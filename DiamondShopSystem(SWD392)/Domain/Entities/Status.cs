@@ -12,6 +12,6 @@ namespace Domain.Entities
         public int? Name { get; set; }
         //Relationship
         public virtual Account? Account { get; set; }
-        public virtual Order? Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();  
     }
 }

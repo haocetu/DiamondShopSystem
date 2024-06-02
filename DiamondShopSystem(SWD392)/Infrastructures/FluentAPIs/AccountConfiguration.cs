@@ -13,19 +13,32 @@ namespace Infrastructures.FluentAPIs
     {
         public void Configure(EntityTypeBuilder<Account> builder)
         {
-            builder.HasKey(u => u.Id);
+            builder.ToTable("Accounts");
 
-            builder.Property(u => u.Id).ValueGeneratedOnAdd();
+            builder.Property(a => a.Name).HasMaxLength(100).IsRequired();
 
-            builder.HasMany(u => u.Orders)
-                    .WithOne(u => u.Account);    
-            
-            builder.HasMany(u => u.Statuses)
-                    .WithOne(u => u.Account);
+            builder.Property(a => a.Email).HasMaxLength(100).IsRequired();
 
-            builder.HasOne(u => u.Role)
-                .WithMany(u => u.Accounts)
-                .HasForeignKey(u => u.RoleId);
+            builder.Property(a => a.Password).HasMaxLength(100).IsRequired();
+
+            builder.Property(a => a.Address).HasMaxLength(200);
+
+            builder.Property(a => a.PhoneNumber).HasMaxLength(20);
+
+            builder.Property(a => a.Gender).HasMaxLength(10);
+
+            builder.Property(a => a.RoleId).IsRequired();
+
+            builder.Property(a => a.Point).HasPrecision(18, 2);
+
+            builder.Property(a => a.ConfirmationToken).HasMaxLength(100);
+
+            builder.HasOne(a => a.Role).WithMany(r => r.Accounts).HasForeignKey(a => a.RoleId).OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasMany(a => a.Statuses).WithOne(s => s.Account).HasForeignKey(s => s.AccountId).OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasMany(a => a.Orders).WithOne(o => o.Account).HasForeignKey(o => o.AccountId).OnDelete(DeleteBehavior.NoAction);
+
         }
     }
 }

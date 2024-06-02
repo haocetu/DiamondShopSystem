@@ -13,11 +13,15 @@ namespace Infrastructures.FluentAPIs
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
-            builder.HasKey(r => r.Id);
+            builder.ToTable("Orders");
 
-            builder.Property(r => r.Id).ValueGeneratedOnAdd();
+            builder.Property(o => o.TotalPrice).HasColumnType("decimal(18,2)");
 
-            //builder.HasMany(u => u.Or)
+            builder.HasOne(o => o.Account).WithMany(a => a.Orders).HasForeignKey(o => o.AccountId).OnDelete(DeleteBehavior.NoAction);
+         
+            builder.HasOne(o => o.Status).WithMany(a => a.Orders).HasForeignKey(o=>o.StatusId).OnDelete(DeleteBehavior.NoAction);   
+         
+            builder.HasOne(o => o.Payment).WithMany(a => a.Orders).HasForeignKey(o=>o.PaymentId).OnDelete(DeleteBehavior.NoAction);   
         }
     }
 }

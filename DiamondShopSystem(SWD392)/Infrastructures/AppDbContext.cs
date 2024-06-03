@@ -1,10 +1,16 @@
 ﻿using Domain.Entities;
+using Infrastructures.FluentAPIs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Infrastructures
 {
     public class AppDbContext : DbContext
     {
+        public AppDbContext()
+        {
+                
+        }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -28,8 +34,35 @@ namespace Infrastructures
         public DbSet<WarrantyDocument> WarrantyDocuments { get; set; }
 
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            string root = Directory.GetParent(Directory.GetCurrentDirectory())?.FullName;
+            string apiDirectory = Path.Combine(root, "DiamondShopSystem(SWD392)");
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(apiDirectory)
+                .AddJsonFile("appsettings.Development.json")
+                .Build();
+            var connectionString = configuration.GetConnectionString("DatabaseConnection");
+            optionsBuilder.UseSqlServer(connectionString);
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new AccountConfiguration());
+            modelBuilder.ApplyConfiguration(new CaratWeightConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ClarityConfiguration());
+            modelBuilder.ApplyConfiguration(new CutConfiguration());
+            modelBuilder.ApplyConfiguration(new DiamondConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderProductConfiguration());
+            modelBuilder.ApplyConfiguration(new OriginConfiguration());
+            modelBuilder.ApplyConfiguration(new PaymentConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new PromotionConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new StatusConfiguration());
+            modelBuilder.ApplyConfiguration(new WarrantyDocumentConfiguration());
         }
     }
 }

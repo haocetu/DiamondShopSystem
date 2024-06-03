@@ -7,13 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commons\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Utils\" />
-    <Folder Include="Services\" />
-    <Folder Include="ServiceResponse\" />
-    <Folder Include="Repositories\" />
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MailKit" Version="4.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
   </ItemGroup>
 
   <ItemGroup>

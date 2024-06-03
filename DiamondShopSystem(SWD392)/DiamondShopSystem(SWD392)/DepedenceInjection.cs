@@ -1,15 +1,35 @@
-﻿using Infrastructures;
+﻿using Application.Interfaces;
+using Application;
+using Infrastructures;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using DiamondShopSystem_SWD392_.Middlewares;
+using DiamondShopSystem_SWD392_.Services;
+using FluentValidation.AspNetCore;
 
 namespace DiamondShopSystem_SWD392_
 {
-    public static class DepedenceInjection
-    {
-        public static IServiceCollection AddDbContextsWithConfigurations(this IServiceCollection services, IConfiguration configuration)
+        public static class DependencyInjection
         {
-            string connectionString = configuration.GetConnectionString("DBConnect")!;
-            services.AddDbContext<AppDbContext>(option => option.UseSqlServer(connectionString));
-            return services;
+            public static IServiceCollection AddWebAPIService(this IServiceCollection services)
+            {
+                services.AddControllers();
+                services.AddEndpointsApiExplorer();
+                services.AddSwaggerGen();
+                services.AddHealthChecks();
+                services.AddSingleton<GlobalExceptionMiddleware>();
+                services.AddSingleton<PerformanceMiddleware>();
+                services.AddSingleton<Stopwatch>();
+                services.AddScoped<IClaimsService, ClaimsService>();
+                services.AddHttpContextAccessor();
+                services.AddMemoryCache();
+                services.AddScoped<IUnitOfWork, UnitOfWork>();
+                //Fluent Validator
+                services.AddFluentValidationAutoValidation();
+                services.AddFluentValidationClientsideAdapters();
+
+                return services;
+            }
         }
     }
-}
+

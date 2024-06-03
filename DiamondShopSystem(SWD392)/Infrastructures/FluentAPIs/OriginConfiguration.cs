@@ -15,6 +15,8 @@ namespace Infrastructures.FluentAPIs
         {
             builder.ToTable("Origins");
 
+            builder.HasKey(x => x.Id);
+
             builder.Property(c => c.Name).HasMaxLength(100);
 
             builder.Property(c => c.Price).HasColumnType("decimal(18,2)").IsRequired();

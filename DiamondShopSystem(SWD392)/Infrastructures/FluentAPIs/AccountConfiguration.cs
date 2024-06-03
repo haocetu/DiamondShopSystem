@@ -15,6 +15,8 @@ namespace Infrastructures.FluentAPIs
         {
             builder.ToTable("Accounts");
 
+            builder.HasKey(x => x.Id);
+
             builder.Property(a => a.Name).HasMaxLength(100).IsRequired();
 
             builder.Property(a => a.Email).HasMaxLength(100).IsRequired();

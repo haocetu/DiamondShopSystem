@@ -9,7 +9,9 @@ namespace Infrastructures.FluentAPIs
         public void Configure(EntityTypeBuilder<WarrantyDocument> builder)
         {
             builder.ToTable("WarrantyDocuments");
-            
+
+            builder.HasKey(x => x.Id);
+
             builder.Property(wd => wd.Period);
 
             builder.Property(wd => wd.TermsAndConditions).HasMaxLength(500);

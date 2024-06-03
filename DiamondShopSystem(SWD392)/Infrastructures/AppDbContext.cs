@@ -51,7 +51,6 @@ namespace Infrastructures
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AccountConfiguration());
-            modelBuilder.ApplyConfiguration(new BaseEntityConfiguration());
             modelBuilder.ApplyConfiguration(new CaratWeightConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new ClarityConfiguration());

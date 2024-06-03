@@ -10,6 +10,8 @@ namespace Infrastructures.FluentAPIs
         {
             builder.ToTable("CaratWeights");
 
+            builder.HasKey(x => x.Id);
+
             builder.Property(c => c.Weight).HasColumnType("float").IsRequired();
 
             builder.Property(c => c.Price).HasColumnType("decimal(18,2)").IsRequired();

@@ -15,6 +15,8 @@ namespace Infrastructures.FluentAPIs
         {
             builder.ToTable("Clarities");
 
+            builder.HasKey(x => x.Id);
+
             builder.Property(c => c.Name).HasMaxLength(100);
 
             builder.Property(c => c.Color).HasMaxLength(50);

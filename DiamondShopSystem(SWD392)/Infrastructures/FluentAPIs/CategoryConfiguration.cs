@@ -15,6 +15,8 @@ namespace Infrastructures.FluentAPIs
         {
             builder.ToTable("Categories");
 
+            builder.HasKey(x => x.Id);
+
             builder.Property(c => c.Name).HasMaxLength(100);
 
             builder.HasMany(c=>c.Products).WithOne(p=>p.Category).HasForeignKey(p=>p.Id);

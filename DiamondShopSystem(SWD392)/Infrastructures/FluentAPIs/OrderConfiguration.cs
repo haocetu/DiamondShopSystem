@@ -15,6 +15,8 @@ namespace Infrastructures.FluentAPIs
         {
             builder.ToTable("Orders");
 
+            builder.HasKey(x => x.Id);
+
             builder.Property(o => o.TotalPrice).HasColumnType("decimal(18,2)");
 
             builder.HasOne(o => o.Account).WithMany(a => a.Orders).HasForeignKey(o => o.AccountId).OnDelete(DeleteBehavior.NoAction);

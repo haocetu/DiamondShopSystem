@@ -18,3 +18,23 @@ D:\FU\Semester_7\SWD392\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructu
 D:\FU\Semester_7\SWD392\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\Infrastructures.pdb
 D:\FU\Semester_7\SWD392\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\Infrastructures.genruntimeconfig.cache
 D:\FU\Semester_7\SWD392\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\ref\Infrastructures.dll
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\bin\Debug\net8.0\Infrastructures.deps.json
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\bin\Debug\net8.0\Infrastructures.runtimeconfig.json
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\bin\Debug\net8.0\Infrastructures.dll
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\bin\Debug\net8.0\Infrastructures.pdb
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\bin\Debug\net8.0\Application.dll
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\bin\Debug\net8.0\Domain.dll
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\bin\Debug\net8.0\Application.pdb
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\bin\Debug\net8.0\Domain.pdb
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\Infrastructures.csproj.AssemblyReference.cache
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\Infrastructures.GeneratedMSBuildEditorConfig.editorconfig
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\Infrastructures.AssemblyInfoInputs.cache
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\Infrastructures.AssemblyInfo.cs
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\Infrastructures.csproj.CoreCompileInputs.cache
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\Infrastructures.sourcelink.json
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\Infrastructures.csproj.CopyComplete
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\Infrastructures.dll
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\refint\Infrastructures.dll
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\Infrastructures.pdb
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\Infrastructures.genruntimeconfig.cache
+D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Infrastructures\obj\Debug\net8.0\ref\Infrastructures.dll

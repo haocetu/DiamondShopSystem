@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Infrastructures\\Infrastructures.csproj": {}
+    "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Infrastructures\\Infrastructures.csproj": {}
   },
   "projects": {
-    "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Application\\Application.csproj": {
+    "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Application\\Application.csproj",
+        "projectUniqueName": "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Application\\Application.csproj",
-        "packagesPath": "C:\\Users\\Hau Giang\\.nuget\\packages\\",
-        "outputPath": "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Application\\obj\\",
+        "projectPath": "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Hau Giang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +32,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Domain\\Domain.csproj": {
-                "projectPath": "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Domain\\Domain.csproj"
+              "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Domain\\Domain.csproj"
               }
             }
           }
@@ -38,16 +42,25 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -64,21 +77,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Domain\\Domain.csproj": {
+    "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Domain\\Domain.csproj",
+        "projectUniqueName": "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\Hau Giang\\.nuget\\packages\\",
-        "outputPath": "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Domain\\obj\\",
+        "projectPath": "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Hau Giang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -98,11 +115,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -124,21 +136,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Infrastructures\\Infrastructures.csproj": {
+    "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Infrastructures\\Infrastructures.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Infrastructures\\Infrastructures.csproj",
+        "projectUniqueName": "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Infrastructures\\Infrastructures.csproj",
         "projectName": "Infrastructures",
-        "projectPath": "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Infrastructures\\Infrastructures.csproj",
-        "packagesPath": "C:\\Users\\Hau Giang\\.nuget\\packages\\",
-        "outputPath": "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Infrastructures\\obj\\",
+        "projectPath": "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Infrastructures\\Infrastructures.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Infrastructures\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Hau Giang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -152,8 +168,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Application\\Application.csproj": {
-                "projectPath": "D:\\FU\\Semester_7\\SWD392\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Application\\Application.csproj"
+              "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Application\\Application.csproj": {
+                "projectPath": "D:\\FPT University\\CN8\\SWD\\DiamondShopSystem\\DiamondShopSystem(SWD392)\\Application\\Application.csproj"
               }
             }
           }
@@ -162,17 +178,16 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -196,6 +211,10 @@
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
@@ -214,7 +233,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

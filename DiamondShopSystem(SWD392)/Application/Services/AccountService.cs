@@ -88,7 +88,7 @@ namespace Application.Services
             var response = new ServiceResponse<bool>();
 
             var exist = await _unitOfWork.AccountRepository.GetByIdAsync(id);
-            if (exist == null)
+            if (exist == null || exist.IsDeleted == true)
             {
                 response.Success = false;
                 response.Message = "Account is not existed";
@@ -132,7 +132,7 @@ namespace Application.Services
 
                 foreach (var user in users)
                 {
-                    if (user.IsDeleted == true)
+                    if (user.IsDeleted == false)
                     {
                         userDTOs.Add(_mapper.Map<AccountDTO>(user));
                     }
@@ -166,7 +166,7 @@ namespace Application.Services
             var response = new ServiceResponse<AccountDTO>();
 
             var exist = await _unitOfWork.AccountRepository.GetByIdAsync(id);
-            if (exist == null)
+            if (exist == null || exist.IsDeleted == true)
             {
                 response.Success = false;
                 response.Message = "Account is not existed";

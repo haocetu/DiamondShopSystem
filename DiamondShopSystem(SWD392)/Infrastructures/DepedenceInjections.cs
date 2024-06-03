@@ -1,4 +1,8 @@
-﻿using Infrastructures.Mappers;
+﻿using Application.Interfaces;
+using Application.Repositories;
+using Application.Services;
+using Infrastructures.Mappers;
+using Infrastructures.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,6 +17,10 @@ namespace Infrastructures
     {
         public static IServiceCollection AddInfrastructuresService(this IServiceCollection services, string databaseConnection)
         {
+            //Account
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IAccountService, AccountService>();
+
             services.AddDbContext<AppDbContext>(option =>
             {
                 option.UseSqlServer(databaseConnection);

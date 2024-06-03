@@ -14,19 +14,3 @@ D:\FU\Semester_7\SWD392\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\
 D:\FU\Semester_7\SWD392\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\obj\Debug\net8.0\refint\Application.dll
 D:\FU\Semester_7\SWD392\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\obj\Debug\net8.0\Application.pdb
 D:\FU\Semester_7\SWD392\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\obj\Debug\net8.0\ref\Application.dll
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\bin\Debug\net8.0\Application.deps.json
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\bin\Debug\net8.0\Application.dll
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\bin\Debug\net8.0\Application.pdb
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\bin\Debug\net8.0\Domain.dll
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\bin\Debug\net8.0\Domain.pdb
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\obj\Debug\net8.0\Application.csproj.AssemblyReference.cache
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\obj\Debug\net8.0\Application.GeneratedMSBuildEditorConfig.editorconfig
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\obj\Debug\net8.0\Application.AssemblyInfoInputs.cache
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\obj\Debug\net8.0\Application.AssemblyInfo.cs
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\obj\Debug\net8.0\Application.csproj.CoreCompileInputs.cache
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\obj\Debug\net8.0\Application.sourcelink.json
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\obj\Debug\net8.0\Application.csproj.CopyComplete
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\obj\Debug\net8.0\Application.dll
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\obj\Debug\net8.0\refint\Application.dll
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\obj\Debug\net8.0\Application.pdb
-D:\FPT University\CN8\SWD\DiamondShopSystem\DiamondShopSystem(SWD392)\Application\obj\Debug\net8.0\ref\Application.dll

@@ -15,6 +15,8 @@ namespace Infrastructures.FluentAPIs
         {
             builder.ToTable("Statuses");
 
+            builder.HasKey(x => x.Id);
+
             builder.Property(s => s.Name).IsRequired();
 
             builder.HasOne(s => s.Account).WithMany(a => a.Statuses).HasForeignKey(s => s.AccountId).OnDelete(DeleteBehavior.NoAction);

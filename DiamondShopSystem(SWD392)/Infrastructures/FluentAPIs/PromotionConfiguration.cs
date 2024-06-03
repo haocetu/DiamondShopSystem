@@ -15,6 +15,8 @@ namespace Infrastructures.FluentAPIs
         {
             builder.ToTable("Promotions");
 
+            builder.HasKey(x => x.Id);
+
             builder.Property(p => p.DiscountPercentage).HasColumnType("decimal(18,2)").IsRequired();
 
             builder.Property(p => p.StartDate).IsRequired();

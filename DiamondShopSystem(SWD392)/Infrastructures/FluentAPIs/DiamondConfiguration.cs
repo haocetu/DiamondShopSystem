@@ -10,6 +10,8 @@ namespace Infrastructures.FluentAPIs
         {
             builder.ToTable("Diamonds");
 
+            builder.HasKey(x => x.Id);
+
             builder.Property(d => d.Price).HasColumnType("decimal(18,2)").IsRequired();
 
             builder.Property(d => d.Quantity).IsRequired();

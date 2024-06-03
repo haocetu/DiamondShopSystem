@@ -13,7 +13,9 @@ namespace Infrastructures.FluentAPIs
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.Property(r => r.Id).ValueGeneratedOnAdd();
+            builder.ToTable("Roles");
+
+            builder.HasKey(x => x.Id);
 
             builder.HasMany(r => r.Accounts).WithOne(a => a.Role).HasForeignKey(a=>a.RoleId);
         }

@@ -15,6 +15,8 @@ namespace Infrastructures.FluentAPIs
         {
             builder.ToTable("Payments");
 
+            builder.HasKey(x => x.Id);
+
             builder.Property(p => p.Name).HasMaxLength(100);
 
             builder.Property(p => p.PaymentType).IsRequired();

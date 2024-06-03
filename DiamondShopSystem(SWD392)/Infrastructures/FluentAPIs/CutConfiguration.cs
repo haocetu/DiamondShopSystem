@@ -10,6 +10,8 @@ namespace Infrastructures.FluentAPIs
         {
             builder.ToTable("Cuts");
 
+            builder.HasKey(x => x.Id);
+
             builder.Property(c => c.Name).HasMaxLength(100);
 
             builder.Property(c => c.Price).IsRequired();

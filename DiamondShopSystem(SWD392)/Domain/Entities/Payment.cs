@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Payment : BaseEntity
+    public class Payment 
     {
-        public string? Name { get; set; }
-        public int? PaymentType { get; set; }
-        //Relationship
-        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+        public int Id { get; set; }
+        public int PaymentMethod { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

@@ -21,8 +21,6 @@ namespace Infrastructures.FluentAPIs
 
             builder.HasOne(o => o.Account).WithMany(a => a.Orders).HasForeignKey(o => o.AccountId).OnDelete(DeleteBehavior.NoAction);
          
-            builder.HasOne(o => o.Status).WithMany(a => a.Orders).HasForeignKey(o=>o.StatusId).OnDelete(DeleteBehavior.NoAction);   
-         
             builder.HasOne(o => o.Payment).WithMany(a => a.Orders).HasForeignKey(o=>o.PaymentId).OnDelete(DeleteBehavior.NoAction);   
         }
     }

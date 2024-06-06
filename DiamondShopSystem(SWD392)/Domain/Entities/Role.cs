@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Role : BaseEntity
+    public class Role 
     {
-        public string? Name {  get; set; }
-        //Relationship
-        public virtual ICollection<Account> Accounts { get; set; } = new List<Account>();
+        public int Id { get; set; }
+        public string Name {  get; set; }
+        public virtual ICollection<Account> Accounts { get; set; }
     }
 }

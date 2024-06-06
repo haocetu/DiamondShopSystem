@@ -15,13 +15,11 @@ namespace Infrastructures.FluentAPIs
         {
             builder.ToTable("Promotions");
 
-            builder.HasKey(x => x.Id);
+            builder.HasKey(p => p.Id);
+
+            builder.Property(p => p.Point).IsRequired();
 
             builder.Property(p => p.DiscountPercentage).HasColumnType("decimal(18,2)").IsRequired();
-
-            builder.Property(p => p.StartDate).IsRequired();
-
-            builder.Property(p => p.EndDate).IsRequired();
         }
     }
 }

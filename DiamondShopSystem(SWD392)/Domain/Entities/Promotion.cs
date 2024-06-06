@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Promotion : BaseEntity
+    public class Promotion 
     {
+        public int Id { get; set; }
+        public int Point { get; set; }
         public decimal DiscountPercentage { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
     }
 }

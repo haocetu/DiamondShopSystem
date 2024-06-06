@@ -8,8 +8,7 @@ namespace Domain.Entities
 {
     public class Category : BaseEntity
     {
-        public string? Name { get; set; }
-        //Realationship
-        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+        public string Name { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

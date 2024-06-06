@@ -8,19 +8,15 @@ namespace Domain.Entities
 {
     public class Product : BaseEntity
     {
-        public string? Name { get; set; }
-        public decimal? Size { get; set; }
-        public string? ImageUrl { get; set; }
-        public int? Quantity { get; set; }
-        public int? CategoryId { get; set; }
-        public int? DiamondId { get; set; }
-        public decimal? Price { get; set; }
-        public decimal? Wage { get; set; }
-        public int? WarrantyDocumentsId { get; set; }
-        //Relationship
-        public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
-        public virtual Category? Category { get; set; }
-        public virtual WarrantyDocument? WarrantyDocument { get; set;}
-        public virtual Diamond? Diamond { get; set; }
+        public string Name { get; set; }
+        public decimal Size { get; set; }
+        public decimal Price { get; set; }
+        public decimal Wage { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
+        public string WarrantyDocument { get; set; }
+        public List<OrderProduct> OrderProducts { get; set; }
+        public List<ProductDiamond> ProductDiamonds { get; set; }
+        public List<Image> Images { get; set; }
     }
 }

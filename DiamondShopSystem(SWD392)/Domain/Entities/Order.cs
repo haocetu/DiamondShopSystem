@@ -8,15 +8,12 @@ namespace Domain.Entities
 {
     public class Order : BaseEntity
     {
-        public int? AccountId { get; set; }
-        public decimal? TotalPrice { get; set; }
-        public int? StatusId {  get; set; }
-        public int? PaymentId { get; set; }
-        //Relationship
-        public virtual Account? Account { get; set; }
-        public virtual Status? Status { get; set; }
-        public virtual Payment? Payment { get; set; }
-        public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
-
+        public decimal TotalPrice { get; set; }
+        public string Status {  get; set; }
+        public int AccountId { get; set; }
+        public Account Account { get; set; }
+        public int PaymentId { get; set; }
+        public Payment Payment { get; set; }
+        public List<OrderProduct> OrderProducts { get; set; } 
     }
 }

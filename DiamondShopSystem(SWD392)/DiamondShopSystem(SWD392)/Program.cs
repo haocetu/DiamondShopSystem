@@ -78,7 +78,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseMiddleware<PerformanceMiddleware>();
-//app.UseMiddleware<ConfirmationTokenMiddleware>();
+app.UseMiddleware<ConfirmationTokenMiddleware>();
 app.MapHealthChecks("/healthchecks");
 app.UseHttpsRedirection();
 

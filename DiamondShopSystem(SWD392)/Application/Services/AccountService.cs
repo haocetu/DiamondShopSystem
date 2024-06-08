@@ -47,7 +47,7 @@ namespace Application.Services
             {
                 var account = _mapper.Map<Account>(createdAccountDTO);
                 account.Password = Utils.HashPassword.HashWithSHA256(createdAccountDTO.Password);
-
+                account.ConfirmationToken = Guid.NewGuid().ToString();
                 
                 account.IsDeleted = false;
 
@@ -222,7 +222,7 @@ namespace Application.Services
             return response;
         }
 
-        public async Task<ServiceResponse<AccountDTO>> UpdateUserAsync(int id, AccountDTO userDTO)
+        public async Task<ServiceResponse<AccountDTO>> UpdateUserAsync(int id, UpdateAccountDTO userDTO)
         {
             var response = new ServiceResponse<AccountDTO>();
 

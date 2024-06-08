@@ -12,7 +12,7 @@ namespace Application.Interfaces
     {
         Task<ServiceResponse<IEnumerable<AccountDTO>>> GetUserAsync();
         Task<ServiceResponse<AccountDTO>> GetUserByIdAsync(int id);
-        Task<ServiceResponse<AccountDTO>> UpdateUserAsync(int id, AccountDTO userDTO);
+        Task<ServiceResponse<AccountDTO>> UpdateUserAsync(int id, UpdateAccountDTO userDTO);
         Task<ServiceResponse<bool>> DeleteUserAsync(int id);
         Task<ServiceResponse<IEnumerable<AccountDTO>>> SearchUserByNameAsync(string name);
         Task<ServiceResponse<AccountDTO>> CreateAccountAsync(CreateAccountDTO createdUserDTO);

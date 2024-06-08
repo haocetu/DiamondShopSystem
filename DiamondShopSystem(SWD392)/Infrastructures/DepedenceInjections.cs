@@ -23,6 +23,10 @@ namespace Infrastructures
             services.AddScoped<IAccountService, AccountService>();
             //Authentication
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            //Diamond
+            services.AddScoped<IDiamondRepository, DiamondRepository>();
+            services.AddScoped<IDiamondService, DiamondService>();
+
 
 
             services.AddDbContext<AppDbContext>(option =>

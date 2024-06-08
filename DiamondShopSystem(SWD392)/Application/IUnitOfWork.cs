@@ -10,6 +10,7 @@ namespace Application
     public interface IUnitOfWork
     {
         public IAccountRepository AccountRepository { get; }
+        public IDiamondRepository DiamondRepository { get; }
         public Task<int> SaveChangeAsync();
     }
 }

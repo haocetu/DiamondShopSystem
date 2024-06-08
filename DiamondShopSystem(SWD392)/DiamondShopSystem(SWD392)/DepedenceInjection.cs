@@ -6,6 +6,9 @@ using System.Diagnostics;
 using DiamondShopSystem_SWD392_.Middlewares;
 using DiamondShopSystem_SWD392_.Services;
 using FluentValidation.AspNetCore;
+using DiamondShopSystem_SWD392_.Validations.AccountValidations;
+using FluentValidation;
+using Application.ViewModels.AccountDTOs;
 
 namespace DiamondShopSystem_SWD392_
 {
@@ -27,8 +30,12 @@ namespace DiamondShopSystem_SWD392_
                 //Fluent Validator
                 services.AddFluentValidationAutoValidation();
                 services.AddFluentValidationClientsideAdapters();
+                //Fluent Validator / Account
+                services.AddTransient<IValidator<CreateAccountDTO>, CreateAccountViewModelValidation>();
+                services.AddTransient<IValidator<RegisterAccountDTO>, RegisterAccountViewModelValidation>();
+                services.AddTransient<IValidator<UpdateAccountDTO>, UpdateAccountViewModelValidation>();
 
-                return services;
+            return services;
             }
         }
     }

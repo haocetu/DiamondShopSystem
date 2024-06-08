@@ -21,6 +21,9 @@ namespace Infrastructures
             //Account
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IAccountService, AccountService>();
+            //Authentication
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+
 
             services.AddDbContext<AppDbContext>(option =>
             {

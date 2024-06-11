@@ -9,7 +9,7 @@
         public string PhoneNumber { get; set; }
         public string Gender { get; set; }
         public int Point { get; set; }
-        public string ConfirmationToken { get; set; }
+        public string? ConfirmationToken { get; set; }
         public int RoleId { get; set; }
         public Role Role { get; set; }
         public List<Order> Orders { get; set; }

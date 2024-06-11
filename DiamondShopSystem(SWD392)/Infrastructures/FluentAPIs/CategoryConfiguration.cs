@@ -15,9 +15,15 @@ namespace Infrastructures.FluentAPIs
         {
             builder.ToTable("Categories");
 
-            builder.HasKey(x => x.Id);
+            builder.HasKey(c => c.Id);
 
-            builder.Property(c => c.Name).HasMaxLength(100);
+            builder.Property(c => c.Name).IsRequired().HasMaxLength(100);
+
+            builder.Property(c => c.Size).IsRequired().HasColumnType("decimal(18,2)");
+
+            builder.Property(c => c.Lenght).IsRequired().HasColumnType("decimal(18,2)");
+
+            builder.Property(c => c.Price).IsRequired().HasColumnType("decimal(18,2)");
 
             builder.HasMany(c=>c.Products).WithOne(p=>p.Category).HasForeignKey(p=>p.Id);
         }

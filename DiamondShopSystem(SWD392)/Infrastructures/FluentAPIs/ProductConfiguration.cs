@@ -27,12 +27,13 @@ namespace Infrastructures.FluentAPIs
 
             builder.Property(p => p.CategoryId).IsRequired();
 
-            builder.Property(p => p.WarrantyDocument).HasMaxLength(500);
-
             builder.HasOne(p => p.Category).WithMany(c => c.Products).HasForeignKey(p => p.CategoryId).OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(p => p.OrderProducts).WithOne(op => op.Product).HasForeignKey(op => op.ProductId).OnDelete(DeleteBehavior.NoAction);
+            
+            builder.HasOne(p=>p.ProductType).WithMany(pt=>pt.Products).HasForeignKey(p=>p.ProductTypeId).OnDelete(DeleteBehavior.NoAction);
+         
+            builder.HasMany(p => p.ProductWarranties).WithOne(pw => pw.Product).HasForeignKey(pw => pw.ProductId).OnDelete(DeleteBehavior.NoAction);
         }
-
     }
 }

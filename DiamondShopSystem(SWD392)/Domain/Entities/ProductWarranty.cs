@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class OrderProduct
+    public class ProductWarranty
     {
+        public int Id { get; set; }
         public int ProductId { get; set; }
-        public int OrderId { get; set; }
-        public int Quantity {  get; set; }
-        public decimal Price { get; set; }
-        public DateTime ShipDate { get; set; }
-        public Order Order { get; set; }
         public Product Product { get; set; }
+        public int OrderId { get; set; }
+        public Order Order { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public string Description { get; set; }
     }
 }

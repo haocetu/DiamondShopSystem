@@ -12,11 +12,13 @@ namespace Domain.Entities
         public decimal Size { get; set; }
         public decimal Price { get; set; }
         public decimal Wage { get; set; }
+        public int ProductTypeId { get; set; }
+        public ProductType ProductType { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-        public string WarrantyDocument { get; set; }
         public List<OrderProduct> OrderProducts { get; set; }
         public List<ProductDiamond> ProductDiamonds { get; set; }
+        public List<ProductWarranty> ProductWarranties { get; set; }
         public List<Image> Images { get; set; }
     }
 }

@@ -17,13 +17,15 @@ namespace Infrastructures.FluentAPIs
 
             builder.HasKey(op => new { op.ProductId, op.OrderId });
 
-            builder.Property(op => op.Quantity).IsRequired();
+            builder.Property(op => op.Quantity).IsRequired().HasColumnType("int");
 
-            builder.Property(op => op.Price).HasColumnType("decimal(18,2)");
+            builder.Property(op => op.Price).IsRequired().HasColumnType("decimal(18,2)");
 
-            builder.HasOne(op => op.Order).WithMany(o => o.OrderProducts).HasForeignKey(op => op.OrderId).OnDelete(DeleteBehavior.NoAction);
+            builder.Property(op => op.ShipDate).IsRequired();
 
-            builder.HasOne(op => op.Product).WithMany(o => o.OrderProducts).HasForeignKey(op => op.ProductId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(op => op.Order).WithMany(o => o.OrderProducts).HasForeignKey(op => op.OrderId);
+
+            builder.HasOne(op => op.Product).WithMany(p => p.OrderProducts).HasForeignKey(op => op.ProductId);
         }
     }
 }

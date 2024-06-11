@@ -10,9 +10,9 @@ namespace Domain.Entities
     {
         public int Id { get; set; }
         public string UrlPath { get; set; }
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
         public Product Product { get; set; }
-        public int DiamondId { get; set; }
+        public int? DiamondId { get; set; }
         public Diamond Diamond { get; set; }
     }
 }

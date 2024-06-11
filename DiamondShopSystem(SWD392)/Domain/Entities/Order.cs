@@ -14,6 +14,7 @@ namespace Domain.Entities
         public Account Account { get; set; }
         public int PaymentId { get; set; }
         public Payment Payment { get; set; }
-        public List<OrderProduct> OrderProducts { get; set; } 
+        public List<OrderProduct> OrderProducts { get; set; }
+        public List<ProductWarranty> ProductWarranties { get; set; }
     }
 }

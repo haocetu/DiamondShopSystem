@@ -9,7 +9,7 @@ namespace Domain.Entities
     public class Payment 
     {
         public int Id { get; set; }
-        public int PaymentMethod { get; set; }
+        public string PaymentMethod { get; set; }
         public List<Order> Orders { get; set; }
     }
 }

@@ -17,9 +17,9 @@ namespace Infrastructures.FluentAPIs
 
             builder.HasKey(p => p.Id);
 
-            builder.Property(p => p.Id);
+            builder.Property(c => c.PaymentMethod).IsRequired().HasMaxLength(100);
 
-            builder.Property(p => p.PaymentMethod).IsRequired();
+            builder.HasMany(p=>p.Orders).WithOne(o=>o.Payment).HasForeignKey(o=>o.PaymentId);
         }
     }
 }

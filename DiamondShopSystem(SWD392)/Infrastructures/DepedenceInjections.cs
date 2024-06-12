@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.Commons;
+using Application.Interfaces;
 using Application.Repositories;
 using Application.Services;
 using Infrastructures.Mappers;
@@ -26,7 +27,9 @@ namespace Infrastructures
             //Diamond
             services.AddScoped<IDiamondRepository, DiamondRepository>();
             services.AddScoped<IDiamondService, DiamondService>();
-
+            //Order
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderService, OrderService>();
 
 
             services.AddDbContext<AppDbContext>(option =>

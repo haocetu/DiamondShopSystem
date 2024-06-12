@@ -1,5 +1,5 @@
-﻿using Application.Interfaces;
-using Application.ServiceResponse;
+﻿using Application.Commons;
+using Application.Interfaces;
 using Application.ViewModels.AccountDTOs;
 using AutoMapper;
 using Domain.Entities;

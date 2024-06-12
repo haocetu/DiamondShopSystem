@@ -11,6 +11,7 @@ namespace Application
     {
         public IAccountRepository AccountRepository { get; }
         public IDiamondRepository DiamondRepository { get; }
+        public IOrderRepository OrderRepository { get; }
         public Task<int> SaveChangeAsync();
     }
 }

@@ -2,6 +2,7 @@
 using Application.Services;
 using Application.ViewModels.AccountDTOs;
 using Application.ViewModels.DiamondDTOs;
+using Application.ViewModels.ImageDTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
@@ -46,7 +47,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> CreateDiamond([FromBody] DiamondDTO createdDiamondDTO)
+        public async Task<IActionResult> CreateDiamond([FromBody] CreateDiamondDTO createdDiamondDTO)
         {
             //Dòng này kiểm tra xem dữ liệu đầu vào (trong trường hợp này là createdAccountDTO)
             //đã được kiểm tra tính hợp lệ bằng các quy tắc mô hình (model validation) hay chưa.
@@ -54,6 +55,27 @@ namespace DiamondShopSystem_SWD392_.Controllers
             if (ModelState.IsValid)
             {
                 var response = await _diamondService.CreateDiamondAsync(createdDiamondDTO);
+                if (response.Success)
+                {
+                    return Ok(response);
+                }
+                else
+                {
+                    return BadRequest(response);
+                }
+            }
+            else
+            {
+                return BadRequest("Invalid request data.");
+            }
+        }
+        [HttpPost]
+        [Route("{id}")]
+        public async Task<IActionResult> AddImage(int id,[FromBody] ImageDiamondDTO image)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _diamondService.AddImageDiamondById(id, image);
                 if (response.Success)
                 {
                     return Ok(response);

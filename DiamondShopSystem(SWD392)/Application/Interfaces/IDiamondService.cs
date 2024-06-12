@@ -1,6 +1,7 @@
 ﻿using Application.Commons;
 using Application.ViewModels.AccountDTOs;
 using Application.ViewModels.DiamondDTOs;
+using Application.ViewModels.ImageDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Application.Interfaces
         Task<ServiceResponse<DiamondDTO>> UpdateDiamondAsync(int id, UpdateDiamondDTO diamondDTO);
         Task<ServiceResponse<bool>> DeleteDiamondAsync(int id);
         Task<ServiceResponse<IEnumerable<DiamondDTO>>> SearchDiamondByOriginAsync(string origin);
-        Task<ServiceResponse<DiamondDTO>> CreateDiamondAsync(DiamondDTO createdDiamondDTO);
+        Task<ServiceResponse<DiamondDTO>> CreateDiamondAsync(CreateDiamondDTO createdDiamondDTO);
+        Task<ServiceResponse<ImageDiamondDTO>> AddImageDiamondById(int id, ImageDiamondDTO imageDiamondDTO);
     }
 }

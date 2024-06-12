@@ -30,7 +30,8 @@ namespace Infrastructures
             //Order
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderService, OrderService>();
-
+            //Image
+            services.AddScoped<IImageRepository, ImageRepository>();
 
             services.AddDbContext<AppDbContext>(option =>
             {

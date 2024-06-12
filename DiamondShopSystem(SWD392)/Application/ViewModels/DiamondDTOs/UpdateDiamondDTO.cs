@@ -14,5 +14,6 @@ namespace Application.ViewModels.DiamondDTOs
         public string CutName { get; set; }
         public string Color { get; set; }
         public decimal Price { get; set; }
+        public string ImageURL {  get; set; }
     }
 }

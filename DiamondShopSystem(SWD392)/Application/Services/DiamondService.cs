@@ -2,6 +2,7 @@
 using Application.Interfaces;
 using Application.ViewModels.AccountDTOs;
 using Application.ViewModels.DiamondDTOs;
+using Application.ViewModels.ImageDTOs;
 using AutoMapper;
 using Domain.Entities;
 using System;
@@ -25,13 +26,16 @@ namespace Application.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<ServiceResponse<DiamondDTO>> CreateDiamondAsync(DiamondDTO createdDiamondDTO)
+        public async Task<ServiceResponse<DiamondDTO>> CreateDiamondAsync(CreateDiamondDTO createdDiamondDTO)
         {
             var response = new ServiceResponse<DiamondDTO>();
             try
             {
                 var diamond = _mapper.Map<Diamond>(createdDiamondDTO);
+                diamond.IsDeleted = false;
                 await _unitOfWork.DiamondRepository.AddAsync(diamond);
+                
+
                 var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
                 if (isSuccess)
                 {
@@ -256,6 +260,61 @@ namespace Application.Services
                     response.Success = false;
                     response.Message = "Error updating the diamond.";
                 }
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Error";
+                response.ErrorMessages = new List<string> { ex.Message };
+            }
+
+            return response;
+        }
+        public async Task<ServiceResponse<ImageDiamondDTO>>AddImageDiamondById(int id, ImageDiamondDTO imageDiamondDTO)
+        {
+            var response = new ServiceResponse<ImageDiamondDTO>();
+            //check exist
+            var exist = await _unitOfWork.DiamondRepository.GetByIdAsync(id);
+            if (exist == null)
+            {
+                response.Success = false;
+                response.Message = "Diamond is not existed";
+                return response;
+            }
+            else if (exist.IsDeleted == true)
+            {
+                response.Success = false;
+                response.Message = "Diamond have been deleted from the system";
+                return response;
+            }
+            //Add
+            try
+            {
+                //Mapping : imageDiamondDTO -> Image
+                var image = _mapper.Map<Image>(imageDiamondDTO);
+                image.DiamondId = id;
+                await _unitOfWork.ImageRepository.AddAsync(image);
+
+
+                var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
+                if (isSuccess)
+                {
+                    var diamondDTO = _mapper.Map<Image>(imageDiamondDTO);
+                    response.Data = imageDiamondDTO;
+                    response.Success = true;
+                    response.Message = "Add image successfully.";
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Message = "Error saving.";
+                }
+            }
+            catch (DbException ex)
+            {
+                response.Success = false;
+                response.Message = "Database error occurred.";
+                response.ErrorMessages = new List<string> { ex.Message };
             }
             catch (Exception ex)
             {

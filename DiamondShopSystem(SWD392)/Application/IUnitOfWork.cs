@@ -12,6 +12,7 @@ namespace Application
         public IAccountRepository AccountRepository { get; }
         public IDiamondRepository DiamondRepository { get; }
         public IOrderRepository OrderRepository { get; }
+        public IImageRepository ImageRepository { get; }
         public Task<int> SaveChangeAsync();
     }
 }

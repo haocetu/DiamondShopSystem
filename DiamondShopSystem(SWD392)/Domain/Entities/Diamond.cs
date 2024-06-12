@@ -14,7 +14,7 @@ namespace Domain.Entities
         public string CutName { get; set; }
         public string Color { get; set; }
         public decimal Price { get; set; }
-        public List<ProductDiamond> ProductDiamonds { get; set; }
+        public List<ProductDiamond> ProductDiamonds { get; set; } = [];
         public List<Image> Images { get; set; }
     }
 }

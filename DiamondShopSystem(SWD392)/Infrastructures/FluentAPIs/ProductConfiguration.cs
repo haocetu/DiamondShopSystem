@@ -24,6 +24,7 @@ namespace Infrastructures.FluentAPIs
             builder.Property(p => p.Price).HasColumnType("decimal(18,2)").IsRequired();
 
             builder.Property(p => p.Wage).HasColumnType("decimal(18,2)").IsRequired();
+            builder.Property(p => p.Quantity).IsRequired();
 
             builder.Property(p => p.CategoryId).IsRequired();
 

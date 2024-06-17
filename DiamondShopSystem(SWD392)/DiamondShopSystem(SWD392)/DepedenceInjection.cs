@@ -20,7 +20,7 @@ namespace DiamondShopSystem_SWD392_
                 services.AddEndpointsApiExplorer();
                 services.AddSwaggerGen();
                 services.AddHealthChecks();
-                services.AddSingleton<GlobalExceptionMiddleware>();
+              //services.AddSingleton<GlobalExceptionMiddleware>();
                 services.AddSingleton<PerformanceMiddleware>();
                 services.AddSingleton<Stopwatch>();
                 services.AddScoped<IClaimsService, ClaimsService>();

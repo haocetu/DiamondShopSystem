@@ -65,6 +65,8 @@ builder.Services.AddSwaggerGen(setup =>
     now we can use dependency injection for AppConfiguratio
 */
 builder.Services.AddSingleton(configuration);
+//Firebase
+Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"D:\diamondshopswd392-firebase-adminsdk-zyw79-c676ac56f2.json");
 
 var app = builder.Build();
 
@@ -76,8 +78,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<GlobalExceptionMiddleware>();
-app.UseMiddleware<PerformanceMiddleware>();
+//app.UseMiddleware<GlobalExceptionMiddleware>();
+//app.UseMiddleware<PerformanceMiddleware>();
 app.UseMiddleware<ConfirmationTokenMiddleware>();
 app.MapHealthChecks("/healthchecks");
 app.UseHttpsRedirection();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,6 @@ namespace Application.ViewModels.DiamondDTOs
         public string CutName { get; set; }
         public string Color { get; set; }
         public decimal Price { get; set; }
-        public string ImageURL { get; set; }
+       // public List<Image> ImageURL { get; set; } = [];
     }
 }

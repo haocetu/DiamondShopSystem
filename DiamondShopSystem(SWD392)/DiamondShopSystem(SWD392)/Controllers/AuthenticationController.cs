@@ -12,7 +12,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
             _authenticationService = authenticationService;
         }
         [HttpPost]
-        public async Task<IActionResult> RegisterAsync(RegisterAccountDTO registerObject)
+        public async Task<IActionResult> RegisterAsync([FromForm]RegisterAccountDTO registerObject)
         {
             var result = await _authenticationService.RegisterAsync(registerObject);
 

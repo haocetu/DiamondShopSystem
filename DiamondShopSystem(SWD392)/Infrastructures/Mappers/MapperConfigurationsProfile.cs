@@ -1,6 +1,5 @@
 ﻿using Application.ViewModels.AccountDTOs;
 using Application.ViewModels.DiamondDTOs;
-using Application.ViewModels.ImageDTOs;
 using AutoMapper;
 using Domain.Entities;
 using System;
@@ -24,8 +23,7 @@ namespace Infrastructures.Mappers
             CreateMap<Diamond, DiamondDTO>().ReverseMap();
             CreateMap<Diamond, UpdateDiamondDTO>().ReverseMap();
             CreateMap<Diamond, CreateDiamondDTO>().ReverseMap();
-            //Image
-            CreateMap<Image, ImageDiamondDTO>().ReverseMap();
+
             
 
 

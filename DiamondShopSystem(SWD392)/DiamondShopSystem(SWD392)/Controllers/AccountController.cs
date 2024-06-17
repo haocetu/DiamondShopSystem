@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.ViewModels.AccountDTOs;
+using Application.ViewModels.DiamondDTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
@@ -16,6 +17,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         {
             var User = await _accountService.GetUserAsync();
             return Ok(User);
+
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAccountById(int id)
@@ -44,27 +46,11 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] CreateAccountDTO createdAccountDTO)
+        public async Task<IActionResult> CreateUser([FromForm] CreateAccountDTO createdAccountDTO)
         {
-            //Dòng này kiểm tra xem dữ liệu đầu vào (trong trường hợp này là createdAccountDTO)
-            //đã được kiểm tra tính hợp lệ bằng các quy tắc mô hình (model validation) hay chưa.
-            //Nếu dữ liệu hợp lệ, nó tiếp tục kiểm tra và xử lý.
-            if (ModelState.IsValid)
-            {
-                var response = await _accountService.CreateAccountAsync(createdAccountDTO);
-                if (response.Success)
-                {
-                    return Ok(response);
-                }
-                else
-                {
-                    return BadRequest(response);
-                }
-            }
-            else
-            {
-                return BadRequest("Invalid request data.");
-            }
+          
+            // return await _accountService.CreateAccountAsync(createdAccountDTO);
+           return Created(nameof(CreateUser), await _accountService.CreateAccountAsync(createdAccountDTO));
         }
         //[Authorize(Roles = "Admin")]
         [HttpPut("{id}")]

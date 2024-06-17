@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Repositories
 {
-    public interface IImageRepository 
+    public interface IImageRepository : IGenericRepository<Image>
     {
-        public Task AddAsync(Image entity);
     }
 }

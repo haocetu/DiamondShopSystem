@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Image
+    public class Image : BaseEntity
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public string UrlPath { get; set; }
         public int? ProductId { get; set; }
         public Product Product { get; set; }

@@ -7,21 +7,21 @@ using System.Linq.Expressions;
 
 namespace Infrastructures.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
+    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        protected DbSet<TEntity> _dbSet;
+        protected DbSet<T> _dbSet;
         private readonly ICurrentTime _timeService;
         private readonly IClaimsService _claimsService;
 
         public GenericRepository(AppDbContext context, ICurrentTime timeService, IClaimsService claimsService)
         {
-            _dbSet = context.Set<TEntity>();
+            _dbSet = context.Set<T>();
             _timeService = timeService;
             _claimsService = claimsService;
         }
-        public Task<List<TEntity>> GetAllAsync() => _dbSet.ToListAsync();
+        public Task<List<T>> GetAllAsync() => _dbSet.ToListAsync();
 
-        public async Task<TEntity?> GetByIdAsync(int id)
+        public async Task<T?> GetByIdAsync(int id)
         {
             try
             {
@@ -36,28 +36,28 @@ namespace Infrastructures.Repositories
             
         }
 
-        public async Task AddAsync(TEntity entity)
+        public async Task AddAsync(T entity)
         {
             entity.CreatedDate = _timeService.GetCurrentTime();
             entity.CreatedBy = _claimsService.GetCurrentUserId.Value;
             await _dbSet.AddAsync(entity);
         }
 
-        public void SoftRemove(TEntity entity)
+        public void SoftRemove(T entity)
         {
             entity.IsDeleted = true;
             entity.DeletedBy = _claimsService.GetCurrentUserId.Value;
             _dbSet.Update(entity);
         }
 
-        public void Update(TEntity entity)
+        public void Update(T entity)
         {
             entity.ModifiedDate = _timeService.GetCurrentTime();
             entity.ModifiedBy = _claimsService.GetCurrentUserId.Value;
             _dbSet.Update(entity);
         }
 
-        public async Task AddRangeAsync(List<TEntity> entities)
+        public async Task AddRangeAsync(List<T> entities)
         {
             foreach (var entity in entities)
             {
@@ -67,7 +67,7 @@ namespace Infrastructures.Repositories
             await _dbSet.AddRangeAsync(entities);
         }
 
-        public void SoftRemoveRange(List<TEntity> entities)
+        public void SoftRemoveRange(List<T> entities)
         {
             foreach (var entity in entities)
             {
@@ -76,6 +76,11 @@ namespace Infrastructures.Repositories
                 entity.DeletedBy = _claimsService.GetCurrentUserId.Value;
             }
             _dbSet.UpdateRange(entities);
+        }
+        public Task DeleteRangeAsync(IEnumerable<T> entities)
+        {
+            _dbSet.RemoveRange(entities);
+            return Task.CompletedTask;
         }
         //public async Task<Pagination<TEntity>> ToPagination(int pageIndex = 0, int pageSize = 10)
         //{
@@ -97,7 +102,7 @@ namespace Infrastructures.Repositories
         //    return result;
         //}
 
-        public void UpdateRange(List<TEntity> entities)
+        public void UpdateRange(List<T> entities)
         {
             foreach (var entity in entities)
             {

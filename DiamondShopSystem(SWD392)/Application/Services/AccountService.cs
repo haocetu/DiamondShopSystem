@@ -28,25 +28,29 @@ namespace Application.Services
         {
             var response = new ServiceResponse<AccountDTO>();
 
-            var exist = await _unitOfWork.AccountRepository.CheckEmailNameExited(createdAccountDTO.Email);
-            var existed = await _unitOfWork.AccountRepository.CheckPhoneNumberExited(createdAccountDTO.PhoneNumber);
+            var emailExist = await _unitOfWork.AccountRepository.CheckEmailNameExited(createdAccountDTO.Email);
+            var phoneExist = await _unitOfWork.AccountRepository.CheckPhoneNumberExited(createdAccountDTO.PhoneNumber);
 
-            if (exist)
+            if (emailExist == true)
             {
                 response.Success = false;
-                response.Message = "Email is existed";
-                return response;
+                response.Message = "Email existed!";
+                //throw new BadRequestException("Email existed!");
             }
-            else if (existed)
+            else if(phoneExist == true)
             {
                 response.Success = false;
-                response.Message = "Phone is existed";
-                return response;
+                response.Message = "Phone existed!";
+                //throw new BadRequestException("Phone existed!");
             }
+
             try
             {
+                //Mapping
                 var account = _mapper.Map<Account>(createdAccountDTO);
+                //HashPassword
                 account.Password = Utils.HashPassword.HashWithSHA256(createdAccountDTO.Password);
+                //GenerateToken
                 account.ConfirmationToken = Guid.NewGuid().ToString();
                 
                 account.IsDeleted = false;
@@ -224,7 +228,7 @@ namespace Application.Services
 
         public async Task<ServiceResponse<AccountDTO>> UpdateUserAsync(int id, UpdateAccountDTO userDTO)
         {
-            var response = new ServiceResponse<AccountDTO>();
+            var response = new ServiceResponse< AccountDTO>();
 
             try
             {

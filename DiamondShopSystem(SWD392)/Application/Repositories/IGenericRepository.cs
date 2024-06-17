@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 
 namespace Application.Repositories
 {
-    public interface IGenericRepository<TEntity>
+    public interface IGenericRepository<T>
     {
-        Task<List<TEntity>> GetAllAsync();
-        Task<TEntity?> GetByIdAsync(int id);
-        Task AddAsync(TEntity entity);
-        void Update(TEntity entity);
+        Task<List<T>> GetAllAsync();
+        Task<T?> GetByIdAsync(int id);
+        Task AddAsync(T entity);
+        void Update(T entity);
         //Task UpdateAsync(TEntity entity);
-        void UpdateRange(List<TEntity> entities);
-        void SoftRemove(TEntity entity);
-        Task AddRangeAsync(List<TEntity> entities);
-        void SoftRemoveRange(List<TEntity> entities);
+        void UpdateRange(List<T> entities);
+        void SoftRemove(T entity);
+        Task AddRangeAsync(List<T> entities);
+        void SoftRemoveRange(List<T> entities);
+
+        Task DeleteRangeAsync(IEnumerable<T> entities);
 
         //Task<Pagination<TEntity>> ToPagination(int pageNumber = 0, int pageSize = 10);
 

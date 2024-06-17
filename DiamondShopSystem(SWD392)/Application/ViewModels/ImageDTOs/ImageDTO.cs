@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Application.ViewModels.ImageDTOs
 {
-    public class ImageDiamondDTO
+    public class ImageDTO
     {
-        public string UrlPath {  get; set; }
-        
+        public int Id { get; set; }
+        public string? UrlPath { get; set; }
     }
 }

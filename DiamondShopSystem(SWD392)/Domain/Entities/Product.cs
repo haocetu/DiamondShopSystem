@@ -15,6 +15,7 @@ namespace Domain.Entities
         public int ProductTypeId { get; set; }
         public ProductType ProductType { get; set; }
         public int CategoryId { get; set; }
+        public int Quantity { get; set; }
         public Category Category { get; set; }
         public List<OrderProduct> OrderProducts { get; set; }
         public List<ProductDiamond> ProductDiamonds { get; set; }

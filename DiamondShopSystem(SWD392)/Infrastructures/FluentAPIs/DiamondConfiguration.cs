@@ -11,6 +11,7 @@ namespace Infrastructures.FluentAPIs
             builder.ToTable("Diamonds");
 
             builder.HasKey(d => d.Id);
+            builder.Property(d => d.Name).HasMaxLength(100);
 
             builder.Property(d => d.OriginName).HasMaxLength(100).IsRequired();
 

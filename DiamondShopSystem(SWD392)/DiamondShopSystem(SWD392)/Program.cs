@@ -5,6 +5,7 @@ using Infrastructures;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -66,6 +67,8 @@ builder.Services.AddSwaggerGen(setup =>
 */
 builder.Services.AddSingleton(configuration);
 //Firebase
+builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));
+
 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"D:\diamondshopswd392-firebase-adminsdk-zyw79-c676ac56f2.json");
 
 var app = builder.Build();

@@ -48,9 +48,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateDiamond([FromForm] CreateDiamondDTO createdDiamondDTO)
         {
-            //Dòng này kiểm tra xem dữ liệu đầu vào (trong trường hợp này là createdAccountDTO)
-            //đã được kiểm tra tính hợp lệ bằng các quy tắc mô hình (model validation) hay chưa.
-            //Nếu dữ liệu hợp lệ, nó tiếp tục kiểm tra và xử lý.
+
             if (ModelState.IsValid)
             {
                 var response = await _diamondService.CreateDiamondAsync(createdDiamondDTO);

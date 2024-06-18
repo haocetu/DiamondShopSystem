@@ -35,6 +35,7 @@ namespace Application.Services
             {
                 var diamond = _mapper.Map<Diamond>(createdDiamondDTO);
                 diamond.IsDeleted = false;
+                diamond.Name = diamond.OriginName+ " " + diamond.CutName +" "+ diamond.ClarityName;
                 await _unitOfWork.DiamondRepository.AddAsync(diamond);
                 
 

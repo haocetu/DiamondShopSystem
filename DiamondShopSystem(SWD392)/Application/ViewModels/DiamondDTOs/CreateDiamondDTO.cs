@@ -22,7 +22,9 @@ namespace Application.ViewModels.DiamondDTOs
         public string Color { get; set; }
         [Required]
         public decimal Price { get; set; }
-        public List<IFormFile> DiamondImages { get; set; } = new List<IFormFile>();
+        [Required]
+        public int Quantity { get; set; }
+        public List<IFormFile> DiamondImages { get; set; } = [];
 
     }
 }

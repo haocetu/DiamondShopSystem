@@ -1,15 +1,9 @@
 ﻿using Application.Commons;
 using Application.Interfaces;
-using Application.ViewModels.AccountDTOs;
 using Application.ViewModels.OrderDTOs;
 using AutoMapper;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services
 {
@@ -17,7 +11,6 @@ namespace Application.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-
         public OrderService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
@@ -67,6 +60,22 @@ namespace Application.Services
 
             try
             {
+                var account = _unitOfWork.AccountRepository.GetByIdAsync(createOrderDTO.AccountId);
+                if (account == null)
+                {
+                    response.Success = false;
+                    response.Message = "Account is not existed.";
+                    return response;
+                }
+
+                var paymentExisted = await _unitOfWork.PaymentRepository.CheckPaymentMethodExisted(createOrderDTO.PaymentID);
+                if (!paymentExisted)
+                {
+                    response.Success = false;
+                    response.Message = "Payment is not existed.";
+                    return response;
+                }
+
                 var order = _mapper.Map<Order>(createOrderDTO);
 
                 order.IsDeleted = false;
@@ -77,7 +86,7 @@ namespace Application.Services
                 if (isSuccess)
                 {
                     var orderDTO = _mapper.Map<OrderDTO>(order);
-                    response.Data = orderDTO; 
+                    response.Data = orderDTO;
                     response.Success = true;
                     response.Message = "Order created successfully.";
                 }
@@ -123,9 +132,31 @@ namespace Application.Services
             return response;
         }
 
-        public Task<ServiceResponse<IEnumerable<OrderDTO>>> GetOrderByUserIDAsync(int userId)
+        public async Task<ServiceResponse<IEnumerable<OrderDTO>>> GetOrderByUserIDAsync(int accountId)
         {
-            throw new NotImplementedException();
+            var response = new ServiceResponse<IEnumerable<OrderDTO>>();
+            try
+            {
+                var orders = await _unitOfWork.OrderRepository.GetOrderByUserIDAsync(accountId);
+                if (orders.Count > 0)
+                {
+                    response.Success = true;
+                    response.Message = "Orders retrieved successfully";
+                    response.Data = _mapper.Map<IEnumerable<OrderDTO>>(orders);
+                }
+                else
+                {
+                    response.Success = true;
+                    response.Message = "Not have order";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Error";
+                response.ErrorMessages = new List<string> { ex.Message };
+            }
+            return response;
         }
 
         public async Task<ServiceResponse<IEnumerable<OrderDTO>>> GetOrdersAsync()

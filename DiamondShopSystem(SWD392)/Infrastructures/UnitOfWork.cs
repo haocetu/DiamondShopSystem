@@ -56,7 +56,7 @@ namespace Infrastructures
             {
                 if (_orderRepository is null)
                 {
-                    _orderRepository = new OrderRepository(_dbContext, _currentTime, _claimsService, this);
+                    _orderRepository = new OrderRepository(_dbContext, _currentTime, _claimsService);
                 }
                 return _orderRepository;
             }

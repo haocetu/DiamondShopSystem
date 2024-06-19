@@ -30,8 +30,7 @@ namespace Infrastructures
             services.AddScoped<IDiamondService, DiamondService>();
 
             // Payment
-            //services.AddScoped<IPaymentRepository, PaymentRepository>();
-            services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
 
             //Order
             //services.AddScoped<IOrderRepository, OrderRepository>();

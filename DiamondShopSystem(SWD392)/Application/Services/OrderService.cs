@@ -1,15 +1,9 @@
 ﻿using Application.Commons;
 using Application.Interfaces;
-using Application.ViewModels.AccountDTOs;
 using Application.ViewModels.OrderDTOs;
 using AutoMapper;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services
 {
@@ -67,7 +61,7 @@ namespace Application.Services
 
             try
             {
-                var account = _unitOfWork.AccountRepository.GetByIdAsync(createOrderDTO.AccountId);
+                var account = await _unitOfWork.AccountRepository.GetByIdAsync(createOrderDTO.accountID);
                 if (account == null)
                 {
                     response.Success = false;
@@ -139,9 +133,29 @@ namespace Application.Services
             return response;
         }
 
-        public Task<ServiceResponse<IEnumerable<OrderDTO>>> GetOrderByUserIDAsync(int userId)
+        public async Task<ServiceResponse<IEnumerable<OrderDTO>>> GetOrderByUserIDAsync(int userId)
         {
-            throw new NotImplementedException();
+            var response = new ServiceResponse<IEnumerable<OrderDTO>>();
+            try
+            {
+                var result = await _unitOfWork.OrderRepository.GetOrderByUserIDAsync(userId);
+                if (result.Count > 0)
+                {
+                    response.Success = true;
+                    response.Message = "Order found";
+                    response.Data = (IEnumerable<OrderDTO>)_mapper.Map<OrderDTO>(result);
+
+                    return response;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Error";
+                response.ErrorMessages = new List<string> { Convert.ToString(ex.Message) };
+            }
+            return response;
         }
 
         public async Task<ServiceResponse<IEnumerable<OrderDTO>>> GetOrdersAsync()

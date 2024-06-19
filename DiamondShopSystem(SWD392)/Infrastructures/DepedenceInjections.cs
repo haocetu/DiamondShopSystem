@@ -21,21 +21,26 @@ namespace Infrastructures
         {
             services.AddScoped<ICurrentTime, CurrentTime>();
             //Account
-            services.AddScoped<IAccountRepository, AccountRepository>();
+            //services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IAccountService, AccountService>();
             //Authentication
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             //Diamond
-            services.AddScoped<IDiamondRepository, DiamondRepository>();
+            //services.AddScoped<IDiamondRepository, DiamondRepository>();
             services.AddScoped<IDiamondService, DiamondService>();
+
+            // Payment
+            //services.AddScoped<IPaymentRepository, PaymentRepository>();
+            services.AddScoped<IPaymentService, PaymentService>();
+
             //Order
-            services.AddScoped<IOrderRepository, OrderRepository>();
+            //services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderService, OrderService>();
             //Firebase
             services.AddSingleton(opt => StorageClient.Create());
             services.AddScoped<IFirebaseStorageService, FirebaseStorageService>();
             //Image
-            services.AddScoped<IImageRepository, ImageRepository>();
+            //services.AddScoped<IImageRepository, ImageRepository>();
             services.AddScoped<IImageService, ImageService>();
 
             services.AddDbContext<AppDbContext>(option =>

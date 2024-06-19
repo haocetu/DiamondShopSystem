@@ -67,6 +67,22 @@ namespace Application.Services
 
             try
             {
+                var account = _unitOfWork.AccountRepository.GetByIdAsync(createOrderDTO.AccountId);
+                if (account == null)
+                {
+                    response.Success = false;
+                    response.Message = "Account is not existed.";
+                    return response;
+                }
+
+                var paymentExisted = await _unitOfWork.PaymentRepository.CheckPaymentMethodExisted(createOrderDTO.PaymentID);
+                if (!paymentExisted)
+                {
+                    response.Success = false;
+                    response.Message = "Payment is not existed.";
+                    return response;
+                }
+
                 var order = _mapper.Map<Order>(createOrderDTO);
 
                 order.IsDeleted = false;

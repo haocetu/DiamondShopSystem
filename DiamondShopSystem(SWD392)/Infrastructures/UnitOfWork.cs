@@ -1,5 +1,7 @@
 ﻿using Application;
+using Application.Interfaces;
 using Application.Repositories;
+using Infrastructures.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +13,78 @@ namespace Infrastructures
     public class UnitOfWork : IUnitOfWork
     {
         private readonly AppDbContext _dbContext;
-        private readonly IAccountRepository _accountRepository;
-        private readonly IDiamondRepository _diamondRepository;
-        private readonly IOrderRepository _orderRepository;
-        private readonly IImageRepository _imageRepository;
-        public UnitOfWork(AppDbContext dbContext, IAccountRepository accountRepository, IDiamondRepository diamondRepository, IOrderRepository orderRepository, IImageRepository imageRepository)
+        private ICurrentTime _currentTime;
+        private IClaimsService _claimsService;
+
+        public UnitOfWork(AppDbContext dbContext, ICurrentTime currentTime, IClaimsService claimsService)
         {
             _dbContext = dbContext;
-            _accountRepository = accountRepository;
-            _diamondRepository = diamondRepository;
-            _orderRepository = orderRepository;
-            _imageRepository = imageRepository;
+            _currentTime = currentTime;
+            _claimsService = claimsService;
         }
-        public IAccountRepository AccountRepository => _accountRepository;
-        public IDiamondRepository DiamondRepository => _diamondRepository;
-        public IOrderRepository OrderRepository => _orderRepository;
-        public IImageRepository ImageRepository => _imageRepository;
+
+        private IDiamondRepository _diamondRepository;
+        public IDiamondRepository DiamondRepository
+        {
+            get
+            {
+                if (_diamondRepository is null)
+                {
+                    _diamondRepository = new DiamondRepository(_dbContext, _currentTime, _claimsService);
+                }
+                return _diamondRepository;
+            }
+        }
+
+        private IAccountRepository _accountRepository;
+        public IAccountRepository AccountRepository
+        {
+            get
+            {
+                if (_accountRepository is null)
+                {
+                    _accountRepository = new AccountRepository(_dbContext, _currentTime, _claimsService);
+                }
+                return _accountRepository;
+            }
+        }
+
+        private IOrderRepository _orderRepository;
+        public IOrderRepository OrderRepository
+        {
+            get
+            {
+                if (_orderRepository is null)
+                {
+                    _orderRepository = new OrderRepository(_dbContext, _currentTime, _claimsService, this);
+                }
+                return _orderRepository;
+            }
+        }
+        private IImageRepository _imageRepository;
+        public IImageRepository ImageRepository
+        {
+            get
+            {
+                if (_imageRepository is null)
+                {
+                    _imageRepository = new ImageRepository(_dbContext, _currentTime, _claimsService);
+                }
+                return _imageRepository;
+            }
+        }
+        private IPaymentRepository _paymentRepository;
+        public IPaymentRepository PaymentRepository
+        {
+            get
+            {
+                if (_paymentRepository is null)
+                {
+                    _paymentRepository = new PaymentRepository(_dbContext);
+                }
+                return _paymentRepository;
+            }
+        }
         public async Task<int> SaveChangeAsync()
         {
             return await _dbContext.SaveChangesAsync();

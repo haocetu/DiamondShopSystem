@@ -41,6 +41,8 @@ namespace Infrastructures
             //Image
             //services.AddScoped<IImageRepository, ImageRepository>();
             services.AddScoped<IImageService, ImageService>();
+            
+            services.AddScoped<ICartService, CartService>();
 
             services.AddDbContext<AppDbContext>(option =>
             {

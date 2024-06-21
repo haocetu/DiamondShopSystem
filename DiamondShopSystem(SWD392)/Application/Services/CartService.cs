@@ -1,10 +1,11 @@
 ﻿using Application.Commons;
+using Application.Interfaces;
 using Application.ViewModels.CartItems;
 using System.Data.Common;
 
-namespace Application.Interfaces
+namespace Application.Services
 {
-    internal class CartService : ICartService
+    public class CartService : ICartService
     {
         private readonly IUnitOfWork _unitOfWork;
 

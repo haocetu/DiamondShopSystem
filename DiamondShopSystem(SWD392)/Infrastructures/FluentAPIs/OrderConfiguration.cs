@@ -21,6 +21,8 @@ namespace Infrastructures.FluentAPIs
 
             builder.Property(o => o.TotalPrice).HasColumnType("decimal(18,2)");
 
+            builder.Property(o => o.ShipDate).IsRequired();
+
             builder.HasOne(o => o.Account).WithMany(a => a.Orders).HasForeignKey(o => o.AccountId).OnDelete(DeleteBehavior.NoAction);
          
             builder.HasOne(o => o.Payment).WithMany(a => a.Orders).HasForeignKey(o=>o.PaymentId).OnDelete(DeleteBehavior.NoAction);   

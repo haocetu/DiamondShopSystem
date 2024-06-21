@@ -17,7 +17,8 @@ namespace Domain.Entities
         public int CategoryId { get; set; }
         public int Quantity { get; set; }
         public Category Category { get; set; }
-        public List<OrderProduct> OrderProducts { get; set; }
+        public List<CartItem> CartItems { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
         public List<ProductDiamond> ProductDiamonds { get; set; }
         public List<ProductWarranty> ProductWarranties { get; set; }
         public List<Image> Images { get; set; }

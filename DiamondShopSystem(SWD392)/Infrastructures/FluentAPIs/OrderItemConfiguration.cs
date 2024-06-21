@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructures.FluentAPIs
 {
-    public class OrderProductConfiguration : IEntityTypeConfiguration<OrderProduct>
+    public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
     {
-        public void Configure(EntityTypeBuilder<OrderProduct> builder)
+        public void Configure(EntityTypeBuilder<OrderItem> builder)
         {
-            builder.ToTable("OrderProducts");
+            builder.ToTable("OrderItems");
 
             builder.HasKey(op => new { op.ProductId, op.OrderId });
 
@@ -21,11 +21,9 @@ namespace Infrastructures.FluentAPIs
 
             builder.Property(op => op.Price).IsRequired().HasColumnType("decimal(18,2)");
 
-            builder.Property(op => op.ShipDate).IsRequired();
+            builder.HasOne(op => op.Order).WithMany(o => o.OrderItems).HasForeignKey(op => op.OrderId);
 
-            builder.HasOne(op => op.Order).WithMany(o => o.OrderProducts).HasForeignKey(op => op.OrderId);
-
-            builder.HasOne(op => op.Product).WithMany(p => p.OrderProducts).HasForeignKey(op => op.ProductId);
+            builder.HasOne(op => op.Product).WithMany(p => p.OrderItems).HasForeignKey(op => op.ProductId);
         }
     }
 }

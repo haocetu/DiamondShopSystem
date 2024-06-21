@@ -85,6 +85,20 @@ namespace Infrastructures
                 return _paymentRepository;
             }
         }
+
+        private ICartRepository _cartRepository;
+        public ICartRepository CartRepository
+        {
+            get
+            {
+                if (_cartRepository is null)
+                {
+                    _cartRepository = new CartRepository(_dbContext);
+                }
+                return _cartRepository;
+            }
+        }
+
         public async Task<int> SaveChangeAsync()
         {
             return await _dbContext.SaveChangesAsync();

@@ -12,6 +12,7 @@
         public string? ConfirmationToken { get; set; }
         public int RoleId { get; set; }
         public Role Role { get; set; }
+        public List<Cart> Carts { get; set; }
         public List<Order> Orders { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace Application
         public IOrderRepository OrderRepository { get; }
         public IImageRepository ImageRepository { get; }
         public IPaymentRepository PaymentRepository { get; }
+        public ICartRepository CartRepository { get; }
         public Task<int> SaveChangeAsync();
     }
 }

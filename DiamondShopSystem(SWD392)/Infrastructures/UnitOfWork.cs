@@ -85,7 +85,20 @@ namespace Infrastructures
                 return _paymentRepository;
             }
         }
-        public async Task<int> SaveChangeAsync()
+
+		private IProductRepository _productRepository;
+		public IProductRepository ProductRepository
+		{
+			get
+			{
+				if (_productRepository is null)
+				{
+					_productRepository = new ProductRepository(_dbContext, _currentTime, _claimsService);
+				}
+				return _productRepository;
+			}
+		}
+		public async Task<int> SaveChangeAsync()
         {
             return await _dbContext.SaveChangesAsync();
         }

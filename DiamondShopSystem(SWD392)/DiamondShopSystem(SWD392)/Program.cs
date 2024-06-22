@@ -1,4 +1,4 @@
-using Application.Commons;
+﻿using Application.Commons;
 using DiamondShopSystem_SWD392_;
 using DiamondShopSystem_SWD392_.Middlewares;
 using Infrastructures;
@@ -78,8 +78,23 @@ builder.Services.AddCors(options =>
         builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", builder =>
+    {
+        builder.WithOrigins("http://localhost:5173") // Chỉ cho phép nguồn gốc này
+               .AllowAnyHeader()
+               .AllowAnyMethod()
+               .AllowCredentials(); // Cho phép cookie và token
+    });
+});
+
+
 
 var app = builder.Build();
+app.UseCors("AllowReactApp");
+
+app.UseRouting();
 
 
 // Configure the HTTP request pipeline.

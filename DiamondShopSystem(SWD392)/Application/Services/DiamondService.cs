@@ -28,9 +28,9 @@ namespace Application.Services
             _mapper = mapper;
             _imageService = imageService;
         }
-        public async Task<ServiceResponse<DiamondDTO>> CreateDiamondAsync(CreateDiamondDTO createdDiamondDTO)
+        public async Task<ServiceResponse<ViewModels.DiamondDTOs.Product>> CreateDiamondAsync(CreateDiamondDTO createdDiamondDTO)
         {
-            var response = new ServiceResponse<DiamondDTO>();
+            var response = new ServiceResponse<ViewModels.DiamondDTOs.Product>();
             try
             {
                 var diamond = _mapper.Map<Diamond>(createdDiamondDTO);
@@ -46,7 +46,7 @@ namespace Application.Services
                 }
                 if (isSuccess)
                 {
-                    var diamondDTO = _mapper.Map<DiamondDTO>(diamond);
+                    var diamondDTO = _mapper.Map<ViewModels.DiamondDTOs.Product>(diamond);
                     response.Data = diamondDTO;
                     response.Success = true;
                     response.Message = "Diamond created successfully.";
@@ -117,21 +117,21 @@ namespace Application.Services
             return response;
         }
     
-        public async Task<ServiceResponse<IEnumerable<DiamondDTO>>> GetDiamondAsync()
+        public async Task<ServiceResponse<IEnumerable<ViewModels.DiamondDTOs.Product>>> GetDiamondAsync()
         {
-            var _response = new ServiceResponse<IEnumerable<DiamondDTO>>();
+            var _response = new ServiceResponse<IEnumerable<ViewModels.DiamondDTOs.Product>>();
             try
             {
                 var diamonds = await _unitOfWork.DiamondRepository.GetAllAsync();
 
-                var diamondDTOs = new List<DiamondDTO>();
+                var diamondDTOs = new List<ViewModels.DiamondDTOs.Product>();
 
                 foreach (var diamond in diamonds)
                 {
 
                     if (diamond.IsDeleted == false)
                     {
-                        diamondDTOs.Add(_mapper.Map<DiamondDTO>(diamond));
+                        diamondDTOs.Add(_mapper.Map<ViewModels.DiamondDTOs.Product>(diamond));
                     }
                 }
 
@@ -158,9 +158,9 @@ namespace Application.Services
             return _response;
         }
 
-        public async Task<ServiceResponse<DiamondDTO>> GetDiamondByIdAsync(int id)
+        public async Task<ServiceResponse<ViewModels.DiamondDTOs.Product>> GetDiamondByIdAsync(int id)
         {
-            var response = new ServiceResponse<DiamondDTO>();
+            var response = new ServiceResponse<ViewModels.DiamondDTOs.Product>();
 
             var exist = await _unitOfWork.DiamondRepository.GetByIdAsync(id);
             if (exist == null)
@@ -178,27 +178,27 @@ namespace Application.Services
             {
                 response.Success = true;
                 response.Message = "Diamond found";
-                response.Data = _mapper.Map<DiamondDTO>(exist);
+                response.Data = _mapper.Map<ViewModels.DiamondDTOs.Product>(exist);
             }
 
             return response;
         }
 
-        public async Task<ServiceResponse<IEnumerable<DiamondDTO>>> SearchDiamondByOriginAsync(string origin)
+        public async Task<ServiceResponse<IEnumerable<ViewModels.DiamondDTOs.Product>>> SearchDiamondByOriginAsync(string origin)
         {
-            var response = new ServiceResponse<IEnumerable<DiamondDTO>>();
+            var response = new ServiceResponse<IEnumerable<ViewModels.DiamondDTOs.Product>>();
 
             try
             {
                 var diamonds = await _unitOfWork.DiamondRepository.SearchDiamondByOriginAsync(origin);
 
-                var diamondDTOs = new List<DiamondDTO>();
+                var diamondDTOs = new List<ViewModels.DiamondDTOs.Product>();
 
                 foreach (var diamond in diamonds)
                 {
                     if (diamond.IsDeleted == false)
                     {
-                        diamondDTOs.Add(_mapper.Map<DiamondDTO>(diamond));
+                        diamondDTOs.Add(_mapper.Map<ViewModels.DiamondDTOs.Product>(diamond));
                     }
                 }
 
@@ -225,9 +225,9 @@ namespace Application.Services
             return response;
         }
 
-        public async Task<ServiceResponse<DiamondDTO>> UpdateDiamondAsync(int id, UpdateDiamondDTO diamondDTO)
+        public async Task<ServiceResponse<ViewModels.DiamondDTOs.Product>> UpdateDiamondAsync(int id, UpdateDiamondDTO diamondDTO)
         {
-            var response = new ServiceResponse<DiamondDTO>();
+            var response = new ServiceResponse<ViewModels.DiamondDTOs.Product>();
 
             try
             {
@@ -254,7 +254,7 @@ namespace Application.Services
 
                 _unitOfWork.DiamondRepository.Update(existingDiamond);
 
-                var updatedDiamondDto = _mapper.Map<DiamondDTO>(updated);
+                var updatedDiamondDto = _mapper.Map<ViewModels.DiamondDTOs.Product>(updated);
                 var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
 
                 if (isSuccess)

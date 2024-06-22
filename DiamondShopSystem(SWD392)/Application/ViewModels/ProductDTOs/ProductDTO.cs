@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.ViewModels.ProductDTOs
 {
-	public class CreateProductDTO
+	public class ProductDTO
 	{
 	}
 }

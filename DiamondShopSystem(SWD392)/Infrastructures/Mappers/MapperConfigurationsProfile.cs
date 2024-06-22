@@ -19,8 +19,8 @@ namespace Infrastructures.Mappers
             CreateMap<Account, CreateAccountDTO>().ReverseMap();
             CreateMap<Account, UpdateAccountDTO>().ReverseMap();
             CreateMap<Account, RegisterAccountDTO>().ReverseMap();
-            //Diamond
-            CreateMap<Diamond, DiamondDTO>().ReverseMap();
+			//Diamond
+			CreateMap<Diamond, Application.ViewModels.DiamondDTOs.Product>().ReverseMap();
             CreateMap<Diamond, UpdateDiamondDTO>().ReverseMap();
             CreateMap<Diamond, CreateDiamondDTO>().ReverseMap();
 

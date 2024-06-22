@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.ViewModels.DiamondDTOs
 {
-    public class DiamondDTO
+    public class Product
     {
         public int Id {  get; set; }
         public string OriginName { get; set; }

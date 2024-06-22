@@ -9,6 +9,6 @@ namespace Application.Repositories
 {
 	public interface IProductRepository : IGenericRepository<Product>
 	{
-		Task<IEnumerable<Diamond>> SearchProduct(string search);
+		Task<IEnumerable<Product>> SearchProduct(string search);
 	}
 }

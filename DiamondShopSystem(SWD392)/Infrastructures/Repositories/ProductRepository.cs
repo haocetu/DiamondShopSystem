@@ -18,9 +18,9 @@ namespace Infrastructures.Repositories
 			_dbContext = context;
 		}
 
-		public async Task<IEnumerable<Diamond>> SearchProduct(string origin)
+		public async Task<IEnumerable<Product>> SearchProduct(string search)
 		{
-			return await _dbContext.Diamonds.Where(u => u.OriginName.Contains(origin)).ToListAsync();
+			return await _dbContext.Products.Where(u => u.Name.Contains(search)).ToListAsync();
 		}
 	}
 }

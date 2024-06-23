@@ -35,7 +35,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
 
 		[HttpGet]
 		[Route("{name}")]
-		public async Task<IActionResult> SearchDiamondByOrigin(string name)
+		public async Task<IActionResult> SearchDiamondByName(string name)
 		{
 			var result = await productService.SearchProductByNameAsync(name);
 			if (result.Success)
@@ -68,6 +68,17 @@ namespace DiamondShopSystem_SWD392_.Controllers
 			{
 				return BadRequest("Invalid request data.");
 			}
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeleteProduct(int id)
+		{
+			var product = await productService.DeleteProductAsync(id);
+			if (!product.Success)
+			{
+				return NotFound(product);
+			}
+			return Ok(product);
 		}
 	}
 }

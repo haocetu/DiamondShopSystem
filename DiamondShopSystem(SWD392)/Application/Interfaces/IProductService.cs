@@ -14,7 +14,7 @@ namespace Application.Interfaces
 		Task<ServiceResponse<IEnumerable<Product>>> GetProductsAsync();
 		Task<ServiceResponse<Product>> GetProductByIdAsync(int id);
 		//Task<ServiceResponse<Product>> UpdateProductAsync(int id, CreateProductDTO pro);
-		//Task<ServiceResponse<bool>> DeleteProductAsync(int id);
+		Task<ServiceResponse<bool>> DeleteProductAsync(int id);
 		Task<ServiceResponse<IEnumerable<Product>>> SearchProductByNameAsync(string search);
 		Task<ServiceResponse<Product>> CreateProductAsync(CreateProductDTO pro);
 	}

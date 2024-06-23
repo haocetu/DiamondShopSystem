@@ -167,5 +167,47 @@ namespace Application.Services
 			}
 			return response;
 		}
+
+		public async Task<ServiceResponse<bool>> DeleteProductAsync(int id)
+		{
+			var response = new ServiceResponse<bool>();
+
+			var exist = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+			if (exist == null)
+			{
+				response.Success = false;
+				response.Message = "Product is not existed!";
+				return response;
+			}
+			else if (exist.IsDeleted == true)
+			{
+				response.Success = false;
+				response.Message = "Product have been deleted from the system!";
+				return response;
+			}
+			try
+			{
+				_unitOfWork.ProductRepository.SoftRemove(exist);
+				exist.IsDeleted = true;
+				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
+				if (isSuccess)
+				{
+					response.Success = true;
+					response.Message = "Product deleted successfully!";
+				}
+				else
+				{
+					response.Success = false;
+					response.Message = "Error deleting product!";
+				}
+			}
+			catch (Exception ex)
+			{
+				response.Success = false;
+				response.Message = "Error";
+				response.ErrorMessages = new List<string> { ex.Message };
+			}
+			return response;
+		}
 	}
 }

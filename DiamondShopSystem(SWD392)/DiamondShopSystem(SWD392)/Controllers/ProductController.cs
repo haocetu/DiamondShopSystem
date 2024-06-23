@@ -21,6 +21,33 @@ namespace DiamondShopSystem_SWD392_.Controllers
 			return Ok(products);
 		}
 
+		[HttpGet]
+		[Route("{id}")]
+		public async Task<IActionResult> GetProductById(int id)
+		{
+			var product = await productService.GetProductByIdAsync(id);
+			if (!product.Success)
+			{
+				return NotFound(product);
+			}
+			return Ok(product);
+		}
+
+		[HttpGet]
+		[Route("{name}")]
+		public async Task<IActionResult> SearchDiamondByOrigin(string name)
+		{
+			var result = await productService.SearchProductByNameAsync(name);
+			if (result.Success)
+			{
+				return Ok(result);
+			}
+			else
+			{
+				return BadRequest(result);
+			}
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> CreateProduct([FromForm] CreateProductDTO createProduct)
 		{

@@ -88,36 +88,33 @@ namespace Application.Services
 			return response;
 		}
 
-		public async Task<ServiceResponse<IEnumerable<Product>>> SearchDiamondByOriginAsync(string origin)
+		public async Task<ServiceResponse<IEnumerable<Product>>> SearchProductByNameAsync(string name)
 		{
-			var response = new ServiceResponse<IEnumerable<ViewModels.DiamondDTOs.Product>>();
-
+			var response = new ServiceResponse<IEnumerable<Product>>();
 			try
 			{
-				var diamonds = await _unitOfWork.DiamondRepository.SearchDiamondByOriginAsync(origin);
+				var products = await _unitOfWork.ProductRepository.SearchProduct(name);
+				var productsDTO = new List<Product>();
 
-				var diamondDTOs = new List<ViewModels.DiamondDTOs.Product>();
-
-				foreach (var diamond in diamonds)
+				foreach (var product in products)
 				{
-					if (diamond.IsDeleted == false)
+					if (product.IsDeleted == false)
 					{
-						diamondDTOs.Add(_mapper.Map<ViewModels.DiamondDTOs.Product>(diamond));
+						productsDTO.Add(_mapper.Map<Product>(product));
 					}
 				}
 
-				if (diamondDTOs.Count != 0)
+				if (productsDTO.Count != 0)
 				{
 					response.Success = true;
-					response.Message = "Diamond retrieved successfully";
-					response.Data = diamondDTOs;
+					response.Message = "Products retrieved successfully!";
+					response.Data = productsDTO;
 				}
 				else
 				{
 					response.Success = false;
-					response.Message = "Not have Diamond yet";
+					response.Message = "Not have product yet!";
 				}
-
 			}
 			catch (Exception ex)
 			{
@@ -125,7 +122,6 @@ namespace Application.Services
 				response.Message = "Error";
 				response.ErrorMessages = new List<string> { ex.Message };
 			}
-
 			return response;
 		}
 

@@ -12,10 +12,10 @@ namespace Application.Interfaces
 	public interface IProductService
 	{
 		Task<ServiceResponse<IEnumerable<Product>>> GetProductsAsync();
-		//Task<ServiceResponse<Product>> GetProductByIdAsync(int id);
+		Task<ServiceResponse<Product>> GetProductByIdAsync(int id);
 		//Task<ServiceResponse<Product>> UpdateProductAsync(int id, CreateProductDTO pro);
 		//Task<ServiceResponse<bool>> DeleteProductAsync(int id);
 		//Task<ServiceResponse<IEnumerable<Product>>> SearchProductAsync(string search);
-		//Task<ServiceResponse<Product>> CreateProductAsync(CreateProductDTO pro);
+		Task<ServiceResponse<Product>> CreateProductAsync(CreateProductDTO pro);
 	}
 }

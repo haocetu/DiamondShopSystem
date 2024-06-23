@@ -1,9 +1,12 @@
 ﻿using Application.Commons;
 using Application.Interfaces;
+using Application.ViewModels.ProductDTOs;
 using AutoMapper;
 using Domain.Entities;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +60,114 @@ namespace Application.Services
 				response.Success = false;
 				response.Message = "Error";
 				response.ErrorMessages = new List<string> { Convert.ToString(ex.Message) };
+			}
+			return response;
+		}
+
+		public async Task<ServiceResponse<Product>> GetProductByIdAsync(int id)
+		{
+			var response = new ServiceResponse<Product>();
+			var exist = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+			if (exist == null)
+			{
+				response.Success = false;
+				response.Message = "Product is not existed!";
+			}
+			else if (exist.IsDeleted == true)
+			{
+				response.Success = false;
+				response.Message = "Product have been deleted from the system.";
+
+			}
+			else
+			{
+				response.Success = true;
+				response.Message = "Product found.";
+				response.Data = exist;
+			}
+			return response;
+		}
+
+		public async Task<ServiceResponse<IEnumerable<Product>>> SearchDiamondByOriginAsync(string origin)
+		{
+			var response = new ServiceResponse<IEnumerable<ViewModels.DiamondDTOs.Product>>();
+
+			try
+			{
+				var diamonds = await _unitOfWork.DiamondRepository.SearchDiamondByOriginAsync(origin);
+
+				var diamondDTOs = new List<ViewModels.DiamondDTOs.Product>();
+
+				foreach (var diamond in diamonds)
+				{
+					if (diamond.IsDeleted == false)
+					{
+						diamondDTOs.Add(_mapper.Map<ViewModels.DiamondDTOs.Product>(diamond));
+					}
+				}
+
+				if (diamondDTOs.Count != 0)
+				{
+					response.Success = true;
+					response.Message = "Diamond retrieved successfully";
+					response.Data = diamondDTOs;
+				}
+				else
+				{
+					response.Success = false;
+					response.Message = "Not have Diamond yet";
+				}
+
+			}
+			catch (Exception ex)
+			{
+				response.Success = false;
+				response.Message = "Error";
+				response.ErrorMessages = new List<string> { ex.Message };
+			}
+
+			return response;
+		}
+
+		public async Task<ServiceResponse<Product>> CreateProductAsync(CreateProductDTO createProduct)
+		{
+			var response = new ServiceResponse<Product>();
+			try
+			{
+				var product = _mapper.Map<Product>(createProduct);
+				product.IsDeleted = false;
+				await _unitOfWork.ProductRepository.AddAsync(product);
+
+
+				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
+				if (!createProduct.ProductImages.IsNullOrEmpty())
+				{
+					await _imageService.UploadProductImages(createProduct.ProductImages, product.Id);
+				}
+				if (isSuccess)
+				{
+					var productDTO = _mapper.Map<Product>(product);
+					response.Data = productDTO;
+					response.Success = true;
+					response.Message = "Product created successfully!";
+				}
+				else
+				{
+					response.Success = false;
+					response.Message = "Error saving the product!";
+				}
+			}
+			catch (DbException ex)
+			{
+				response.Success = false;
+				response.Message = "Database error occurred.";
+				response.ErrorMessages = new List<string> { ex.Message };
+			}
+			catch (Exception ex)
+			{
+				response.Success = false;
+				response.Message = "Error";
+				response.ErrorMessages = new List<string> { ex.Message };
 			}
 			return response;
 		}

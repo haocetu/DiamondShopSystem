@@ -35,7 +35,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
 
 		[HttpGet]
 		[Route("{name}")]
-		public async Task<IActionResult> SearchDiamondByName(string name)
+		public async Task<IActionResult> SearchProductByName(string name)
 		{
 			var result = await productService.SearchProductByNameAsync(name);
 			if (result.Success)

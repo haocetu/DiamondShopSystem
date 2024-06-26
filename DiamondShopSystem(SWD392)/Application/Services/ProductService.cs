@@ -92,19 +92,21 @@ namespace Application.Services
 			return response;
 		}
 
-		public async Task<ServiceResponse<IEnumerable<Product>>> SearchProductByNameAsync(string name)
+		public async Task<ServiceResponse<IEnumerable<ProductDTO>>> SearchProductByNameAsync(string name)
 		{
-			var response = new ServiceResponse<IEnumerable<Product>>();
+			var response = new ServiceResponse<IEnumerable<ProductDTO>>();
 			try
 			{
 				var products = await _unitOfWork.ProductRepository.SearchProduct(name);
-				var productsDTO = new List<Product>();
+				var productsDTO = new List<ProductDTO>();
 
 				foreach (var product in products)
 				{
 					if (product.IsDeleted == false)
 					{
-						productsDTO.Add(_mapper.Map<Product>(product));
+						var pro = _mapper.Map<ProductDTO>(product);
+						pro.Images = _unitOfWork.ImageRepository.GetImagesByProductId(product.Id);
+						productsDTO.Add(pro);
 					}
 				}
 

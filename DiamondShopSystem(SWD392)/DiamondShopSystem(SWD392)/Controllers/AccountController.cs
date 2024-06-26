@@ -54,7 +54,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
         //[Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAccount(int id, [FromBody] UpdateAccountDTO accountDTO)
+        public async Task<IActionResult> UpdateAccount(int id, [FromForm] UpdateAccountDTO accountDTO)
         {
             var updatedUser = await _accountService.UpdateUserAsync(id, accountDTO);
             if (!updatedUser.Success)

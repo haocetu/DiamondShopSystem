@@ -251,7 +251,7 @@ namespace Application.Services
 
                 // Map accountDT0 => existingUser
                 var updated = _mapper.Map(userDTO, existingUser);
-                //updated.PasswordHash = Utils.HashPassword.HashWithSHA256(accountDTO.PasswordHash);
+                updated.Password = Utils.HashPassword.HashWithSHA256(userDTO.Password);
 
                 _unitOfWork.AccountRepository.Update(existingUser);
 

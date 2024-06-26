@@ -9,5 +9,6 @@ namespace Application.Repositories
 {
     public interface IImageRepository : IGenericRepository<Image>
     {
-    }
+		List<string> GetImagesByProductId(int id);
+	}
 }

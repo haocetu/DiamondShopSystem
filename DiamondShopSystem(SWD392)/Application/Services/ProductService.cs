@@ -26,20 +26,22 @@ namespace Application.Services
 			_imageService = imageService;
 		}
 
-		public async Task<ServiceResponse<IEnumerable<Product>>> GetProductsAsync()
+		public async Task<ServiceResponse<IEnumerable<ProductDTO>>> GetProductsAsync()
 		{
-			var response = new ServiceResponse<IEnumerable<Product>>();
+			var response = new ServiceResponse<IEnumerable<ProductDTO>>();
 			try
 			{
 				var products = await _unitOfWork.ProductRepository.GetAllAsync();
 
-				var productsDTO = new List<Product>();
+				var productsDTO = new List<ProductDTO>();
 
 				foreach (var product in products)
 				{
 					if (product.IsDeleted == false)
 					{
-						productsDTO.Add(_mapper.Map<Product>(product));
+						var pro = _mapper.Map<ProductDTO>(product);
+						pro.Images = _unitOfWork.ImageRepository.GetImagesByProductId(product.Id);
+						productsDTO.Add(pro);
 					}
 				}
 
@@ -64,16 +66,17 @@ namespace Application.Services
 			return response;
 		}
 
-		public async Task<ServiceResponse<Product>> GetProductByIdAsync(int id)
+		public async Task<ServiceResponse<ProductDTO>> GetProductByIdAsync(int id)
 		{
-			var response = new ServiceResponse<Product>();
+			var response = new ServiceResponse<ProductDTO>();
 			var exist = await _unitOfWork.ProductRepository.GetByIdAsync(id);
-			if (exist == null)
+			var pro = _mapper.Map<ProductDTO>(exist);
+			if (pro == null)
 			{
 				response.Success = false;
 				response.Message = "Product is not existed!";
 			}
-			else if (exist.IsDeleted == true)
+			else if (pro.IsDeleted == true)
 			{
 				response.Success = false;
 				response.Message = "Product have been deleted from the system.";
@@ -83,7 +86,8 @@ namespace Application.Services
 			{
 				response.Success = true;
 				response.Message = "Product found.";
-				response.Data = exist;
+				pro.Images = _unitOfWork.ImageRepository.GetImagesByProductId(pro.Id);
+				response.Data = pro;
 			}
 			return response;
 		}

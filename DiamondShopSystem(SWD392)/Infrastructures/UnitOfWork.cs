@@ -98,7 +98,6 @@ namespace Infrastructures
 				return _productRepository;
 			}
 		}
-		public async Task<int> SaveChangeAsync()
         private ICartRepository _cartRepository;
         public ICartRepository CartRepository
         {

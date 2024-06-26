@@ -129,9 +129,9 @@ namespace Application.Services
 			return response;
 		}
 
-		public async Task<ServiceResponse<Product>> CreateProductAsync(CreateProductDTO createProduct)
+		public async Task<ServiceResponse<CreateProductDTO>> CreateProductAsync(CreateProductDTO createProduct)
 		{
-			var response = new ServiceResponse<Product>();
+			var response = new ServiceResponse<CreateProductDTO>();
 			try
 			{
 				var product = _mapper.Map<Product>(createProduct);
@@ -146,8 +146,7 @@ namespace Application.Services
 				}
 				if (isSuccess)
 				{
-					var productDTO = _mapper.Map<Product>(product);
-					response.Data = productDTO;
+					response.Data = createProduct;
 					response.Success = true;
 					response.Message = "Product created successfully!";
 				}

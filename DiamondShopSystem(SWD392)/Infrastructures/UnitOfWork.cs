@@ -93,7 +93,7 @@ namespace Infrastructures
             {
                 if (_cartRepository is null)
                 {
-                    _cartRepository = new CartRepository(_dbContext);
+                    _cartRepository = new CartRepository(_dbContext,_currentTime,_claimsService);
                 }
                 return _cartRepository;
             }

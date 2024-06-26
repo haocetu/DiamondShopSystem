@@ -1,11 +1,6 @@
 ﻿using Domain.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructures.FluentAPIs
 {
@@ -19,7 +14,7 @@ namespace Infrastructures.FluentAPIs
 
             builder.HasOne(c => c.Account).WithMany(a => a.Carts).HasForeignKey(c => c.AccountId);
 
-            builder.HasMany(c => c.CartItems).WithOne(ci => ci.Cart).HasForeignKey(ci => ci.CartId);
+            builder.HasMany(c => c.Items).WithOne(ci => ci.Cart).HasForeignKey(ci => ci.CartId);
         }
     }
 

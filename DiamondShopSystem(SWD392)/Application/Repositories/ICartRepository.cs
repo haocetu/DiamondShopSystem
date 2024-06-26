@@ -1,15 +1,10 @@
-﻿using Application.ViewModels.CartItems;
-using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
 
 namespace Application.Repositories
 {
-    public interface ICartRepository
+    public interface ICartRepository : IGenericRepository<Cart>
     {
-        Task<List<CartItemViewModel>> GetCartItemsForUser(int accountId);
+        Task DeleteCartAsync(int cartId);
+        Task<Cart> GetCartForUserAsync(int userId);
     }
 }

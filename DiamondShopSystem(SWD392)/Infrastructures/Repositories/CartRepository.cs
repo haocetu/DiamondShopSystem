@@ -1,36 +1,30 @@
-﻿using Application.Repositories;
-using Application.ViewModels.CartItems;
+﻿using Application.Interfaces;
+using Application.Repositories;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructures.Repositories
 {
-    public class CartRepository : ICartRepository
+    public class CartRepository : GenericRepository<Cart>, ICartRepository
     {
         private readonly AppDbContext _context;
-        public CartRepository(AppDbContext context)
+
+        public CartRepository(AppDbContext context, ICurrentTime timeService, IClaimsService claimsService) : base(context, timeService, claimsService)
         {
             _context = context;
         }
-
-        public async Task<List<CartItemViewModel>> GetCartItemsForUser(int accountId)
+        public async Task DeleteCartAsync(int cartId)
         {
-            var cartItems = await _context.CartItems
-                .Where(ci => ci.Cart.AccountId == accountId) 
-                .Select(ci => new CartItemViewModel
-                {
-                    ProductId = ci.ProductId,
-                    ProductName = ci.Product.Name,
-                    Quantity = ci.Quantity,
-                    Price = ci.Price
-                }).ToListAsync();
-
-            return cartItems;
+            var cart = await _context.Carts.FirstOrDefaultAsync(c=>c.Id == cartId);
+            if (cart != null)
+            {
+                _context.Carts.Remove(cart);
+                await _context.SaveChangesAsync();
+            }
+        }
+        public async Task<Cart> GetCartForUserAsync(int userId)
+        {
+            return await _context.Carts.Include(c => c.Items).FirstOrDefaultAsync(c => c.AccountId == userId);
         }
     }
 }

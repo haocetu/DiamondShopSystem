@@ -113,6 +113,27 @@ namespace Infrastructures.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -373,8 +394,11 @@ namespace Infrastructures.Migrations
 
             modelBuilder.Entity("Domain.Entities.OrderItem", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
@@ -382,12 +406,17 @@ namespace Infrastructures.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("ProductId", "OrderId");
+                    b.HasKey("Id");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems", (string)null);
                 });
@@ -614,7 +643,7 @@ namespace Infrastructures.Migrations
             modelBuilder.Entity("Domain.Entities.CartItem", b =>
                 {
                     b.HasOne("Domain.Entities.Cart", "Cart")
-                        .WithMany("CartItems")
+                        .WithMany("Items")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -669,7 +698,7 @@ namespace Infrastructures.Migrations
             modelBuilder.Entity("Domain.Entities.OrderItem", b =>
                 {
                     b.HasOne("Domain.Entities.Order", "Order")
-                        .WithMany("OrderItems")
+                        .WithMany("Items")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -751,7 +780,7 @@ namespace Infrastructures.Migrations
 
             modelBuilder.Entity("Domain.Entities.Cart", b =>
                 {
-                    b.Navigation("CartItems");
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Domain.Entities.Category", b =>
@@ -768,7 +797,7 @@ namespace Infrastructures.Migrations
 
             modelBuilder.Entity("Domain.Entities.Order", b =>
                 {
-                    b.Navigation("OrderItems");
+                    b.Navigation("Items");
 
                     b.Navigation("ProductWarranties");
                 });

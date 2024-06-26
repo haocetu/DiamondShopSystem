@@ -252,7 +252,14 @@ namespace Infrastructures.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AccountId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<int>(type: "int", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<int>(type: "int", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<int>(type: "int", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -330,6 +337,8 @@ namespace Infrastructures.Migrations
                 name: "OrderItems",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
@@ -337,7 +346,7 @@ namespace Infrastructures.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderItems", x => new { x.ProductId, x.OrderId });
+                    table.PrimaryKey("PK_OrderItems", x => x.Id);
                     table.ForeignKey(
                         name: "FK_OrderItems_Orders_OrderId",
                         column: x => x.OrderId,
@@ -413,6 +422,11 @@ namespace Infrastructures.Migrations
                 name: "IX_OrderItems_OrderId",
                 table: "OrderItems",
                 column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_ProductId",
+                table: "OrderItems",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_AccountId",

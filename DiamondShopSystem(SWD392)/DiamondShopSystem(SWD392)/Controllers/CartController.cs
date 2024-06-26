@@ -1,4 +1,6 @@
 ﻿using Application.Interfaces;
+using Application.RequestModel.Cart;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
@@ -14,16 +16,40 @@ namespace DiamondShopSystem_SWD392_.Controllers
             _cartService = cartService;
         }
 
-        [HttpGet]
-        [Route("{accountId}")]
-        public async Task<IActionResult> GetCartItemsForUser(int accountId)
+        [HttpGet("cart-list")]
+        [Authorize]
+        public async Task<IActionResult> GetCartItemsForUser()
         {
-            var result = await _cartService.GetCartItemsForUser(accountId);
+            var result = await _cartService.GetCartForUserAsync();
             if (!result.Success)
             {
                 return BadRequest(result.ErrorMessages);
             }
             return Ok(result);
+        }
+
+        [HttpPatch("update-cart")]
+        [Authorize]
+        public async Task<IActionResult> AddOrUpdateCartAsync(CartRequestModel request)
+        {
+            var result = await _cartService.AddOrUpdateCartAsync(request);
+            if (!result.Success)
+            {
+                return BadRequest(result.ErrorMessages);
+            }
+            return Ok();
+        }
+
+        [HttpDelete("delete-cart/{id}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteCartAsync(int id)
+        {
+            var result = await _cartService.DeleteCartAsync(id);
+            if (!result.Success)
+            {
+                return BadRequest(result.ErrorMessages);
+            }
+            return Ok();
         }
     }
 }

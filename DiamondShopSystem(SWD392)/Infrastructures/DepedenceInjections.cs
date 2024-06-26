@@ -7,11 +7,6 @@ using Infrastructures.Mappers;
 using Infrastructures.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructures
 {
@@ -20,26 +15,23 @@ namespace Infrastructures
         public static IServiceCollection AddInfrastructuresService(this IServiceCollection services, string databaseConnection)
         {
             services.AddScoped<ICurrentTime, CurrentTime>();
-            //Account
-            //services.AddScoped<IAccountRepository, AccountRepository>();
+            
             services.AddScoped<IAccountService, AccountService>();
-            //Authentication
+            
             services.AddScoped<IAuthenticationService, AuthenticationService>();
-            //Diamond
-            //services.AddScoped<IDiamondRepository, DiamondRepository>();
+            
             services.AddScoped<IDiamondService, DiamondService>();
-
-            // Payment
+            
             services.AddScoped<IPaymentRepository, PaymentRepository>();
 
-            //Order
-            //services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<ICartService, CartService>();
+            
             services.AddScoped<IOrderService, OrderService>();
-            //Firebase
+            
             services.AddSingleton(opt => StorageClient.Create());
+            
             services.AddScoped<IFirebaseStorageService, FirebaseStorageService>();
-            //Image
-            //services.AddScoped<IImageRepository, ImageRepository>();
+            
             services.AddScoped<IImageService, ImageService>();
             
             services.AddScoped<ICartService, CartService>();

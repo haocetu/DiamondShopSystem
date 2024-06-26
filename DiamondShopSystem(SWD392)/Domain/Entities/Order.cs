@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
     public class Order : BaseEntity
     {
@@ -15,7 +9,7 @@ namespace Domain.Entities
         public int PaymentId { get; set; }
         public Payment Payment { get; set; }
         public DateTime ShipDate { get; set; }
-        public List<OrderItem> OrderItems { get; set; }
+        public List<OrderItem> Items { get; set; }
         public List<ProductWarranty> ProductWarranties { get; set; }
     }
 }

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.Repositories
 {
-    public interface IImageRepository : IGenericRepository<Image>
-    {
-		List<string> GetImagesByProductId(int id);
+	public interface IProductRepository : IGenericRepository<Product>
+	{
+		Task<IEnumerable<Product>> SearchProduct(string search);
 	}
 }

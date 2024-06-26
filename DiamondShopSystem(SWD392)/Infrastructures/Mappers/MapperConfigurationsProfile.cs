@@ -1,5 +1,6 @@
 ﻿using Application.ViewModels.AccountDTOs;
 using Application.ViewModels.DiamondDTOs;
+using Application.ViewModels.ProductDTOs;
 using AutoMapper;
 using Domain.Entities;
 using System;
@@ -19,15 +20,17 @@ namespace Infrastructures.Mappers
             CreateMap<Account, CreateAccountDTO>().ReverseMap();
             CreateMap<Account, UpdateAccountDTO>().ReverseMap();
             CreateMap<Account, RegisterAccountDTO>().ReverseMap();
-            //Diamond
-            CreateMap<Diamond, DiamondDTO>().ReverseMap();
+			//Diamond
+			CreateMap<Diamond, DiamondDTO>().ReverseMap();
             CreateMap<Diamond, UpdateDiamondDTO>().ReverseMap();
             CreateMap<Diamond, CreateDiamondDTO>().ReverseMap();
+            CreateMap<Domain.Entities.Product, CreateProductDTO>().ReverseMap();
+            CreateMap<Domain.Entities.Product, ProductDTO>().ReverseMap();
 
-            
 
 
 
-        }
+
+		}
     }
 }

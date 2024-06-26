@@ -86,6 +86,18 @@ namespace Infrastructures
             }
         }
 
+		private IProductRepository _productRepository;
+		public IProductRepository ProductRepository
+		{
+			get
+			{
+				if (_productRepository is null)
+				{
+					_productRepository = new ProductRepository(_dbContext, _currentTime, _claimsService);
+				}
+				return _productRepository;
+			}
+		}
         private ICartRepository _cartRepository;
         public ICartRepository CartRepository
         {

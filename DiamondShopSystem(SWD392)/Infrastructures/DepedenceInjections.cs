@@ -27,7 +27,8 @@ namespace Infrastructures
             services.AddScoped<ICartService, CartService>();
             
             services.AddScoped<IOrderService, OrderService>();
-            
+            services.AddScoped<IProductService, ProductService>();
+            //Firebase
             services.AddSingleton(opt => StorageClient.Create());
             
             services.AddScoped<IFirebaseStorageService, FirebaseStorageService>();

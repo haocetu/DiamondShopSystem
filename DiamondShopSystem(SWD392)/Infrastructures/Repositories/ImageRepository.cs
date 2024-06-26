@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Application.Repositories;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,11 @@ namespace Infrastructures.Repositories
         {
             _appDbContext = context;
         }
-    }
+
+		public List<string> GetImagesByProductId(int id)
+		{
+			//return _appDbContext.Images.Where(x => x.ProductId == id).ToList();
+            return _appDbContext.Images.Where(x => x.ProductId == id).Select(x => x.UrlPath).ToList();
+		}
+	}
 }

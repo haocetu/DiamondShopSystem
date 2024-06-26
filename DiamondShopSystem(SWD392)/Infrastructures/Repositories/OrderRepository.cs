@@ -2,11 +2,6 @@
 using Application.Repositories;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructures.Repositories
 {
@@ -17,7 +12,10 @@ namespace Infrastructures.Repositories
         {
             _dbContext = context;
         }
-
+        public async Task<Order> GetOrderByIdAsync(int orderId)
+        {
+            return await _dbContext.Orders.Include(o => o.Items).FirstOrDefaultAsync(o => o.Id == orderId);
+        }
         public async Task<List<Order>> GetOrderByUserIDAsync(int userId)
         {
             var result = await _dbContext.Orders.Where(o => o.AccountId == userId).ToListAsync();

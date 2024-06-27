@@ -67,41 +67,39 @@ namespace Application.Services
 			return response;
 		}
 
-		public async Task<ServiceResponse<ProductDTO>> UpdateProductAsync(int id, UpdateDiamondDTO diamondDTO)
+		public async Task<ServiceResponse<ProductDTO>> UpdateProductAsync(int id, UpdateProductDTO updatedProduct)
 		{
 			var response = new ServiceResponse<ProductDTO>();
 
 			try
 			{
-				var existingDiamond = await _unitOfWork.DiamondRepository.GetByIdAsync(id);
+				var existProduct = await _unitOfWork.ProductRepository.GetByIdAsync(id);
 
-				if (existingDiamond == null)
+				if (existProduct == null)
 				{
 					response.Success = false;
-					response.Message = "Diamond not found.";
+					response.Message = "Product not found.";
 					return response;
 				}
 
-				if (existingDiamond.IsDeleted == true)
+				if (existProduct.IsDeleted == true)
 				{
 					response.Success = false;
-					response.Message = "Diamond has been deleted in system";
+					response.Message = "Product has been deleted in the system.";
 					return response;
 				}
 
-
-				// Map accountDT0 => existingUser
-				var updated = _mapper.Map(diamondDTO, existingDiamond);
-				//updated.PasswordHash = Utils.HashPassword.HashWithSHA256(accountDTO.PasswordHash);
-
-				_unitOfWork.DiamondRepository.Update(existingDiamond);
-
-				var updatedDiamondDto = _mapper.Map<DiamondDTO>(updated);
+				var newProduct = _mapper.Map(updatedProduct, existProduct);
+				//
+				_unitOfWork.ProductRepository.Update(existProduct);
+				//
+				var result = _mapper.Map<ProductDTO>(newProduct);
+				//
 				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
 
 				if (isSuccess)
 				{
-					response.Data = updatedDiamondDto;
+					response.Data = result;
 					response.Success = true;
 					response.Message = "Diamond updated successfully.";
 				}

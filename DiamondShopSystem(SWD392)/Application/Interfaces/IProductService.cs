@@ -13,7 +13,7 @@ namespace Application.Interfaces
 	{
 		Task<ServiceResponse<IEnumerable<ProductDTO>>> GetProductsAsync();
 		Task<ServiceResponse<ProductDTO>> GetProductByIdAsync(int id);
-		Task<ServiceResponse<ProductDTO>> UpdateProductAsync(int id, CreateProductDTO pro);
+		Task<ServiceResponse<ProductDTO>> UpdateProductAsync(int id, UpdateProductDTO pro);
 		Task<ServiceResponse<bool>> DeleteProductAsync(int id);
 		Task<ServiceResponse<IEnumerable<ProductDTO>>> SearchProductByNameAsync(string search);
 		Task<ServiceResponse<CreateProductDTO>> CreateProductAsync(CreateProductDTO pro);

@@ -1,6 +1,5 @@
 ﻿using Application.Commons;
 using Application.Interfaces;
-using Application.ViewModels.DiamondDTOs;
 using Application.ViewModels.ProductDTOs;
 using AutoMapper;
 using Domain.Entities;
@@ -101,18 +100,18 @@ namespace Application.Services
 				{
 					response.Data = result;
 					response.Success = true;
-					response.Message = "Diamond updated successfully.";
+					response.Message = "Product updated successfully.";
 				}
 				else
 				{
 					response.Success = false;
-					response.Message = "Error updating the diamond.";
+					response.Message = "Error updating product.";
 				}
 			}
 			catch (Exception ex)
 			{
 				response.Success = false;
-				response.Message = "Error";
+				response.Message = "Error.";
 				response.ErrorMessages = new List<string> { ex.Message };
 			}
 

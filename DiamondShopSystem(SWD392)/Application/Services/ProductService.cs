@@ -66,6 +66,58 @@ namespace Application.Services
 			return response;
 		}
 
+		public async Task<ServiceResponse<ProductDTO>> UpdateProductAsync(int id, UpdateProductDTO updatedProduct)
+		{
+			var response = new ServiceResponse<ProductDTO>();
+
+			try
+			{
+				var existProduct = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+
+				if (existProduct == null)
+				{
+					response.Success = false;
+					response.Message = "Product not found.";
+					return response;
+				}
+
+				if (existProduct.IsDeleted == true)
+				{
+					response.Success = false;
+					response.Message = "Product has been deleted in the system.";
+					return response;
+				}
+
+				var newProduct = _mapper.Map(updatedProduct, existProduct);
+				//
+				_unitOfWork.ProductRepository.Update(existProduct);
+				//
+				var result = _mapper.Map<ProductDTO>(newProduct);
+				//
+				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
+
+				if (isSuccess)
+				{
+					response.Data = result;
+					response.Success = true;
+					response.Message = "Product updated successfully.";
+				}
+				else
+				{
+					response.Success = false;
+					response.Message = "Error updating product.";
+				}
+			}
+			catch (Exception ex)
+			{
+				response.Success = false;
+				response.Message = "Error.";
+				response.ErrorMessages = new List<string> { ex.Message };
+			}
+
+			return response;
+		}
+
 		public async Task<ServiceResponse<ProductDTO>> GetProductByIdAsync(int id)
 		{
 			var response = new ServiceResponse<ProductDTO>();

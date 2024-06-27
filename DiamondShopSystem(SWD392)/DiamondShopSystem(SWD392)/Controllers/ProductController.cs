@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.Services;
+using Application.ViewModels.DiamondDTOs;
 using Application.ViewModels.ProductDTOs;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -68,6 +69,18 @@ namespace DiamondShopSystem_SWD392_.Controllers
 			{
 				return BadRequest("Invalid request data.");
 			}
+		}
+
+		[HttpPut]
+		[Route("{id}")]
+		public async Task<IActionResult> UpdateProduct(int id, [FromBody] UpdateProductDTO productDTO)
+		{
+			var result = await productService.UpdateProductAsync(id, productDTO);
+			if (!result.Success)
+			{
+				return NotFound(result);
+			}
+			return Ok(result);
 		}
 
 		[HttpDelete("{id}")]

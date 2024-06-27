@@ -24,8 +24,10 @@ namespace Infrastructures.Mappers
 			CreateMap<Diamond, DiamondDTO>().ReverseMap();
             CreateMap<Diamond, UpdateDiamondDTO>().ReverseMap();
             CreateMap<Diamond, CreateDiamondDTO>().ReverseMap();
-            CreateMap<Domain.Entities.Product, CreateProductDTO>().ReverseMap();
-            CreateMap<Domain.Entities.Product, ProductDTO>().ReverseMap();
+            //Product
+            CreateMap<Product, CreateProductDTO>().ReverseMap();
+            CreateMap<Product, ProductDTO>().ReverseMap();
+            CreateMap<Product, UpdateProductDTO>().ReverseMap();
 
 
 

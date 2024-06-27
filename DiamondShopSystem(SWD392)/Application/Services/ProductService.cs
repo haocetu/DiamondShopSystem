@@ -1,5 +1,6 @@
 ﻿using Application.Commons;
 using Application.Interfaces;
+using Application.ViewModels.DiamondDTOs;
 using Application.ViewModels.ProductDTOs;
 using AutoMapper;
 using Domain.Entities;
@@ -63,6 +64,60 @@ namespace Application.Services
 				response.Message = "Error";
 				response.ErrorMessages = new List<string> { Convert.ToString(ex.Message) };
 			}
+			return response;
+		}
+
+		public async Task<ServiceResponse<DiamondDTO>> UpdateDiamondAsync(int id, UpdateDiamondDTO diamondDTO)
+		{
+			var response = new ServiceResponse<DiamondDTO>();
+
+			try
+			{
+				var existingDiamond = await _unitOfWork.DiamondRepository.GetByIdAsync(id);
+
+				if (existingDiamond == null)
+				{
+					response.Success = false;
+					response.Message = "Diamond not found.";
+					return response;
+				}
+
+				if (existingDiamond.IsDeleted == true)
+				{
+					response.Success = false;
+					response.Message = "Diamond has been deleted in system";
+					return response;
+				}
+
+
+				// Map accountDT0 => existingUser
+				var updated = _mapper.Map(diamondDTO, existingDiamond);
+				//updated.PasswordHash = Utils.HashPassword.HashWithSHA256(accountDTO.PasswordHash);
+
+				_unitOfWork.DiamondRepository.Update(existingDiamond);
+
+				var updatedDiamondDto = _mapper.Map<DiamondDTO>(updated);
+				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
+
+				if (isSuccess)
+				{
+					response.Data = updatedDiamondDto;
+					response.Success = true;
+					response.Message = "Diamond updated successfully.";
+				}
+				else
+				{
+					response.Success = false;
+					response.Message = "Error updating the diamond.";
+				}
+			}
+			catch (Exception ex)
+			{
+				response.Success = false;
+				response.Message = "Error";
+				response.ErrorMessages = new List<string> { ex.Message };
+			}
+
 			return response;
 		}
 

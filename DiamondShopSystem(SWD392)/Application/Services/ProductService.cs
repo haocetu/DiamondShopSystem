@@ -67,9 +67,9 @@ namespace Application.Services
 			return response;
 		}
 
-		public async Task<ServiceResponse<DiamondDTO>> UpdateDiamondAsync(int id, UpdateDiamondDTO diamondDTO)
+		public async Task<ServiceResponse<ProductDTO>> UpdateProductAsync(int id, UpdateDiamondDTO diamondDTO)
 		{
-			var response = new ServiceResponse<DiamondDTO>();
+			var response = new ServiceResponse<ProductDTO>();
 
 			try
 			{

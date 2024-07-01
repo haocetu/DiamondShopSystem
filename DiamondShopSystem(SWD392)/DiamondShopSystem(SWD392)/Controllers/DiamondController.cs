@@ -69,7 +69,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> UpdateDiamond(int id, [FromBody] UpdateDiamondDTO diamondDTO)
+        public async Task<IActionResult> UpdateDiamond(int id, [FromForm] UpdateDiamondDTO diamondDTO)
         {
             var updatedDiamond = await _diamondService.UpdateDiamondAsync(id, diamondDTO);
             if (!updatedDiamond.Success)

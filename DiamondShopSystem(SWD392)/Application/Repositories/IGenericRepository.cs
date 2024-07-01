@@ -9,11 +9,12 @@ namespace Application.Repositories
 {
     public interface IGenericRepository<T>
     {
+        Task<List<T>> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null);
+        Task<T?> GetAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null);
         Task<List<T>> GetAllAsync();
         Task<T?> GetByIdAsync(int id);
         Task AddAsync(T entity);
         void Update(T entity);
-        //Task UpdateAsync(TEntity entity);
         void UpdateRange(List<T> entities);
         void SoftRemove(T entity);
         Task AddRangeAsync(List<T> entities);
@@ -21,7 +22,6 @@ namespace Application.Repositories
 
         Task DeleteRangeAsync(IEnumerable<T> entities);
 
-        //Task<Pagination<TEntity>> ToPagination(int pageNumber = 0, int pageSize = 10);
 
 
     }

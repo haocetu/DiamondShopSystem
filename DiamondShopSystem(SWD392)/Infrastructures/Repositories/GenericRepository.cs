@@ -82,25 +82,6 @@ namespace Infrastructures.Repositories
             _dbSet.RemoveRange(entities);
             return Task.CompletedTask;
         }
-        //public async Task<Pagination<TEntity>> ToPagination(int pageIndex = 0, int pageSize = 10)
-        //{
-        //    var itemCount = await _dbSet.CountAsync();
-        //    var items = await _dbSet.OrderByDescending(x => x.CreationDate)
-        //                            .Skip(pageIndex * pageSize)
-        //                            .Take(pageSize)
-        //                            .AsNoTracking()
-        //                            .ToListAsync();
-
-        //    var result = new Pagination<TEntity>()
-        //    {
-        //        PageIndex = pageIndex,
-        //        PageSize = pageSize,
-        //        TotalItemsCount = itemCount,
-        //        Items = items,
-        //    };
-
-        //    return result;
-        //}
 
         public void UpdateRange(List<T> entities)
         {
@@ -111,18 +92,44 @@ namespace Infrastructures.Repositories
             }
             _dbSet.UpdateRange(entities);
         }
-        //public async Task UpdateAsync(TEntity entity)
-        //{
-        //    // Cập nhật thông tin thời gian và người dùng
-        //    entity.ModificationDate = _timeService.GetCurrentTime();
-        //    entity.ModificationBy = _claimsService.GetCurrentUserId;
 
-        //    // Đánh dấu thực thể là đã được sửa đổi
-        //    _dbSet.Update(entity);
+        public async Task<T?> GetAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
+        {
+            IQueryable<T> query = _dbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
 
-        //    // Lưu các thay đổi vào cơ sở dữ liệu
-        //    await _dbSet.SaveChangesAsync();
-        //}
+            if (includeProperties != null)
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' },
+                             StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<List<T>> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
+        {
+            IQueryable<T> query = _dbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (includeProperties != null)
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' },
+                             StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
+            return await query.ToListAsync();
+        }
     }
 
 }

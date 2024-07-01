@@ -22,5 +22,6 @@ namespace Infrastructures.Repositories
         {
             return await _dbContext.Diamonds.Where(u => u.OriginName.Contains(origin)).ToListAsync();
         }
+
     }
 }

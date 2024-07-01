@@ -25,6 +25,7 @@ namespace Application.ViewModels.ProductDTOs
 		public int CategoryId { get; set; }
 		[Required]
 		public int Quantity { get; set; }
+		public List<int> Diamonds { get; set; }
 		public List<IFormFile> ProductImages { get; set; } = [];
 	}
 }

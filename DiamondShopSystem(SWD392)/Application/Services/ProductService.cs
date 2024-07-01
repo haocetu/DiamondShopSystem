@@ -192,11 +192,14 @@ namespace Application.Services
 				product.IsDeleted = false;
 				await _unitOfWork.ProductRepository.AddAsync(product);
 
-
 				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
 				if (!createProduct.ProductImages.IsNullOrEmpty())
 				{
 					await _imageService.UploadProductImages(createProduct.ProductImages, product.Id);
+				}
+				if (!createProduct.Diamonds.IsNullOrEmpty())
+				{
+					//await _imageService.UploadProductImages(createProduct.ProductImages, product.Id);
 				}
 				if (isSuccess)
 				{

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class ProductDiamond
+    public class ProductDiamond : BaseEntity
     {
         public int Id { get; set; }
         public bool IsMain { get; set; }

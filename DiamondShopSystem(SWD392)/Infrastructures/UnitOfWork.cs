@@ -111,7 +111,20 @@ namespace Infrastructures
             }
         }
 
-        public async Task<int> SaveChangeAsync()
+        private IProductDiamondRepository _productDiamondRepository;
+		public IProductDiamondRepository ProductDiamondRepository
+		{
+			get
+			{
+				if (_productDiamondRepository is null)
+				{
+					_productDiamondRepository = new ProductDiamondRepository(_dbContext, _currentTime, _claimsService);
+				}
+				return _productDiamondRepository;
+			}
+		}
+
+		public async Task<int> SaveChangeAsync()
         {
             return await _dbContext.SaveChangesAsync();
         }

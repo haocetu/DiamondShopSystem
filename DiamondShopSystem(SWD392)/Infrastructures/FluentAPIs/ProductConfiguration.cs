@@ -20,6 +20,7 @@ namespace Infrastructures.FluentAPIs
             builder.Property(p => p.Name).HasMaxLength(100).IsRequired();
 
             //builder.Property(p => p.Size).HasColumnType("decimal(18,2)").IsRequired();
+            builder.Property(p => p.Weight).IsRequired();
 
             builder.Property(p => p.Price).HasColumnType("decimal(18,2)").IsRequired();
 

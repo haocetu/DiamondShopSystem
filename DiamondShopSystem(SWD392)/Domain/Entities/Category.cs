@@ -11,7 +11,6 @@ namespace Domain.Entities
         public string Name { get; set; }
         public float Size { get; set; }
         public float Length { get; set; }
-        public decimal Price { get; set; }
         public virtual ICollection<Product> Products { get; set; }
     }
 }

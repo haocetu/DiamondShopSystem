@@ -13,10 +13,10 @@ namespace Application.ViewModels.ProductDTOs
 	{
 		[Required]
 		public string Name { get; set; }
-		//[Required]
-		//public decimal Size { get; set; }
-		//[Required]
-		//public decimal Price { get; set; }
+		[Required]
+		public decimal Size { get; set; }
+		[Required]
+		public decimal Price { get; set; }
 		[Required]
 		public decimal Wage { get; set; }
 		[Required]

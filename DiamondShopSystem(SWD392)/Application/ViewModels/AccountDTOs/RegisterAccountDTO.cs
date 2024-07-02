@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace Application.ViewModels.AccountDTOs
         public string PhoneNumber { get; set; }
 
         [Required]
+        [EnumDataType(typeof(Gender))]
         public string Gender { get; set; }
     }
 }

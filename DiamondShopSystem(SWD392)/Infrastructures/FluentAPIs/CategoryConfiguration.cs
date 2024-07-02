@@ -19,9 +19,9 @@ namespace Infrastructures.FluentAPIs
 
             builder.Property(c => c.Name).IsRequired().HasMaxLength(100);
 
-            builder.Property(c => c.Size).IsRequired().HasColumnType("decimal(18,2)");
+            builder.Property(c => c.Size).HasColumnType("decimal(18,2)");
 
-            builder.Property(c => c.Lenght).IsRequired().HasColumnType("decimal(18,2)");
+            builder.Property(c => c.Length).HasColumnType("decimal(18,2)");
 
             builder.Property(c => c.Price).IsRequired().HasColumnType("decimal(18,2)");
 

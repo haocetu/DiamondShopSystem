@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Infrastructures.Migrations
 {
     /// <inheritdoc />
@@ -19,7 +21,7 @@ namespace Infrastructures.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Size = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Lenght = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Length = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<int>(type: "int", nullable: true),
@@ -43,9 +45,9 @@ namespace Infrastructures.Migrations
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     OriginName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     CaratWeight = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ClarityName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CutName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ClarityName = table.Column<int>(type: "int", maxLength: 50, nullable: false),
+                    CutName = table.Column<int>(type: "int", maxLength: 50, nullable: false),
+                    Color = table.Column<int>(type: "int", maxLength: 50, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -123,7 +125,6 @@ namespace Infrastructures.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Size = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Wage = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ProductTypeId = table.Column<int>(type: "int", nullable: false),
@@ -163,7 +164,7 @@ namespace Infrastructures.Migrations
                     Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Gender = table.Column<int>(type: "int", maxLength: 10, nullable: false),
                     Point = table.Column<int>(type: "int", precision: 18, scale: 2, nullable: false),
                     ConfirmationToken = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     RoleId = table.Column<int>(type: "int", nullable: false),
@@ -227,7 +228,14 @@ namespace Infrastructures.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsMain = table.Column<bool>(type: "bit", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    DiamondId = table.Column<int>(type: "int", nullable: false)
+                    DiamondId = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<int>(type: "int", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<int>(type: "int", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<int>(type: "int", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -386,6 +394,112 @@ namespace Infrastructures.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "IsDeleted", "Length", "ModifiedBy", "ModifiedDate", "Name", "Price", "Size" },
+                values: new object[,]
+                {
+                    { 1, null, null, null, null, false, 0m, null, null, "Ring", 200000m, 6m },
+                    { 2, null, null, null, null, false, 0m, null, null, "Ring", 250000m, 7m },
+                    { 3, null, null, null, null, false, 0m, null, null, "Ring", 300000m, 8m },
+                    { 4, null, null, null, null, false, 0m, null, null, "Ring", 350000m, 9m },
+                    { 5, null, null, null, null, false, 0m, null, null, "Ring", 400000m, 10m },
+                    { 6, null, null, null, null, false, 0m, null, null, "Ring", 450000m, 11m },
+                    { 7, null, null, null, null, false, 0m, null, null, "Ring", 500000m, 12m },
+                    { 8, null, null, null, null, false, 0m, null, null, "Ring", 550000m, 13m },
+                    { 9, null, null, null, null, false, 0m, null, null, "Ring", 600000m, 14m },
+                    { 10, null, null, null, null, false, 0m, null, null, "Ring", 650000m, 15m },
+                    { 11, null, null, null, null, false, 0m, null, null, "Ring", 700000m, 16m },
+                    { 12, null, null, null, null, false, 0m, null, null, "Ring", 750000m, 17m },
+                    { 13, null, null, null, null, false, 0m, null, null, "Ring", 800000m, 18m },
+                    { 14, null, null, null, null, false, 0m, null, null, "Ring", 850000m, 19m },
+                    { 15, null, null, null, null, false, 0m, null, null, "Ring", 900000m, 20m },
+                    { 16, null, null, null, null, false, 36m, null, null, "Necklace", 500000m, 0m },
+                    { 17, null, null, null, null, false, 38m, null, null, "Necklace", 550000m, 0m },
+                    { 18, null, null, null, null, false, 40m, null, null, "Necklace", 600000m, 0m },
+                    { 19, null, null, null, null, false, 42m, null, null, "Necklace", 650000m, 0m },
+                    { 20, null, null, null, null, false, 44m, null, null, "Necklace", 700000m, 0m },
+                    { 21, null, null, null, null, false, 46m, null, null, "Necklace", 750000m, 0m },
+                    { 22, null, null, null, null, false, 48m, null, null, "Necklace", 800000m, 0m },
+                    { 23, null, null, null, null, false, 50m, null, null, "Necklace", 850000m, 0m },
+                    { 24, null, null, null, null, false, 52m, null, null, "Necklace", 850000m, 0m },
+                    { 25, null, null, null, null, false, 54m, null, null, "Necklace", 900000m, 0m },
+                    { 26, null, null, null, null, false, 56m, null, null, "Necklace", 950000m, 0m },
+                    { 27, null, null, null, null, false, 58m, null, null, "Necklace", 1000000m, 0m },
+                    { 28, null, null, null, null, false, 60m, null, null, "Necklace", 1050000m, 0m },
+                    { 29, null, null, null, null, false, 0m, null, null, "Earring", 0m, 0m },
+                    { 30, null, null, null, null, false, 0m, null, null, "Bracelet", 500000m, 36m },
+                    { 31, null, null, null, null, false, 0m, null, null, "Bracelet", 550000m, 38m },
+                    { 32, null, null, null, null, false, 0m, null, null, "Bracelet", 600000m, 40m },
+                    { 33, null, null, null, null, false, 0m, null, null, "Bracelet", 650000m, 42m },
+                    { 34, null, null, null, null, false, 0m, null, null, "Bracelet", 700000m, 44m },
+                    { 35, null, null, null, null, false, 0m, null, null, "Bracelet", 750000m, 46m },
+                    { 36, null, null, null, null, false, 0m, null, null, "Bracelet", 800000m, 48m },
+                    { 37, null, null, null, null, false, 0m, null, null, "Bracelet", 850000m, 50m },
+                    { 38, null, null, null, null, false, 0m, null, null, "Bracelet", 900000m, 52m },
+                    { 39, null, null, null, null, false, 0m, null, null, "Bracelet", 950000m, 54m },
+                    { 40, null, null, null, null, false, 0m, null, null, "Bracelet", 1000000m, 56m },
+                    { 41, null, null, null, null, false, 0m, null, null, "Bracelet", 1050000m, 58m },
+                    { 42, null, null, null, null, false, 0m, null, null, "Bracelet", 1100000m, 60m },
+                    { 43, null, null, null, null, false, 36m, null, null, "Bangles", 500000m, 0m },
+                    { 44, null, null, null, null, false, 38m, null, null, "Bangles", 550000m, 0m },
+                    { 45, null, null, null, null, false, 40m, null, null, "Bangles", 600000m, 0m },
+                    { 46, null, null, null, null, false, 42m, null, null, "Bangles", 650000m, 0m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Diamonds",
+                columns: new[] { "Id", "CaratWeight", "ClarityName", "Color", "CreatedBy", "CreatedDate", "CutName", "DeletedBy", "DeletedDate", "IsDeleted", "ModifiedBy", "ModifiedDate", "Name", "OriginName", "Price", "Quantity" },
+                values: new object[,]
+                {
+                    { 1, 2.5m, 0, 0, null, null, 0, null, null, false, null, null, "Kim cương Good FL", "Kim cương", 5000000000m, 10 },
+                    { 2, 2.5m, 0, 0, null, null, 0, null, null, false, null, null, "Kim cương Excellent I1", "Kim cương", 6000000000m, 10 },
+                    { 3, 2.5m, 0, 0, null, null, 0, null, null, false, null, null, "Kim cương Very Good I2", "Kim cương", 7000000000m, 10 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductType",
+                columns: new[] { "Id", "Material", "Price", "Weight" },
+                values: new object[,]
+                {
+                    { 1, "Gold", 5567000m, 3.75f },
+                    { 2, "Platium", 827287m, 1f },
+                    { 3, "Sliver", 22325m, 1f }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Customer" },
+                    { 2, "Admin" },
+                    { 3, "SaleStaff" },
+                    { 4, "DeliveryStaff" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "CategoryId", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "IsDeleted", "ModifiedBy", "ModifiedDate", "Name", "Price", "ProductTypeId", "Quantity", "Wage" },
+                values: new object[,]
+                {
+                    { 1, 1, null, null, null, null, false, null, null, "Nhẫn Vàng trắng 14K đính đá  ", 7236000m, 1, 10, 500000m },
+                    { 2, 16, null, null, null, null, false, null, null, "Dây chuyền Vàng Trắng Ý 18K ", 15692000m, 1, 10, 1000000m },
+                    { 3, 3, null, null, null, null, false, null, null, "Lắc tay Bạc đính đá", 700000m, 3, 10, 100000m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductDiamonds",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "DiamondId", "IsDeleted", "IsMain", "ModifiedBy", "ModifiedDate", "ProductId" },
+                values: new object[,]
+                {
+                    { 1, null, null, null, null, 1, false, true, null, null, 1 },
+                    { 2, null, null, null, null, 1, false, true, null, null, 2 },
+                    { 3, null, null, null, null, 2, false, false, null, null, 2 },
+                    { 4, null, null, null, null, 3, false, false, null, null, 2 },
+                    { 5, null, null, null, null, 3, false, true, null, null, 3 }
                 });
 
             migrationBuilder.CreateIndex(

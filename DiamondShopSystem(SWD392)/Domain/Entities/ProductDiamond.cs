@@ -8,11 +8,12 @@ namespace Domain.Entities
 {
     public class ProductDiamond : BaseEntity
     {
-        public int Id { get; set; }
         public bool IsMain { get; set; }
         public int ProductId { get; set; }
-        public Product Product { get; set; }
         public int DiamondId { get; set; }
+
+        //Relationship
+        public Product Product { get; set; }
         public Diamond Diamond { get; set; }
     }
 }

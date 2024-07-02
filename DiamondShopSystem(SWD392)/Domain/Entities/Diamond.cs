@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,9 @@ namespace Domain.Entities
         public string Name { get; set; }
         public string OriginName {  get; set; }
         public float CaratWeight {  get; set; }
-        public string ClarityName { get; set; }
-        public string CutName { get; set; }
-        public string Color { get; set; }
+        public DiamondClarity ClarityName { get; set; }
+        public DiamondCut CutName { get; set; }
+        public DiamondColor Color { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public List<ProductDiamond> ProductDiamonds { get; set; } = [];

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructures.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240626021708_InitialDatabase")]
+    [Migration("20240702080020_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -59,10 +59,9 @@ namespace Infrastructures.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Gender")
-                        .IsRequired()
+                    b.Property<int>("Gender")
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("int");
 
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
@@ -199,7 +198,7 @@ namespace Infrastructures.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("Lenght")
+                    b.Property<decimal>("Length")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("ModifiedBy")
@@ -222,6 +221,422 @@ namespace Infrastructures.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 200000m,
+                            Size = 6m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 250000m,
+                            Size = 7m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 300000m,
+                            Size = 8m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 350000m,
+                            Size = 9m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 400000m,
+                            Size = 10m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 450000m,
+                            Size = 11m
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 500000m,
+                            Size = 12m
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 550000m,
+                            Size = 13m
+                        },
+                        new
+                        {
+                            Id = 9,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 600000m,
+                            Size = 14m
+                        },
+                        new
+                        {
+                            Id = 10,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 650000m,
+                            Size = 15m
+                        },
+                        new
+                        {
+                            Id = 11,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 700000m,
+                            Size = 16m
+                        },
+                        new
+                        {
+                            Id = 12,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 750000m,
+                            Size = 17m
+                        },
+                        new
+                        {
+                            Id = 13,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 800000m,
+                            Size = 18m
+                        },
+                        new
+                        {
+                            Id = 14,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 850000m,
+                            Size = 19m
+                        },
+                        new
+                        {
+                            Id = 15,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Ring",
+                            Price = 900000m,
+                            Size = 20m
+                        },
+                        new
+                        {
+                            Id = 16,
+                            IsDeleted = false,
+                            Length = 36m,
+                            Name = "Necklace",
+                            Price = 500000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 17,
+                            IsDeleted = false,
+                            Length = 38m,
+                            Name = "Necklace",
+                            Price = 550000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 18,
+                            IsDeleted = false,
+                            Length = 40m,
+                            Name = "Necklace",
+                            Price = 600000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 19,
+                            IsDeleted = false,
+                            Length = 42m,
+                            Name = "Necklace",
+                            Price = 650000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 20,
+                            IsDeleted = false,
+                            Length = 44m,
+                            Name = "Necklace",
+                            Price = 700000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 21,
+                            IsDeleted = false,
+                            Length = 46m,
+                            Name = "Necklace",
+                            Price = 750000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 22,
+                            IsDeleted = false,
+                            Length = 48m,
+                            Name = "Necklace",
+                            Price = 800000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 23,
+                            IsDeleted = false,
+                            Length = 50m,
+                            Name = "Necklace",
+                            Price = 850000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 24,
+                            IsDeleted = false,
+                            Length = 52m,
+                            Name = "Necklace",
+                            Price = 850000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 25,
+                            IsDeleted = false,
+                            Length = 54m,
+                            Name = "Necklace",
+                            Price = 900000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 26,
+                            IsDeleted = false,
+                            Length = 56m,
+                            Name = "Necklace",
+                            Price = 950000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 27,
+                            IsDeleted = false,
+                            Length = 58m,
+                            Name = "Necklace",
+                            Price = 1000000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 28,
+                            IsDeleted = false,
+                            Length = 60m,
+                            Name = "Necklace",
+                            Price = 1050000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 29,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Earring",
+                            Price = 0m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 30,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Bracelet",
+                            Price = 500000m,
+                            Size = 36m
+                        },
+                        new
+                        {
+                            Id = 31,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Bracelet",
+                            Price = 550000m,
+                            Size = 38m
+                        },
+                        new
+                        {
+                            Id = 32,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Bracelet",
+                            Price = 600000m,
+                            Size = 40m
+                        },
+                        new
+                        {
+                            Id = 33,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Bracelet",
+                            Price = 650000m,
+                            Size = 42m
+                        },
+                        new
+                        {
+                            Id = 34,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Bracelet",
+                            Price = 700000m,
+                            Size = 44m
+                        },
+                        new
+                        {
+                            Id = 35,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Bracelet",
+                            Price = 750000m,
+                            Size = 46m
+                        },
+                        new
+                        {
+                            Id = 36,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Bracelet",
+                            Price = 800000m,
+                            Size = 48m
+                        },
+                        new
+                        {
+                            Id = 37,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Bracelet",
+                            Price = 850000m,
+                            Size = 50m
+                        },
+                        new
+                        {
+                            Id = 38,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Bracelet",
+                            Price = 900000m,
+                            Size = 52m
+                        },
+                        new
+                        {
+                            Id = 39,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Bracelet",
+                            Price = 950000m,
+                            Size = 54m
+                        },
+                        new
+                        {
+                            Id = 40,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Bracelet",
+                            Price = 1000000m,
+                            Size = 56m
+                        },
+                        new
+                        {
+                            Id = 41,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Bracelet",
+                            Price = 1050000m,
+                            Size = 58m
+                        },
+                        new
+                        {
+                            Id = 42,
+                            IsDeleted = false,
+                            Length = 0m,
+                            Name = "Bracelet",
+                            Price = 1100000m,
+                            Size = 60m
+                        },
+                        new
+                        {
+                            Id = 43,
+                            IsDeleted = false,
+                            Length = 36m,
+                            Name = "Bangles",
+                            Price = 500000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 44,
+                            IsDeleted = false,
+                            Length = 38m,
+                            Name = "Bangles",
+                            Price = 550000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 45,
+                            IsDeleted = false,
+                            Length = 40m,
+                            Name = "Bangles",
+                            Price = 600000m,
+                            Size = 0m
+                        },
+                        new
+                        {
+                            Id = 46,
+                            IsDeleted = false,
+                            Length = 42m,
+                            Name = "Bangles",
+                            Price = 650000m,
+                            Size = 0m
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Diamond", b =>
@@ -235,15 +650,13 @@ namespace Infrastructures.Migrations
                     b.Property<decimal>("CaratWeight")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ClarityName")
-                        .IsRequired()
+                    b.Property<int>("ClarityName")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("int");
 
-                    b.Property<string>("Color")
-                        .IsRequired()
+                    b.Property<int>("Color")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("int");
 
                     b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
@@ -251,10 +664,9 @@ namespace Infrastructures.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CutName")
-                        .IsRequired()
+                    b.Property<int>("CutName")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("int");
 
                     b.Property<int?>("DeletedBy")
                         .HasColumnType("int");
@@ -290,6 +702,47 @@ namespace Infrastructures.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Diamonds", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CaratWeight = 2.5m,
+                            ClarityName = 0,
+                            Color = 0,
+                            CutName = 0,
+                            IsDeleted = false,
+                            Name = "Kim cương Good FL",
+                            OriginName = "Kim cương",
+                            Price = 5000000000m,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CaratWeight = 2.5m,
+                            ClarityName = 0,
+                            Color = 0,
+                            CutName = 0,
+                            IsDeleted = false,
+                            Name = "Kim cương Excellent I1",
+                            OriginName = "Kim cương",
+                            Price = 6000000000m,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CaratWeight = 2.5m,
+                            ClarityName = 0,
+                            Color = 0,
+                            CutName = 0,
+                            IsDeleted = false,
+                            Name = "Kim cương Very Good I2",
+                            OriginName = "Kim cương",
+                            Price = 7000000000m,
+                            Quantity = 10
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Image", b =>
@@ -488,9 +941,6 @@ namespace Infrastructures.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Size")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<decimal>("Wage")
                         .HasColumnType("decimal(18,2)");
 
@@ -501,6 +951,41 @@ namespace Infrastructures.Migrations
                     b.HasIndex("ProductTypeId");
 
                     b.ToTable("Products", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            IsDeleted = false,
+                            Name = "Nhẫn Vàng trắng 14K đính đá  ",
+                            Price = 7236000m,
+                            ProductTypeId = 1,
+                            Quantity = 10,
+                            Wage = 500000m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 16,
+                            IsDeleted = false,
+                            Name = "Dây chuyền Vàng Trắng Ý 18K ",
+                            Price = 15692000m,
+                            ProductTypeId = 1,
+                            Quantity = 10,
+                            Wage = 1000000m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 3,
+                            IsDeleted = false,
+                            Name = "Lắc tay Bạc đính đá",
+                            Price = 700000m,
+                            ProductTypeId = 3,
+                            Quantity = 10,
+                            Wage = 100000m
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.ProductDiamond", b =>
@@ -511,11 +996,32 @@ namespace Infrastructures.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("DiamondId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsMain")
                         .HasColumnType("bit");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -527,6 +1033,48 @@ namespace Infrastructures.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductDiamonds", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DiamondId = 1,
+                            IsDeleted = false,
+                            IsMain = true,
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DiamondId = 1,
+                            IsDeleted = false,
+                            IsMain = true,
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DiamondId = 2,
+                            IsDeleted = false,
+                            IsMain = false,
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DiamondId = 3,
+                            IsDeleted = false,
+                            IsMain = false,
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DiamondId = 3,
+                            IsDeleted = false,
+                            IsMain = true,
+                            ProductId = 3
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.ProductType", b =>
@@ -550,6 +1098,29 @@ namespace Infrastructures.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Material = "Gold",
+                            Price = 5567000m,
+                            Weight = 3.75f
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Material = "Platium",
+                            Price = 827287m,
+                            Weight = 1f
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Material = "Sliver",
+                            Price = 22325m,
+                            Weight = 1f
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.ProductWarranty", b =>
@@ -619,6 +1190,28 @@ namespace Infrastructures.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Customer"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "SaleStaff"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "DeliveryStaff"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Account", b =>

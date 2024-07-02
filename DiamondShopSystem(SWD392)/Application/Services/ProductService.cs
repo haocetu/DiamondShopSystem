@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -199,7 +200,16 @@ namespace Application.Services
 				}
 				if (!createProduct.Diamonds.IsNullOrEmpty())
 				{
-					//await _imageService.UploadProductImages(createProduct.ProductImages, product.Id);
+					foreach (var diamond in createProduct.Diamonds)
+					{
+						var productDiamond = new ProductDiamond
+						{
+							IsMain = false,
+							DiamondId = diamond,
+							ProductId = product.Id,
+						};
+						_unitOfWork.ProductDiamondRepository.AddAsync(productDiamond);
+					}
 				}
 				if (isSuccess)
 				{

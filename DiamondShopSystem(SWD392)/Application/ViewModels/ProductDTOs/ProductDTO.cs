@@ -15,6 +15,7 @@ namespace Application.ViewModels.ProductDTOs
 		public decimal Wage { get; set; }
 		public int ProductTypeId { get; set; }
 		public int CategoryId { get; set; }
+		public Category Category { get; set; }
 		public int Quantity { get; set; }
 		public List<string> Images { get; set; }
 	}

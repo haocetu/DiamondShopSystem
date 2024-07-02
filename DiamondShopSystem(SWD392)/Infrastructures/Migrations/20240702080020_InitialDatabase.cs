@@ -125,7 +125,6 @@ namespace Infrastructures.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Size = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Wage = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ProductTypeId = table.Column<int>(type: "int", nullable: false),
@@ -451,6 +450,16 @@ namespace Infrastructures.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Diamonds",
+                columns: new[] { "Id", "CaratWeight", "ClarityName", "Color", "CreatedBy", "CreatedDate", "CutName", "DeletedBy", "DeletedDate", "IsDeleted", "ModifiedBy", "ModifiedDate", "Name", "OriginName", "Price", "Quantity" },
+                values: new object[,]
+                {
+                    { 1, 2.5m, 0, 0, null, null, 0, null, null, false, null, null, "Kim cương Good FL", "Kim cương", 5000000000m, 10 },
+                    { 2, 2.5m, 0, 0, null, null, 0, null, null, false, null, null, "Kim cương Excellent I1", "Kim cương", 6000000000m, 10 },
+                    { 3, 2.5m, 0, 0, null, null, 0, null, null, false, null, null, "Kim cương Very Good I2", "Kim cương", 7000000000m, 10 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "ProductType",
                 columns: new[] { "Id", "Material", "Price", "Weight" },
                 values: new object[,]
@@ -469,6 +478,28 @@ namespace Infrastructures.Migrations
                     { 2, "Admin" },
                     { 3, "SaleStaff" },
                     { 4, "DeliveryStaff" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "CategoryId", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "IsDeleted", "ModifiedBy", "ModifiedDate", "Name", "Price", "ProductTypeId", "Quantity", "Wage" },
+                values: new object[,]
+                {
+                    { 1, 1, null, null, null, null, false, null, null, "Nhẫn Vàng trắng 14K đính đá  ", 7236000m, 1, 10, 500000m },
+                    { 2, 16, null, null, null, null, false, null, null, "Dây chuyền Vàng Trắng Ý 18K ", 15692000m, 1, 10, 1000000m },
+                    { 3, 3, null, null, null, null, false, null, null, "Lắc tay Bạc đính đá", 700000m, 3, 10, 100000m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductDiamonds",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "DiamondId", "IsDeleted", "IsMain", "ModifiedBy", "ModifiedDate", "ProductId" },
+                values: new object[,]
+                {
+                    { 1, null, null, null, null, 1, false, true, null, null, 1 },
+                    { 2, null, null, null, null, 1, false, true, null, null, 2 },
+                    { 3, null, null, null, null, 2, false, false, null, null, 2 },
+                    { 4, null, null, null, null, 3, false, false, null, null, 2 },
+                    { 5, null, null, null, null, 3, false, true, null, null, 3 }
                 });
 
             migrationBuilder.CreateIndex(

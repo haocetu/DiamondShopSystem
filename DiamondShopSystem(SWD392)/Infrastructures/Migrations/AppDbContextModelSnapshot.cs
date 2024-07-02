@@ -209,9 +209,6 @@ namespace Infrastructures.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<decimal>("Size")
                         .HasColumnType("decimal(18,2)");
 
@@ -226,7 +223,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 200000m,
                             Size = 6m
                         },
                         new
@@ -235,7 +231,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 250000m,
                             Size = 7m
                         },
                         new
@@ -244,7 +239,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 300000m,
                             Size = 8m
                         },
                         new
@@ -253,7 +247,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 350000m,
                             Size = 9m
                         },
                         new
@@ -262,7 +255,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 400000m,
                             Size = 10m
                         },
                         new
@@ -271,7 +263,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 450000m,
                             Size = 11m
                         },
                         new
@@ -280,7 +271,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 500000m,
                             Size = 12m
                         },
                         new
@@ -289,7 +279,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 550000m,
                             Size = 13m
                         },
                         new
@@ -298,7 +287,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 600000m,
                             Size = 14m
                         },
                         new
@@ -307,7 +295,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 650000m,
                             Size = 15m
                         },
                         new
@@ -316,7 +303,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 700000m,
                             Size = 16m
                         },
                         new
@@ -325,7 +311,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 750000m,
                             Size = 17m
                         },
                         new
@@ -334,7 +319,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 800000m,
                             Size = 18m
                         },
                         new
@@ -343,7 +327,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 850000m,
                             Size = 19m
                         },
                         new
@@ -352,7 +335,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Ring",
-                            Price = 900000m,
                             Size = 20m
                         },
                         new
@@ -361,7 +343,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 36m,
                             Name = "Necklace",
-                            Price = 500000m,
                             Size = 0m
                         },
                         new
@@ -370,7 +351,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 38m,
                             Name = "Necklace",
-                            Price = 550000m,
                             Size = 0m
                         },
                         new
@@ -379,7 +359,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 40m,
                             Name = "Necklace",
-                            Price = 600000m,
                             Size = 0m
                         },
                         new
@@ -388,7 +367,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 42m,
                             Name = "Necklace",
-                            Price = 650000m,
                             Size = 0m
                         },
                         new
@@ -397,7 +375,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 44m,
                             Name = "Necklace",
-                            Price = 700000m,
                             Size = 0m
                         },
                         new
@@ -406,7 +383,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 46m,
                             Name = "Necklace",
-                            Price = 750000m,
                             Size = 0m
                         },
                         new
@@ -415,7 +391,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 48m,
                             Name = "Necklace",
-                            Price = 800000m,
                             Size = 0m
                         },
                         new
@@ -424,7 +399,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 50m,
                             Name = "Necklace",
-                            Price = 850000m,
                             Size = 0m
                         },
                         new
@@ -433,7 +407,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 52m,
                             Name = "Necklace",
-                            Price = 850000m,
                             Size = 0m
                         },
                         new
@@ -442,7 +415,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 54m,
                             Name = "Necklace",
-                            Price = 900000m,
                             Size = 0m
                         },
                         new
@@ -451,7 +423,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 56m,
                             Name = "Necklace",
-                            Price = 950000m,
                             Size = 0m
                         },
                         new
@@ -460,7 +431,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 58m,
                             Name = "Necklace",
-                            Price = 1000000m,
                             Size = 0m
                         },
                         new
@@ -469,7 +439,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 60m,
                             Name = "Necklace",
-                            Price = 1050000m,
                             Size = 0m
                         },
                         new
@@ -478,7 +447,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Earring",
-                            Price = 0m,
                             Size = 0m
                         },
                         new
@@ -487,7 +455,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Bracelet",
-                            Price = 500000m,
                             Size = 36m
                         },
                         new
@@ -496,7 +463,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Bracelet",
-                            Price = 550000m,
                             Size = 38m
                         },
                         new
@@ -505,7 +471,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Bracelet",
-                            Price = 600000m,
                             Size = 40m
                         },
                         new
@@ -514,7 +479,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Bracelet",
-                            Price = 650000m,
                             Size = 42m
                         },
                         new
@@ -523,7 +487,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Bracelet",
-                            Price = 700000m,
                             Size = 44m
                         },
                         new
@@ -532,7 +495,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Bracelet",
-                            Price = 750000m,
                             Size = 46m
                         },
                         new
@@ -541,7 +503,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Bracelet",
-                            Price = 800000m,
                             Size = 48m
                         },
                         new
@@ -550,7 +511,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Bracelet",
-                            Price = 850000m,
                             Size = 50m
                         },
                         new
@@ -559,7 +519,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Bracelet",
-                            Price = 900000m,
                             Size = 52m
                         },
                         new
@@ -568,7 +527,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Bracelet",
-                            Price = 950000m,
                             Size = 54m
                         },
                         new
@@ -577,7 +535,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Bracelet",
-                            Price = 1000000m,
                             Size = 56m
                         },
                         new
@@ -586,7 +543,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Bracelet",
-                            Price = 1050000m,
                             Size = 58m
                         },
                         new
@@ -595,7 +551,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 0m,
                             Name = "Bracelet",
-                            Price = 1100000m,
                             Size = 60m
                         },
                         new
@@ -604,7 +559,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 36m,
                             Name = "Bangles",
-                            Price = 500000m,
                             Size = 0m
                         },
                         new
@@ -613,7 +567,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 38m,
                             Name = "Bangles",
-                            Price = 550000m,
                             Size = 0m
                         },
                         new
@@ -622,7 +575,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 40m,
                             Name = "Bangles",
-                            Price = 600000m,
                             Size = 0m
                         },
                         new
@@ -631,7 +583,6 @@ namespace Infrastructures.Migrations
                             IsDeleted = false,
                             Length = 42m,
                             Name = "Bangles",
-                            Price = 650000m,
                             Size = 0m
                         });
                 });
@@ -941,6 +892,9 @@ namespace Infrastructures.Migrations
                     b.Property<decimal>("Wage")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("Weight")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -959,7 +913,8 @@ namespace Infrastructures.Migrations
                             Price = 7236000m,
                             ProductTypeId = 1,
                             Quantity = 10,
-                            Wage = 500000m
+                            Wage = 500000m,
+                            Weight = 7m
                         },
                         new
                         {
@@ -970,7 +925,8 @@ namespace Infrastructures.Migrations
                             Price = 15692000m,
                             ProductTypeId = 1,
                             Quantity = 10,
-                            Wage = 1000000m
+                            Wage = 1000000m,
+                            Weight = 150m
                         },
                         new
                         {
@@ -981,7 +937,8 @@ namespace Infrastructures.Migrations
                             Price = 700000m,
                             ProductTypeId = 3,
                             Quantity = 10,
-                            Wage = 100000m
+                            Wage = 100000m,
+                            Weight = 200m
                         });
                 });
 

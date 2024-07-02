@@ -10,11 +10,14 @@ namespace Domain.Entities
     {
         public string Name { get; set; }
         public decimal Price { get; set; }
+        public int Quantity { get; set; }
+        public decimal Weight { get; set; }
         public decimal Wage { get; set; }
         public int ProductTypeId { get; set; }
-        public ProductType ProductType { get; set; }
         public int CategoryId { get; set; }
-        public int Quantity { get; set; }
+ 
+        //Relationship
+        public ProductType ProductType { get; set; }
         public Category Category { get; set; }
         public List<CartItem> CartItems { get; set; }
         public List<OrderItem> OrderItems { get; set; }

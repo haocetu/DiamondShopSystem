@@ -247,6 +247,18 @@ namespace Application.Services
                     response.Message = "Diamond has been deleted in system";
                     return response;
                 }
+                if(diamondDTO.OriginName == null)
+                {
+                    diamondDTO.OriginName = existingDiamond.OriginName;
+                }
+                if(diamondDTO.CaratWeight == null)
+                {
+                    diamondDTO.CaratWeight = existingDiamond.CaratWeight;
+                }
+                //if(diamondDTO.ClarityName  == null)
+                //{
+                //    diamondDTO.ClarityName = existingDiamond.ClarityName;
+                //}
                 //Mapping
                 var update = _mapper.Map(existingDiamond, diamondDTO);
 

@@ -59,7 +59,7 @@ namespace Infrastructures
             modelBuilder.ApplyConfiguration(new CartItemConfiguration());
             modelBuilder.ApplyConfiguration(new PaymentConfiguration());
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
-
+            #region insert data
             //Role
             modelBuilder.Entity<Role>().HasData(
                 new Role { Id = 1, Name = "Customer"},
@@ -127,6 +127,27 @@ namespace Infrastructures
                 new Category { Id = 45, Name = "Bangles", Length = 40, Price = 600000, IsDeleted = false },
                 new Category { Id = 46, Name = "Bangles", Length = 42, Price = 650000, IsDeleted = false }
                 );
+            //Diamond
+            modelBuilder.Entity<Diamond>().HasData(
+                new Diamond { Id = 1, Name = "Kim cương Good FL", OriginName = "Kim cương", CaratWeight = 2.5f, ClarityName = 0, CutName = 0, Color = 0, Price = 5000000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 2, Name = "Kim cương Excellent I1", OriginName = "Kim cương", CaratWeight = 2.5f, ClarityName = 0, CutName = 0, Color = 0, Price = 6000000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 3, Name = "Kim cương Very Good I2", OriginName = "Kim cương", CaratWeight = 2.5f, ClarityName = 0, CutName = 0, Color = 0, Price = 7000000000, Quantity = 10, IsDeleted = false}
+                );
+            //Product
+            modelBuilder.Entity<Product>().HasData(
+                new Product { Id = 1, Name = "Nhẫn Vàng trắng 14K đính đá  ",Quantity = 10, CategoryId = 1, Price = 7236000, Wage = 500000, ProductTypeId = 1, IsDeleted = false },
+                new Product { Id = 2, Name = "Dây chuyền Vàng Trắng Ý 18K ", Quantity = 10, CategoryId = 16, Price = 15692000, Wage = 1000000, ProductTypeId = 1, IsDeleted = false },
+                new Product { Id = 3, Name = "Lắc tay Bạc đính đá", Quantity = 10, CategoryId = 3, Price = 700000, Wage = 100000, ProductTypeId = 3, IsDeleted = false }
+                );
+            //Product Diamond
+            modelBuilder.Entity<ProductDiamond>().HasData(
+                new ProductDiamond { Id = 1, ProductId = 1, DiamondId = 1, IsMain = true, IsDeleted = false},
+                new ProductDiamond { Id = 2, ProductId = 2, DiamondId = 1, IsMain = true , IsDeleted = false},
+                new ProductDiamond { Id = 3, ProductId = 2, DiamondId = 2, IsMain = false, IsDeleted = false },
+                new ProductDiamond { Id = 4, ProductId = 2, DiamondId = 3, IsMain = false, IsDeleted = false },
+                new ProductDiamond { Id = 5, ProductId = 3, DiamondId = 3, IsMain = true, IsDeleted = false }
+                );
+            #endregion
         }
     }
 }

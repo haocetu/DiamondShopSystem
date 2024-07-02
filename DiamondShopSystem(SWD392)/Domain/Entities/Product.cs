@@ -9,7 +9,6 @@ namespace Domain.Entities
     public class Product : BaseEntity
     {
         public string Name { get; set; }
-        public decimal Size { get; set; }
         public decimal Price { get; set; }
         public decimal Wage { get; set; }
         public int ProductTypeId { get; set; }

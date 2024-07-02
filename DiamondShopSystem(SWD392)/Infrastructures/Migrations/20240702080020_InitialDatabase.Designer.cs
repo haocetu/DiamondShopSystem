@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructures.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240702061647_InitialDatabase")]
+    [Migration("20240702080020_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -702,6 +702,47 @@ namespace Infrastructures.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Diamonds", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CaratWeight = 2.5m,
+                            ClarityName = 0,
+                            Color = 0,
+                            CutName = 0,
+                            IsDeleted = false,
+                            Name = "Kim cương Good FL",
+                            OriginName = "Kim cương",
+                            Price = 5000000000m,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CaratWeight = 2.5m,
+                            ClarityName = 0,
+                            Color = 0,
+                            CutName = 0,
+                            IsDeleted = false,
+                            Name = "Kim cương Excellent I1",
+                            OriginName = "Kim cương",
+                            Price = 6000000000m,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CaratWeight = 2.5m,
+                            ClarityName = 0,
+                            Color = 0,
+                            CutName = 0,
+                            IsDeleted = false,
+                            Name = "Kim cương Very Good I2",
+                            OriginName = "Kim cương",
+                            Price = 7000000000m,
+                            Quantity = 10
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Image", b =>
@@ -900,9 +941,6 @@ namespace Infrastructures.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Size")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<decimal>("Wage")
                         .HasColumnType("decimal(18,2)");
 
@@ -913,6 +951,41 @@ namespace Infrastructures.Migrations
                     b.HasIndex("ProductTypeId");
 
                     b.ToTable("Products", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            IsDeleted = false,
+                            Name = "Nhẫn Vàng trắng 14K đính đá  ",
+                            Price = 7236000m,
+                            ProductTypeId = 1,
+                            Quantity = 10,
+                            Wage = 500000m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 16,
+                            IsDeleted = false,
+                            Name = "Dây chuyền Vàng Trắng Ý 18K ",
+                            Price = 15692000m,
+                            ProductTypeId = 1,
+                            Quantity = 10,
+                            Wage = 1000000m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 3,
+                            IsDeleted = false,
+                            Name = "Lắc tay Bạc đính đá",
+                            Price = 700000m,
+                            ProductTypeId = 3,
+                            Quantity = 10,
+                            Wage = 100000m
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.ProductDiamond", b =>
@@ -960,6 +1033,48 @@ namespace Infrastructures.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductDiamonds", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DiamondId = 1,
+                            IsDeleted = false,
+                            IsMain = true,
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DiamondId = 1,
+                            IsDeleted = false,
+                            IsMain = true,
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DiamondId = 2,
+                            IsDeleted = false,
+                            IsMain = false,
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DiamondId = 3,
+                            IsDeleted = false,
+                            IsMain = false,
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DiamondId = 3,
+                            IsDeleted = false,
+                            IsMain = true,
+                            ProductId = 3
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.ProductType", b =>

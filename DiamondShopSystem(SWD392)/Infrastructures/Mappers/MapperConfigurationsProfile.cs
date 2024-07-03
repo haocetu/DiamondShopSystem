@@ -1,4 +1,5 @@
 ﻿using Application.ViewModels.AccountDTOs;
+using Application.ViewModels.CategoryDTOs;
 using Application.ViewModels.DiamondDTOs;
 using Application.ViewModels.ImageDTOs;
 using Application.ViewModels.ProductDTOs;
@@ -31,6 +32,8 @@ namespace Infrastructures.Mappers
             CreateMap<Product, UpdateProductDTO>().ReverseMap();
             //Image
             CreateMap<Image, ImageDTO>().ReverseMap();
+            //Category
+            CreateMap<Category, CategoryDTO>().ReverseMap();
 
 
 

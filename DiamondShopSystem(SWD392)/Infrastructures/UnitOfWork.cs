@@ -137,7 +137,6 @@ namespace Infrastructures
 			}
 		}
 
-		public async Task<int> SaveChangeAsync()
         private IRoleRepository _roleRepository; 
         public IRoleRepository RoleRepository
         {

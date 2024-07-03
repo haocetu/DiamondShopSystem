@@ -11,6 +11,5 @@ namespace Application.ViewModels.CategoryDTOs
 		public string Name { get; set; }
 		public float Size { get; set; }
 		public float Length { get; set; }
-		public decimal Price { get; set; }
 	}
 }

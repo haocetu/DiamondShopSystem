@@ -42,17 +42,13 @@ namespace Application.Services
 					if (product.IsDeleted == false)
 					{
 						var pro = _mapper.Map<ProductDTO>(product);
-						pro.Images = _unitOfWork.ImageRepository.GetImagesByProductId(product.Id);
-						var cat = await _unitOfWork.CategoryRepository.GetByIdAsync(product.CategoryId);
+						pro.Images = _unitOfWork.ImageRepository.GetImagesByProductId(pro.Id);
+						var cat = await _unitOfWork.CategoryRepository.GetByIdAsync(pro.CategoryId);
 						if (cat != null)
 						{
-							pro.CategoryDTO = new CategoryDTO();
-							pro.CategoryDTO.Name = cat.Name;
-							pro.CategoryDTO.Size = cat.Size;
-							pro.CategoryDTO.Length = cat.Length;
-							pro.CategoryDTO.Price = cat.Price;
-							productsDTO.Add(pro);
+							pro.CategoryDTO = _mapper.Map<CategoryDTO>(cat);
 						}
+						productsDTO.Add(pro);
 					}
 				}
 
@@ -73,6 +69,76 @@ namespace Application.Services
 				response.Success = false;
 				response.Message = "Error";
 				response.ErrorMessages = new List<string> { Convert.ToString(ex.Message) };
+			}
+			return response;
+		}
+		public async Task<ServiceResponse<ProductDTO>> GetProductByIdAsync(int id)
+		{
+			var response = new ServiceResponse<ProductDTO>();
+			var exist = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+			var pro = _mapper.Map<ProductDTO>(exist);
+			if (pro == null)
+			{
+				response.Success = false;
+				response.Message = "Product is not existed!";
+			}
+			else if (pro.IsDeleted == true)
+			{
+				response.Success = false;
+				response.Message = "Product have been deleted from the system.";
+
+			}
+			else
+			{
+				response.Success = true;
+				response.Message = "Product found.";
+				pro.Images = _unitOfWork.ImageRepository.GetImagesByProductId(pro.Id);
+				var cat = await _unitOfWork.CategoryRepository.GetByIdAsync(pro.CategoryId);
+				pro.CategoryDTO = _mapper.Map<CategoryDTO>(cat);
+				response.Data = pro;
+			}
+			return response;
+		}
+		public async Task<ServiceResponse<IEnumerable<ProductDTO>>> SearchProductByNameAsync(string name)
+		{
+			var response = new ServiceResponse<IEnumerable<ProductDTO>>();
+			try
+			{
+				var products = await _unitOfWork.ProductRepository.SearchProduct(name);
+				var productsDTO = new List<ProductDTO>();
+
+				foreach (var product in products)
+				{
+					if (product.IsDeleted == false)
+					{
+						var pro = _mapper.Map<ProductDTO>(product);
+						pro.Images = _unitOfWork.ImageRepository.GetImagesByProductId(pro.Id);
+						var cat = await _unitOfWork.CategoryRepository.GetByIdAsync(pro.CategoryId);
+						if (cat != null)
+						{
+							pro.CategoryDTO = _mapper.Map<CategoryDTO>(cat);
+						}
+						productsDTO.Add(pro);
+					}
+				}
+
+				if (productsDTO.Count != 0)
+				{
+					response.Success = true;
+					response.Message = "Products retrieved successfully!";
+					response.Data = productsDTO;
+				}
+				else
+				{
+					response.Success = false;
+					response.Message = "Not have product yet!";
+				}
+			}
+			catch (Exception ex)
+			{
+				response.Success = false;
+				response.Message = "Error";
+				response.ErrorMessages = new List<string> { ex.Message };
 			}
 			return response;
 		}
@@ -126,71 +192,6 @@ namespace Application.Services
 				response.ErrorMessages = new List<string> { ex.Message };
 			}
 
-			return response;
-		}
-
-		public async Task<ServiceResponse<ProductDTO>> GetProductByIdAsync(int id)
-		{
-			var response = new ServiceResponse<ProductDTO>();
-			var exist = await _unitOfWork.ProductRepository.GetByIdAsync(id);
-			var pro = _mapper.Map<ProductDTO>(exist);
-			if (pro == null)
-			{
-				response.Success = false;
-				response.Message = "Product is not existed!";
-			}
-			else if (pro.IsDeleted == true)
-			{
-				response.Success = false;
-				response.Message = "Product have been deleted from the system.";
-
-			}
-			else
-			{
-				response.Success = true;
-				response.Message = "Product found.";
-				pro.Images = _unitOfWork.ImageRepository.GetImagesByProductId(pro.Id);
-				response.Data = pro;
-			}
-			return response;
-		}
-
-		public async Task<ServiceResponse<IEnumerable<ProductDTO>>> SearchProductByNameAsync(string name)
-		{
-			var response = new ServiceResponse<IEnumerable<ProductDTO>>();
-			try
-			{
-				var products = await _unitOfWork.ProductRepository.SearchProduct(name);
-				var productsDTO = new List<ProductDTO>();
-
-				foreach (var product in products)
-				{
-					if (product.IsDeleted == false)
-					{
-						var pro = _mapper.Map<ProductDTO>(product);
-						pro.Images = _unitOfWork.ImageRepository.GetImagesByProductId(product.Id);
-						productsDTO.Add(pro);
-					}
-				}
-
-				if (productsDTO.Count != 0)
-				{
-					response.Success = true;
-					response.Message = "Products retrieved successfully!";
-					response.Data = productsDTO;
-				}
-				else
-				{
-					response.Success = false;
-					response.Message = "Not have product yet!";
-				}
-			}
-			catch (Exception ex)
-			{
-				response.Success = false;
-				response.Message = "Error";
-				response.ErrorMessages = new List<string> { ex.Message };
-			}
 			return response;
 		}
 

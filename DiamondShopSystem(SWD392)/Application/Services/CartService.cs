@@ -71,8 +71,7 @@ namespace Application.Services
                     };
                     foreach (var item in cartRequest.Items)
                     {
-                        //var price = await _unitOfWork.CartRepository.GetProductPriceAsync(item.ProductId);
-                        var price = 1;
+                        var price = (await _unitOfWork.ProductRepository.GetByIdAsync(item.ProductId)).Price;
                         cart.Items.Add(new CartItem
                         {
                             ProductId = item.ProductId,
@@ -95,11 +94,9 @@ namespace Application.Services
                 }
                 else
                 {
-                    cart.Items.Clear();
                     foreach (var item in cartRequest.Items)
                     {
-                        //var price = await _unitOfWork.CartRepository.GetProductPriceAsync(item.ProductId);
-                        var price = 1;
+                        var price = (await _unitOfWork.ProductRepository.GetByIdAsync(item.ProductId)).Price;
                         cart.Items.Add(new CartItem
                         {
                             CartId = cart.Id,
@@ -109,6 +106,17 @@ namespace Application.Services
                         });
                     }
                     _unitOfWork.CartRepository.Update(cart);
+                    var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
+                    if (isSuccess)
+                    {
+                        response.Success = true;
+                        response.Message = "Add to cart successfully.";
+                    }
+                    else
+                    {
+                        response.Success = false;
+                        response.Message = "Error to add item to cart.";
+                    }
                 }
             }
             catch (DbException ex)

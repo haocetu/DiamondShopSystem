@@ -86,7 +86,6 @@ namespace Application.Services
 			{
 				response.Success = false;
 				response.Message = "Product have been deleted from the system.";
-
 			}
 			else
 			{
@@ -142,6 +141,60 @@ namespace Application.Services
 			}
 			return response;
 		}
+		public async Task<ServiceResponse<CreateProductDTO>> CreateProductAsync(CreateProductDTO createProduct)
+		{
+			var response = new ServiceResponse<CreateProductDTO>();
+			try
+			{
+				var product = _mapper.Map<Product>(createProduct);
+				product.IsDeleted = false;
+				await _unitOfWork.ProductRepository.AddAsync(product);
+				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
+
+				if (!createProduct.ProductImages.IsNullOrEmpty())
+				{
+					await _imageService.UploadProductImages(createProduct.ProductImages, product.Id);
+				}
+				if (!createProduct.Diamonds.IsNullOrEmpty())
+				{
+					foreach (var diamond in createProduct.Diamonds)
+					{
+						var productDiamond = new ProductDiamond
+						{
+							IsMain = false,
+							DiamondId = diamond,
+							ProductId = product.Id,
+						};
+						await _unitOfWork.ProductDiamondRepository.AddAsync(productDiamond);
+						await _unitOfWork.SaveChangeAsync();
+					}
+				}
+				if (isSuccess)
+				{
+					response.Data = createProduct;
+					response.Success = true;
+					response.Message = "Product created successfully!";
+				}
+				else
+				{
+					response.Success = false;
+					response.Message = "Error saving the product!";
+				}
+			}
+			catch (DbException ex)
+			{
+				response.Success = false;
+				response.Message = "Database error occurred.";
+				response.ErrorMessages = new List<string> { ex.Message };
+			}
+			catch (Exception ex)
+			{
+				response.Success = false;
+				response.Message = "Error.";
+				response.ErrorMessages = new List<string> { ex.Message };
+			}
+			return response;
+		}
 
 		public async Task<ServiceResponse<ProductDTO>> UpdateProductAsync(int id, UpdateProductDTO updatedProduct)
 		{
@@ -192,60 +245,6 @@ namespace Application.Services
 				response.ErrorMessages = new List<string> { ex.Message };
 			}
 
-			return response;
-		}
-
-		public async Task<ServiceResponse<CreateProductDTO>> CreateProductAsync(CreateProductDTO createProduct)
-		{
-			var response = new ServiceResponse<CreateProductDTO>();
-			try
-			{
-				var product = _mapper.Map<Product>(createProduct);
-				product.IsDeleted = false;
-				await _unitOfWork.ProductRepository.AddAsync(product);
-
-				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
-				if (!createProduct.ProductImages.IsNullOrEmpty())
-				{
-					await _imageService.UploadProductImages(createProduct.ProductImages, product.Id);
-				}
-				if (!createProduct.Diamonds.IsNullOrEmpty())
-				{
-					foreach (var diamond in createProduct.Diamonds)
-					{
-						var productDiamond = new ProductDiamond
-						{
-							IsMain = false,
-							DiamondId = diamond,
-							ProductId = product.Id,
-						};
-						_unitOfWork.ProductDiamondRepository.AddAsync(productDiamond);
-					}
-				}
-				if (isSuccess)
-				{
-					response.Data = createProduct;
-					response.Success = true;
-					response.Message = "Product created successfully!";
-				}
-				else
-				{
-					response.Success = false;
-					response.Message = "Error saving the product!";
-				}
-			}
-			catch (DbException ex)
-			{
-				response.Success = false;
-				response.Message = "Database error occurred.";
-				response.ErrorMessages = new List<string> { ex.Message };
-			}
-			catch (Exception ex)
-			{
-				response.Success = false;
-				response.Message = "Error";
-				response.ErrorMessages = new List<string> { ex.Message };
-			}
 			return response;
 		}
 

@@ -14,11 +14,13 @@ namespace Application.ViewModels.ProductDTOs
 		[Required]
 		public string Name { get; set; }
 		[Required]
-		public decimal Wage { get; set; }
+		public int CategoryId { get; set; }
 		[Required]
 		public int ProductTypeId { get; set; }
 		[Required]
-		public int CategoryId { get; set; }
+		public decimal Weight { get; set; }
+		[Required]
+		public decimal Wage { get; set; }
 		[Required]
 		public int Quantity { get; set; }
 		public List<int> Diamonds { get; set; }

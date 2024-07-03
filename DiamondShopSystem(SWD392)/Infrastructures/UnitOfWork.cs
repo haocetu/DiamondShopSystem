@@ -150,7 +150,20 @@ namespace Infrastructures
             }
         }
 
-        public async Task<int> SaveChangeAsync()
+		private IProductTypeRepository _productTypeRepository;
+		public IProductTypeRepository ProductTypeRepository
+		{
+			get
+			{
+				if (_productTypeRepository is null)
+				{
+					_productTypeRepository = new ProductTypeRepository(_dbContext, _currentTime, _claimsService);
+				}
+				return (_productTypeRepository);
+			}
+		}
+
+		public async Task<int> SaveChangeAsync()
         {
             return await _dbContext.SaveChangesAsync();
         }

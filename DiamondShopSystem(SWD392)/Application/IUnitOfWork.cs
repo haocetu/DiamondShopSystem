@@ -19,6 +19,7 @@ namespace Application
         public IProductDiamondRepository ProductDiamondRepository { get; }
         public ICategoryRepository CategoryRepository { get; }
         public IRoleRepository RoleRepository { get;}
+        public IProductTypeRepository ProductTypeRepository { get; }
         public Task<int> SaveChangeAsync();
     }
 }

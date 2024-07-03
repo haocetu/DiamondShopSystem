@@ -16,5 +16,9 @@ namespace Infrastructures.Repositories
 		{
 			_dbContext = context;
 		}
+		public List<int> GetDiamondsByProductId(int id)
+		{
+			return _dbContext.ProductDiamonds.Where(x => x.ProductId == id).Select(x => x.DiamondId).ToList();
+		}
 	}
 }

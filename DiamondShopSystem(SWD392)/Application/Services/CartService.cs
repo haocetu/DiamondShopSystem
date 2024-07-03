@@ -1,10 +1,12 @@
 ﻿using Application.Commons;
 using Application.Interfaces;
 using Application.RequestModel.Cart;
+using Application.ViewModels.AccountDTOs;
 using Application.ViewModels.Cart;
 using Application.ViewModels.CartItems;
 using Domain.Entities;
 using System.Data.Common;
+using System.Security.Principal;
 
 namespace Application.Services
 {
@@ -79,6 +81,17 @@ namespace Application.Services
                         });
                     }
                     await _unitOfWork.CartRepository.AddAsync(cart);
+                    var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
+                    if (isSuccess)
+                    {
+                        response.Success = true;
+                        response.Message = "Add to cart successfully.";
+                    }
+                    else
+                    {
+                        response.Success = false;
+                        response.Message = "Error to add item to cart.";
+                    }
                 }
                 else
                 {

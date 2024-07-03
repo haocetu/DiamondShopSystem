@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Enums
+namespace Application.Interfaces
 {
-    public enum Gender
+    public interface IRoleService
     {
-        Male = 1,
-        Female = 2
+        string GetRoleName(int roleid);
     }
 }

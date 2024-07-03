@@ -23,8 +23,6 @@ namespace Infrastructures.FluentAPIs
 
             builder.Property(c => c.Length).HasColumnType("decimal(18,2)");
 
-            builder.Property(c => c.Price).IsRequired().HasColumnType("decimal(18,2)");
-
             builder.HasMany(c=>c.Products).WithOne(p=>p.Category).HasForeignKey(p=>p.Id);
         }
     }

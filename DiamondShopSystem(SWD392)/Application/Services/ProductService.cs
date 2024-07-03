@@ -148,13 +148,19 @@ namespace Application.Services
 			{
 				var product = _mapper.Map<Product>(createProduct);
 				product.IsDeleted = false;
+				var productType = await _unitOfWork.ProductTypeRepository.GetByIdAsync(product.ProductTypeId);
+				product.Price = product.Wage + productType.Price*product.Weight;
+				if (!createProduct.Diamonds.IsNullOrEmpty())
+				{
+					foreach (var diamond in createProduct.Diamonds)
+					{
+						var dia = await _unitOfWork.DiamondRepository.GetByIdAsync(diamond);
+						product.Price += dia.Price;
+					}
+				}
 				await _unitOfWork.ProductRepository.AddAsync(product);
 				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
 
-				if (!createProduct.ProductImages.IsNullOrEmpty())
-				{
-					await _imageService.UploadProductImages(createProduct.ProductImages, product.Id);
-				}
 				if (!createProduct.Diamonds.IsNullOrEmpty())
 				{
 					foreach (var diamond in createProduct.Diamonds)
@@ -168,6 +174,11 @@ namespace Application.Services
 						await _unitOfWork.ProductDiamondRepository.AddAsync(productDiamond);
 						await _unitOfWork.SaveChangeAsync();
 					}
+				}
+
+				if (!createProduct.ProductImages.IsNullOrEmpty())
+				{
+					await _imageService.UploadProductImages(createProduct.ProductImages, product.Id);
 				}
 				if (isSuccess)
 				{

@@ -4,6 +4,7 @@ using Application.Utils;
 using Application.ViewModels.AccountDTOs;
 using AutoMapper;
 using Domain.Entities;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -17,7 +18,7 @@ namespace Application.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICurrentTime _currentTime;
-        private readonly AppConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         //private IValidator<Account> _validator;
         private readonly IMapper _mapper;
@@ -25,7 +26,7 @@ namespace Application.Services
         public AuthenticationService(
         IUnitOfWork unitOfWork,
         ICurrentTime currentTime,
-        AppConfiguration configuration,
+        IConfiguration configuration,
         IMapper mapper
 )
         {
@@ -61,11 +62,16 @@ namespace Application.Services
                     response.Message = "Your account have been deleted!";
                     return response;
                 }
-                var token = user.GenerateJsonWebToken(
-                    _configuration,
-                    _configuration.JWTSection.SecretKey,
-                    _currentTime.GetCurrentTime()
-                    );
+
+                var generate = new GenerateJsonWebTokenString(_unitOfWork);
+
+                var token = generate.GenerateJsonWebToken(user, _configuration, _configuration.GetSection("JWTSection:SecretKey").Value , _currentTime.GetCurrentTime());
+
+                //var token = user.GenerateJsonWebToken(
+                //    _configuration,
+                //    _configuration.JWTSection.SecretKey,
+                //    _currentTime.GetCurrentTime()
+                //    );
 
                 response.Success = true;
                 response.Message = "Login successfully.";

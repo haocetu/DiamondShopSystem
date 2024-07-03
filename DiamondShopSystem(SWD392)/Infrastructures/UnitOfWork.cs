@@ -111,6 +111,19 @@ namespace Infrastructures
             }
         }
 
+        private IRoleRepository _roleRepository; 
+        public IRoleRepository RoleRepository
+        {
+            get
+            {
+                if (_roleRepository is null)
+                {
+                    _roleRepository = new RoleRepository(_dbContext);
+                }
+                return (_roleRepository);
+            }
+        }
+
         public async Task<int> SaveChangeAsync()
         {
             return await _dbContext.SaveChangesAsync();

@@ -124,6 +124,19 @@ namespace Infrastructures
 			}
 		}
 
+        private ICategoryRepository _categoryRepository;
+		public ICategoryRepository CategoryRepository
+		{
+			get
+			{
+				if (_categoryRepository is null)
+				{
+					_categoryRepository = new CategoryRepository(_dbContext, _currentTime, _claimsService);
+				}
+				return _categoryRepository;
+			}
+		}
+
 		public async Task<int> SaveChangeAsync()
         {
             return await _dbContext.SaveChangesAsync();

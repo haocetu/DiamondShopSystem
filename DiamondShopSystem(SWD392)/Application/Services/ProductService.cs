@@ -1,5 +1,6 @@
 ﻿using Application.Commons;
 using Application.Interfaces;
+using Application.ViewModels.CategoryDTOs;
 using Application.ViewModels.ProductDTOs;
 using AutoMapper;
 using Domain.Entities;
@@ -42,7 +43,16 @@ namespace Application.Services
 					{
 						var pro = _mapper.Map<ProductDTO>(product);
 						pro.Images = _unitOfWork.ImageRepository.GetImagesByProductId(product.Id);
-						productsDTO.Add(pro);
+						var cat = await _unitOfWork.CategoryRepository.GetByIdAsync(product.CategoryId);
+						if (cat != null)
+						{
+							pro.CategoryDTO = new CategoryDTO();
+							pro.CategoryDTO.Name = cat.Name;
+							pro.CategoryDTO.Size = cat.Size;
+							pro.CategoryDTO.Length = cat.Length;
+							pro.CategoryDTO.Price = cat.Price;
+							productsDTO.Add(pro);
+						}
 					}
 				}
 

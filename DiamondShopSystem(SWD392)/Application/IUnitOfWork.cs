@@ -17,6 +17,7 @@ namespace Application
         public IProductRepository ProductRepository { get; }
         public ICartRepository CartRepository { get; }
         public IProductDiamondRepository ProductDiamondRepository { get; }
+        public ICategoryRepository CategoryRepository { get; }
         public Task<int> SaveChangeAsync();
     }
 }

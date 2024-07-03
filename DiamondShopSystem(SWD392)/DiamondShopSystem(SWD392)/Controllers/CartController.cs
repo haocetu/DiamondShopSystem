@@ -16,7 +16,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
             _cartService = cartService;
         }
 
-        [HttpGet("cart-list")]
+        [HttpGet("view-cart")]
         [Authorize]
         public async Task<IActionResult> GetCartItemsForUser()
         {
@@ -28,7 +28,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
             return Ok(result);
         }
 
-        [HttpPatch("update-cart")]
+        [HttpPatch("add-to-cart")]
         [Authorize]
         public async Task<IActionResult> AddOrUpdateCartAsync(CartRequestModel request)
         {

@@ -23,7 +23,8 @@ namespace Application.ViewModels.ProductDTOs
 		public decimal Wage { get; set; }
 		[Required]
 		public int Quantity { get; set; }
-		public List<int> Diamonds { get; set; }
+		public List<int> PrimaryDiamonds { get; set; }
+		public List<int> SubDiamonds { get; set; }
 		public List<IFormFile> ProductImages { get; set; } = [];
 	}
 }

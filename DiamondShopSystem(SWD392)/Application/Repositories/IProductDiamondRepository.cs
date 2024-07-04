@@ -9,6 +9,7 @@ namespace Application.Repositories
 {
 	public interface IProductDiamondRepository : IGenericRepository<ProductDiamond>
 	{
-		List<int> GetDiamondsByProductId(int id);
+		List<int> GetPrimaryDiamondsByProductId(int id);
+		List<int> GetSubDiamondsByProductId(int id);
 	}
 }

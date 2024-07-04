@@ -63,7 +63,30 @@ namespace Application.Services
 			}
 			return response;
 		}
-		public async Task<ServiceResponse<CategoryDTO>> CreateCategoryAsync(CategoryDTO cat)
+		public async Task<ServiceResponse<CategoryDTO>> GetCategoryByIdAsync(int id)
+		{
+			var response = new ServiceResponse<CategoryDTO>();
+			var exist = await _unitOfWork.CategoryRepository.GetByIdAsync(id);
+			var category = _mapper.Map<CategoryDTO>(exist);
+			if (category == null)
+			{
+				response.Success = false;
+				response.Message = "Cannot found category.";
+			}
+			else if (exist.IsDeleted == true)
+			{
+				response.Success = false;
+				response.Message = "Category was deleted from the system.";
+			}
+			else
+			{
+				response.Success = true;
+				response.Message = "Category was retrieved successfully!";
+				response.Data = category;
+			}
+			return response;
+		}
+		public async Task<ServiceResponse<CategoryDTO>> CreateCategoryAsync(CreateCategoryDTO cat)
 		{
 			var response = new ServiceResponse<CategoryDTO>();
 			try
@@ -75,7 +98,8 @@ namespace Application.Services
 				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
 				if (isSuccess)
 				{
-					response.Data = cat;
+					var categoryDTO = _mapper.Map<CategoryDTO>(category);
+					response.Data = categoryDTO;
 					response.Success = true;
 					response.Message = "Category created successfully.";
 				}

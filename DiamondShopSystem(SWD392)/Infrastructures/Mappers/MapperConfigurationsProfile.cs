@@ -36,8 +36,9 @@ namespace Infrastructures.Mappers
             CreateMap<Image, ImageDTO>().ReverseMap();
             //Category
             CreateMap<Category, CategoryDTO>().ReverseMap();
-            //ProductType
-            CreateMap<ProductType, ProductTypeDTO>().ReverseMap();
+			CreateMap<Category, CreateCategoryDTO>().ReverseMap();
+			//ProductType
+			CreateMap<ProductType, ProductTypeDTO>().ReverseMap();
             //Promotion
             CreateMap<Promotion, PromotionDTO>().ReverseMap();
             CreateMap<Promotion, CreatePromotionDTO>().ReverseMap();

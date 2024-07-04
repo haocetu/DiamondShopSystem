@@ -20,6 +20,8 @@ namespace Infrastructures
             services.AddScoped<ICurrentTime, CurrentTime>();
             
             services.AddScoped<IAccountService, AccountService>();
+
+            services.AddScoped<IPromotionService, PromotionService>();
             
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             

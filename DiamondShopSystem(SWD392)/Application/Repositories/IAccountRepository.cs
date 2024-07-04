@@ -14,5 +14,7 @@ namespace Application.Repositories
         Task<bool> CheckPhoneNumberExited(string phonenumber);
         Task<Account> GetUserByConfirmationToken(string token);
         Task<IEnumerable<Account>> SearchAccountByNameAsync(string name);
+        Task<int> GetPoint(int userid);
+        Task UpdatePoint(int userid, decimal price);    
     }
 }

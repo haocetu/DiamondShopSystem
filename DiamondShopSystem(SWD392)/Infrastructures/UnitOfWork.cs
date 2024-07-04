@@ -162,8 +162,21 @@ namespace Infrastructures
 				return (_productTypeRepository);
 			}
 		}
+        private IPromotionRepository _promotionRepository;
+        public IPromotionRepository PromotionRepository
+        {
+            get
+            {
+                if (_promotionRepository is null)
+                {
+                    _promotionRepository = new PromotionRepository(_dbContext, _currentTime, _claimsService);
+                }
+                return _promotionRepository;
+            }
+        }
 
-		public async Task<int> SaveChangeAsync()
+
+        public async Task<int> SaveChangeAsync()
         {
             return await _dbContext.SaveChangesAsync();
         }

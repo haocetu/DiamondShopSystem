@@ -1,5 +1,4 @@
 ﻿using Application.Interfaces;
-using Application.RequestModel.Order;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,14 +16,18 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpPost("place-order")]
-        [Authorize]
-        public async Task<IActionResult> PlaceOrderAsync(OrderRequestModel request)
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> PlaceOrderAsync()
         {
-            var result = await _orderService.PlaceOrderAsync(request);
-            if (!result.Success)
-            {
-                return BadRequest(result);
-            }
+            var result = await _orderService.PlaceOrderAsync();
+            return Ok(result);
+        }
+
+        [HttpPost("change-status/{id}")]
+        [Authorize(Roles = "SaleStaff,Admin")]
+        public async Task<IActionResult> ChangeOrderStatusAsync(int id, string status)
+        {
+            var result = await _orderService.ChangeOrderStatusAsync(id, status);
             return Ok(result);
         }
     }

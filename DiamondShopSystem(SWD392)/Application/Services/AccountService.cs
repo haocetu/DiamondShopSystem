@@ -228,7 +228,7 @@ namespace Application.Services
 
         public async Task<ServiceResponse<AccountDTO>> UpdateUserAsync(int id, UpdateAccountDTO userDTO)
         {
-            var response = new ServiceResponse< AccountDTO>();
+            var response = new ServiceResponse<AccountDTO>();
 
             try
             {

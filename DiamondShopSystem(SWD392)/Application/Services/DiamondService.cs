@@ -247,18 +247,14 @@ namespace Application.Services
                     response.Message = "Diamond has been deleted in system";
                     return response;
                 }
-                if(diamondDTO.OriginName == null)
-                {
-                    diamondDTO.OriginName = existingDiamond.OriginName;
-                }
-                if(diamondDTO.CaratWeight == null)
-                {
-                    diamondDTO.CaratWeight = existingDiamond.CaratWeight;
-                }
-                //if(diamondDTO.ClarityName  == null)
-                //{
-                //    diamondDTO.ClarityName = existingDiamond.ClarityName;
-                //}
+                //If any value is null, it will be equal to the original value
+                diamondDTO.OriginName ??= existingDiamond.OriginName;
+                diamondDTO.CaratWeight ??= existingDiamond.CaratWeight;
+                diamondDTO.ClarityName ??= existingDiamond.ClarityName;
+                diamondDTO.CutName ??= existingDiamond.CutName;
+                diamondDTO.Color ??= existingDiamond.Color;
+                diamondDTO.Price ??= existingDiamond.Price;
+                diamondDTO.Quantity ??= existingDiamond.Quantity;
                 //Mapping
                 var update = _mapper.Map(existingDiamond, diamondDTO);
 
@@ -275,12 +271,12 @@ namespace Application.Services
 				{
                     response.Data = updatedDiamond;
                     response.Success = true;
-                    response.Message = "Diamond created successfully.";
+                    response.Message = "Diamond update successfully.";
                 }
 				else
 				{
 					response.Success = false;
-					response.Message = "Error saving the user.";
+					response.Message = "Error saving the diamond.";
 				}
 			}
 			catch (DbException ex)

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructures.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240702183918_InitialDatabase")]
+    [Migration("20240703120853_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -1121,8 +1121,29 @@ namespace Infrastructures.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<decimal>("DiscountPercentage")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Point")
                         .HasColumnType("int");
@@ -1130,6 +1151,29 @@ namespace Infrastructures.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Promotions", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DiscountPercentage = 0.5m,
+                            IsDeleted = false,
+                            Point = 10000
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DiscountPercentage = 1m,
+                            IsDeleted = false,
+                            Point = 15000
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DiscountPercentage = 1.5m,
+                            IsDeleted = false,
+                            Point = 20000
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Role", b =>

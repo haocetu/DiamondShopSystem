@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Application.ViewModels.PromotionDTOs
 {
-    public class Promotion : BaseEntity
+    public class PromotionDTO
     {
-        public int Point { get; set; }
+        public int Id { get; set; }
+        public int Point {  get; set; }
         public decimal DiscountPercentage { get; set; }
     }
 }

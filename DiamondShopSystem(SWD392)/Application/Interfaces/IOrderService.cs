@@ -6,6 +6,6 @@ namespace Application.Interfaces
     public interface IOrderService
     {
         Task<ServiceResponse<OrderViewModel>> PlaceOrderAsync();
-        Task<ServiceResponse<OrderViewModel>> ChangeOrderStatusAsync(int orderid, bool status);
+        Task<ServiceResponse<OrderViewModel>> ChangeOrderStatusAsync(int orderid, string status);
     }
 }

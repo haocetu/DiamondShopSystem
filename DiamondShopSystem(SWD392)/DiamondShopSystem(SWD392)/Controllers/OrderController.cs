@@ -22,5 +22,13 @@ namespace DiamondShopSystem_SWD392_.Controllers
             var result = await _orderService.PlaceOrderAsync();
             return Ok(result);
         }
+
+        [HttpPost("change-status/{id}")]
+        [Authorize(Roles = "SaleStaff,Admin")]
+        public async Task<IActionResult> ChangeOrderStatusAsync(int id, string status)
+        {
+            var result = await _orderService.ChangeOrderStatusAsync(id, status);
+            return Ok(result);
+        }
     }
 }

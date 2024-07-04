@@ -24,6 +24,16 @@ namespace Infrastructures.Repositories
         public Task<bool> CheckPhoneNumberExited(string phonenumber) =>
                                                 _dbContext.Accounts.AnyAsync(u => u.PhoneNumber == phonenumber);
 
+        public async Task<int> GetPoint(int userid)
+        {
+            var user = await _dbContext.Accounts.FirstOrDefaultAsync(user => user.Id == userid);
+            if (user != null)
+            {
+                return user.Point;
+            }
+            return 0;
+        }
+
         public async Task<Account> GetUserByConfirmationToken(string token)
         {
             return await _dbContext.Accounts.SingleOrDefaultAsync(
@@ -46,6 +56,17 @@ namespace Infrastructures.Repositories
         public async Task<IEnumerable<Account>> SearchAccountByNameAsync(string name)
         {
             return await _dbContext.Accounts.Where(u => u.Name.Contains(name)).ToListAsync();
+        }
+
+        public async Task UpdatePoint(int userid, decimal price)
+        {
+            var user = await _dbContext.Accounts.FirstOrDefaultAsync(u => u.Id == userid);
+
+            if (user != null)
+            {
+                int newPoint = (int)Math.Round(price / 1_000_000m, 0);
+                user.Point += newPoint;
+            }
         }
     }
 }

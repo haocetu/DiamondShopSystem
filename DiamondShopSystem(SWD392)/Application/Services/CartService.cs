@@ -80,20 +80,23 @@ namespace Application.Services
                     foreach (var item in cartRequest.Items)
                     {
                         var product = await _unitOfWork.ProductRepository.GetByIdAsync(item.ProductId);
-
-                        if (product == null)
+                        if (product.Quantity >= item.Quantity)
+                        {
+                            cart.Items.Add(new CartItem
+                            {
+                                ProductId = item.ProductId,
+                                Quantity = item.Quantity,
+                                Price = product.Price
+                            });
+                            product.Quantity -= item.Quantity;
+                            _unitOfWork.ProductRepository.Update(product);
+                        }
+                        else
                         {
                             response.Success = false;
-                            response.Message = $"Product with id: {item.ProductId} is not exist.";
+                            response.Message = $"Not enough stock for product {item.ProductId}.";
                             return response;
                         }
-
-                        cart.Items.Add(new CartItem
-                        {
-                            ProductId = item.ProductId,
-                            Quantity = item.Quantity,
-                            Price = product.Price
-                        });
                     }
                     await _unitOfWork.CartRepository.AddAsync(cart);
                 }
@@ -111,19 +114,30 @@ namespace Application.Services
                         }
 
                         var cartItem = cart.Items.FirstOrDefault(i => i.ProductId == item.ProductId);
-                        if (cartItem != null)
+                        if (product.Quantity >= item.Quantity)
                         {
-                            cartItem.Quantity += item.Quantity;
+                            if (cartItem != null)
+                            {
+                                cartItem.Quantity += item.Quantity;
+                            }
+                            else
+                            {
+                                cart.Items.Add(new CartItem
+                                {
+                                    CartId = cart.Id,
+                                    ProductId = item.ProductId,
+                                    Quantity = item.Quantity,
+                                    Price = product.Price
+                                });
+                            }
+                            product.Quantity -= item.Quantity;
+                            _unitOfWork.ProductRepository.Update(product);
                         }
                         else
                         {
-                            cart.Items.Add(new CartItem
-                            {
-                                CartId = cart.Id,
-                                ProductId = item.ProductId,
-                                Quantity = item.Quantity,
-                                Price = product.Price
-                            });
+                            response.Success = false;
+                            response.Message = $"Not enough stock for product {item.ProductId}.";
+                            return response;
                         }
                     }
                     _unitOfWork.CartRepository.Update(cart);
@@ -191,15 +205,20 @@ namespace Application.Services
                         response.Message = $"Product with id: {item.ProductId} is not exist.";
                         return response;
                     }
-
-                    var cartItem = cart.Items.FirstOrDefault(ci => ci.ProductId == item.ProductId);
-                    if (item.Quantity >= cartItem.Quantity)
+                    var cartItem = cart.Items.FirstOrDefault(i => i.ProductId == item.ProductId);
+                    if (cartItem != null)
                     {
-                        cart.Items.Remove(cartItem);
-                    }
-                    else
-                    {
-                        cartItem.Quantity -= item.Quantity;
+                        if (item.Quantity >= cartItem.Quantity)
+                        {
+                            cart.Items.Remove(cartItem);
+                            product.Quantity += cartItem.Quantity;
+                        }
+                        else
+                        {
+                            cartItem.Quantity -= item.Quantity;
+                            product.Quantity += item.Quantity;
+                        }
+                        _unitOfWork.ProductRepository.Update(product);
                     }
                 }
                 _unitOfWork.CartRepository.Update(cart);

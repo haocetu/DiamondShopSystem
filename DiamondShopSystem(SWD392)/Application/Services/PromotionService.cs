@@ -24,7 +24,7 @@ namespace Application.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<ServiceResponse<IEnumerable<PromotionDTO>>>GetListPromotionAsync()
+        public async Task<ServiceResponse<IEnumerable<PromotionDTO>>> GetListPromotionAsync()
         {
             var response = new ServiceResponse<IEnumerable<PromotionDTO>>();
             try
@@ -33,9 +33,9 @@ namespace Application.Services
 
                 var promotionList = new List<PromotionDTO>();
 
-                foreach ( var promotion in list)
+                foreach (var promotion in list)
                 {
-                    if(promotion.IsDeleted == false)
+                    if (promotion.IsDeleted == false)
                     {
                         promotionList.Add(_mapper.Map<PromotionDTO>(promotion));
                     }
@@ -60,7 +60,7 @@ namespace Application.Services
             }
             return response;
         }
-        public async Task<ServiceResponse<PromotionDTO>>GetPromotionByIdAsync(int id)
+        public async Task<ServiceResponse<PromotionDTO>> GetPromotionByIdAsync(int id)
         {
             var response = new ServiceResponse<PromotionDTO>();
 
@@ -80,7 +80,7 @@ namespace Application.Services
 
             return response;
         }
-        public async Task<ServiceResponse<PromotionDTO>>CreatePromotionAsync(CreatePromotionDTO newPromotion)
+        public async Task<ServiceResponse<PromotionDTO>> CreatePromotionAsync(CreatePromotionDTO newPromotion)
         {
             var response = new ServiceResponse<PromotionDTO>();
             try
@@ -96,7 +96,7 @@ namespace Application.Services
                 if (isSuccess)
                 {
                     var data = _mapper.Map<PromotionDTO>(promotion);
-                    response.Data = data; 
+                    response.Data = data;
                     response.Success = true;
                     response.Message = "Promotion created successfully.";
                 }
@@ -154,6 +154,28 @@ namespace Application.Services
             }
 
             return response;
+        }
+
+        public decimal DiscountFromPoint(decimal price, int point)
+        {
+            decimal result;
+            if (point > 20000)
+            {
+                result = price * 1.5m;
+            }
+            else if (point > 15000)
+            {
+                result = price * 1m;
+            }
+            else if (point > 10000)
+            {
+                result = price * 0.5m;
+            }
+            else
+            {
+                result = price;
+            }
+            return result;
         }
     }
 }

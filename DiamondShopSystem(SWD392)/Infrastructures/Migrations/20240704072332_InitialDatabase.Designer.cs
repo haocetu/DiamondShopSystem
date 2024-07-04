@@ -12,11 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructures.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-<<<<<<<< HEAD:DiamondShopSystem(SWD392)/Infrastructures/Migrations/20240703120853_InitialDatabase.Designer.cs
-    [Migration("20240703120853_InitialDatabase")]
-========
-    [Migration("20240704071008_InitialDatabase")]
->>>>>>>> 833a9b2 (fix(place-order): place order from cart):DiamondShopSystem(SWD392)/Infrastructures/Migrations/20240704071008_InitialDatabase.Designer.cs
+    [Migration("20240704072332_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />

@@ -177,5 +177,23 @@ namespace Application.Services
             }
             return result;
         }
+
+        public int GetPromotionIdFromPoint(int point)
+        {
+            var result = 0;
+            if (point > 20000)
+            {
+                result = 3;
+            }
+            else if (point > 15000)
+            {
+                result = 2;
+            }
+            else if (point > 10000)
+            {
+                result = 1;
+            }
+            return result;
+        }
     }
 }

@@ -113,6 +113,7 @@ namespace Application.Services
                     UserId = order.AccountId,
                     OrderDate = order.CreatedDate.Value,
                     TotalAmount = order.TotalPrice,
+                    PromotionId = _promotionService.GetPromotionIdFromPoint(userpoint),
                     Items = order.Items.Select(i => new OrderItemViewModel
                     {
                         ProductId = i.ProductId,

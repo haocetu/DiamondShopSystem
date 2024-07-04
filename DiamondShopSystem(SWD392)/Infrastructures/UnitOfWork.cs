@@ -111,6 +111,32 @@ namespace Infrastructures
             }
         }
 
+        private IProductDiamondRepository _productDiamondRepository;
+		public IProductDiamondRepository ProductDiamondRepository
+		{
+			get
+			{
+				if (_productDiamondRepository is null)
+				{
+					_productDiamondRepository = new ProductDiamondRepository(_dbContext, _currentTime, _claimsService);
+				}
+				return _productDiamondRepository;
+			}
+		}
+
+        private ICategoryRepository _categoryRepository;
+		public ICategoryRepository CategoryRepository
+		{
+			get
+			{
+				if (_categoryRepository is null)
+				{
+					_categoryRepository = new CategoryRepository(_dbContext, _currentTime, _claimsService);
+				}
+				return _categoryRepository;
+			}
+		}
+
         private IRoleRepository _roleRepository; 
         public IRoleRepository RoleRepository
         {
@@ -124,6 +150,18 @@ namespace Infrastructures
             }
         }
 
+		private IProductTypeRepository _productTypeRepository;
+		public IProductTypeRepository ProductTypeRepository
+		{
+			get
+			{
+				if (_productTypeRepository is null)
+				{
+					_productTypeRepository = new ProductTypeRepository(_dbContext, _currentTime, _claimsService);
+				}
+				return (_productTypeRepository);
+			}
+		}
         private IPromotionRepository _promotionRepository;
         public IPromotionRepository PromotionRepository
         {

@@ -5,6 +5,7 @@ using Application.ViewModels.OrderItem;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
+using static Google.Apis.Requests.BatchRequest;
 
 namespace Application.Services
 {
@@ -60,6 +61,99 @@ namespace Application.Services
                 response.Message = "Error";
                 response.ErrorMessages = new List<string> { ex.Message };
             }
+            return response;
+        }
+
+        public async Task<ServiceResponse<OrderDetailsViewModel>> GetOrderDetailsAsync(int orderid)
+        {
+            var response = new ServiceResponse<OrderDetailsViewModel>();
+            try
+            {
+                var order = await _unitOfWork.OrderRepository.GetOrderByIdAsync(orderid);
+                if (order == null)
+                {
+                    response.Success = false;
+                    response.Message = "Order does not exist.";
+                    return response;
+                }
+
+                response.Success = true;
+                response.Message = "This is details information for order";
+                response.Data = new OrderDetailsViewModel
+                {
+                    Id = order.Id,
+                    UserId = order.AccountId,
+                    Status = order.Status,
+                    TotalPrice = order.TotalPrice,
+                    PaymentId = order.PaymentId,
+                    OrderDate = order.CreatedDate.Value,
+                    ShipDate = order.ShipDate,
+                    Items = order.Items.Select(i => new OrderItemViewModel
+                    {
+                        ProductId = i.ProductId,
+                        Quantity = i.Quantity,
+                        Price = i.Price
+                    }).ToList()
+                };
+            }
+            catch (DbException ex)
+            {
+                response.Success = false;
+                response.Message = "Database error occurred.";
+                response.ErrorMessages = new List<string> { ex.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Error";
+                response.ErrorMessages = new List<string> { ex.Message };
+            }
+            return response;
+        }
+
+        public async Task<ServiceResponse<List<OrderDetailsViewModel>>> GetOrdersAsync()
+        {
+            var response = new ServiceResponse<List<OrderDetailsViewModel>>();
+            try
+            {
+                var orders = await _unitOfWork.OrderRepository.GetOrdersAsync();
+
+                var result = orders.Select(order => new OrderDetailsViewModel
+                {
+                    Id = order.Id,
+                    UserId = order.AccountId,
+                    Status = order.Status,
+                    TotalPrice = order.TotalPrice,
+                    PaymentId = order.PaymentId,
+                    OrderDate = order.CreatedDate.Value,
+                    ShipDate = order.ShipDate,
+                    Items = order.Items.Select(i => new OrderItemViewModel
+                    {
+                        ProductId = i.ProductId,
+                        Quantity = i.Quantity,
+                        Price = i.Price
+                    }).ToList()
+                }).ToList();
+
+                if (result.Count != 0)
+                {
+                    response.Success = true;
+                    response.Message = "Orders retrieved successfully";
+                    response.Data = result;
+                }
+                else
+                {
+                    response.Success = true;
+                    response.Message = "Not have any orders";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Error";
+                response.ErrorMessages = new List<string> { Convert.ToString(ex.Message) };
+            }
+
             return response;
         }
 

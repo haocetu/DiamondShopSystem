@@ -30,5 +30,21 @@ namespace DiamondShopSystem_SWD392_.Controllers
             var result = await _orderService.ChangeOrderStatusAsync(id, status);
             return Ok(result);
         }
+
+        [HttpGet("order/{id}")]
+        [Authorize(Roles = "SaleStaff,Admin")]
+        public async Task<IActionResult> GetOrderDetailsAsync(int id)
+        {
+            var result = await _orderService.GetOrderDetailsAsync(id);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "SaleStaff,Admin")]
+        public async Task<IActionResult> GetOrdersAsync()
+        {
+            var result = await _orderService.GetOrdersAsync();
+            return Ok(result);
+        }
     }
 }

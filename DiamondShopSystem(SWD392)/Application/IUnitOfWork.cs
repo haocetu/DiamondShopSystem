@@ -17,6 +17,7 @@ namespace Application
         public IProductRepository ProductRepository { get; }
         public ICartRepository CartRepository { get; }
         public IRoleRepository RoleRepository { get;}
+        public IPromotionRepository PromotionRepository { get; }
         public Task<int> SaveChangeAsync();
     }
 }

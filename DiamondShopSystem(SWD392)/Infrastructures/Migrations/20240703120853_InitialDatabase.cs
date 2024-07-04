@@ -97,7 +97,14 @@ namespace Infrastructures.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Point = table.Column<int>(type: "int", nullable: false),
-                    DiscountPercentage = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    DiscountPercentage = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<int>(type: "int", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<int>(type: "int", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<int>(type: "int", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -467,6 +474,16 @@ namespace Infrastructures.Migrations
                     { 1, "Gold", 5567000m, 3.75f },
                     { 2, "Platium", 827287m, 1f },
                     { 3, "Sliver", 22325m, 1f }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Promotions",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "DiscountPercentage", "IsDeleted", "ModifiedBy", "ModifiedDate", "Point" },
+                values: new object[,]
+                {
+                    { 1, null, null, null, null, 0.5m, false, null, null, 10000 },
+                    { 2, null, null, null, null, 1m, false, null, null, 15000 },
+                    { 3, null, null, null, null, 1.5m, false, null, null, 20000 }
                 });
 
             migrationBuilder.InsertData(

@@ -106,7 +106,7 @@ namespace Application.Services
 				response.Success = false;
 				response.Message = "Product is not existed!";
 			}
-			else if (pro.IsDeleted == true)
+			else if (exist.IsDeleted == true)
 			{
 				response.Success = false;
 				response.Message = "Product have been deleted from the system.";

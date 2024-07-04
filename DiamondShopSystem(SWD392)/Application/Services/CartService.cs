@@ -1,12 +1,11 @@
 ﻿using Application.Commons;
 using Application.Interfaces;
 using Application.RequestModel.Cart;
-using Application.ViewModels.AccountDTOs;
 using Application.ViewModels.Cart;
 using Application.ViewModels.CartItems;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
-using System.Security.Principal;
 
 namespace Application.Services
 {
@@ -25,6 +24,14 @@ namespace Application.Services
             try
             {
                 var cart = await _unitOfWork.CartRepository.GetCartForUserAsync(_claimsService.GetCurrentUserId.Value);
+
+                if (cart == null)
+                {
+                    response.Success = false;
+                    response.Message = "Cart is null. Add item to cart and try again.";
+                    return response;
+                }
+
                 response.Data = new CartViewModel
                 {
                     Id = cart.Id,
@@ -32,6 +39,7 @@ namespace Application.Services
                     Items = cart.Items.Select(i => new CartItemViewModel
                     {
                         ProductId = i.ProductId,
+                        ProductName = cart.Items.FirstOrDefault(ci=>ci.ProductId == i.ProductId).Product.Name,
                         Quantity = i.Quantity,
                         Price = i.Price
                     }).ToList()
@@ -54,7 +62,7 @@ namespace Application.Services
             return response;
         }
 
-        public async Task<ServiceResponse<CartViewModel>> AddOrUpdateCartAsync(CartRequestModel cartRequest)
+        public async Task<ServiceResponse<CartViewModel>> AddToCartAsync(CartRequestModel cartRequest)
         {
             var response = new ServiceResponse<CartViewModel>();
 
@@ -71,53 +79,78 @@ namespace Application.Services
                     };
                     foreach (var item in cartRequest.Items)
                     {
-                        var price = (await _unitOfWork.ProductRepository.GetByIdAsync(item.ProductId)).Price;
+                        var product = await _unitOfWork.ProductRepository.GetByIdAsync(item.ProductId);
+
+                        if (product == null)
+                        {
+                            response.Success = false;
+                            response.Message = $"Product with id: {item.ProductId} is not exist.";
+                            return response;
+                        }
+
                         cart.Items.Add(new CartItem
                         {
                             ProductId = item.ProductId,
                             Quantity = item.Quantity,
-                            Price = price
+                            Price = product.Price
                         });
                     }
                     await _unitOfWork.CartRepository.AddAsync(cart);
-                    var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
-                    if (isSuccess)
-                    {
-                        response.Success = true;
-                        response.Message = "Add to cart successfully.";
-                    }
-                    else
-                    {
-                        response.Success = false;
-                        response.Message = "Error to add item to cart.";
-                    }
                 }
                 else
                 {
                     foreach (var item in cartRequest.Items)
                     {
-                        var price = (await _unitOfWork.ProductRepository.GetByIdAsync(item.ProductId)).Price;
-                        cart.Items.Add(new CartItem
+                        var product = await _unitOfWork.ProductRepository.GetByIdAsync(item.ProductId);
+
+                        if (product == null)
                         {
-                            CartId = cart.Id,
-                            ProductId = item.ProductId,
-                            Quantity = item.Quantity,
-                            Price = price
-                        });
+                            response.Success = false;
+                            response.Message = $"Product with id: {item.ProductId} is not exist.";
+                            return response;
+                        }
+
+                        var cartItem = cart.Items.FirstOrDefault(i => i.ProductId == item.ProductId);
+                        if (cartItem != null)
+                        {
+                            cartItem.Quantity += item.Quantity;
+                        }
+                        else
+                        {
+                            cart.Items.Add(new CartItem
+                            {
+                                CartId = cart.Id,
+                                ProductId = item.ProductId,
+                                Quantity = item.Quantity,
+                                Price = product.Price
+                            });
+                        }
                     }
                     _unitOfWork.CartRepository.Update(cart);
-                    var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
-                    if (isSuccess)
-                    {
-                        response.Success = true;
-                        response.Message = "Add to cart successfully.";
-                    }
-                    else
-                    {
-                        response.Success = false;
-                        response.Message = "Error to add item to cart.";
-                    }
                 }
+
+                await _unitOfWork.SaveChangeAsync();
+                response.Data = new CartViewModel
+                {
+                    Id = cart.Id,
+                    UserId = cart.AccountId,
+                    Items = cart.Items.Select(i => new CartItemViewModel
+                    {
+                        ProductId = i.ProductId,
+                        ProductName = i.Product.Name,
+                        Quantity = i.Quantity,
+                        Price = i.Price
+                    }).ToList()
+                };
+                response.Success = true;
+                response.Message = "Add to cart successfully.";
+            }
+
+            catch (DbUpdateException ex)
+            {
+                response.Success = false;
+                response.Message = "Failed to update data.";
+                response.ErrorMessages = new List<string> { ex.Message };
             }
             catch (DbException ex)
             {
@@ -134,19 +167,107 @@ namespace Application.Services
             return response;
         }
 
-        public async Task<ServiceResponse<bool>> DeleteCartAsync(int id)
+        public async Task<ServiceResponse<CartViewModel>> RemoveFromCartAsync(CartRequestModel request)
+        {
+            var response = new ServiceResponse<CartViewModel>();
+            try
+            {
+                var cart = await _unitOfWork.CartRepository.GetCartForUserAsync(_claimsService.GetCurrentUserId.Value);
+
+                if (cart == null)
+                {
+                    response.Success = false;
+                    response.Message = "Cart is not existed.";
+                    return response;
+                }
+
+                foreach (var item in request.Items)
+                {
+                    var product = await _unitOfWork.ProductRepository.GetByIdAsync(item.ProductId);
+
+                    if (product == null)
+                    {
+                        response.Success = false;
+                        response.Message = $"Product with id: {item.ProductId} is not exist.";
+                        return response;
+                    }
+
+                    var cartItem = cart.Items.FirstOrDefault(ci => ci.ProductId == item.ProductId);
+                    if (item.Quantity >= cartItem.Quantity)
+                    {
+                        cart.Items.Remove(cartItem);
+                    }
+                    else
+                    {
+                        cartItem.Quantity -= item.Quantity;
+                    }
+                }
+                _unitOfWork.CartRepository.Update(cart);
+                await _unitOfWork.SaveChangeAsync();
+
+                response.Data = new CartViewModel
+                {
+                    Id = cart.Id,
+                    UserId = cart.AccountId,
+                    Items = cart.Items.Select(i => new CartItemViewModel
+                    {
+                        ProductId = i.ProductId,
+                        ProductName = i.Product.Name,
+                        Quantity = i.Quantity,
+                        Price = i.Price
+                    }).ToList()
+                };
+                response.Success = true;
+                response.Message = "Removed from cart successfully.";
+
+            }
+            catch (DbUpdateException ex)
+            {
+                response.Success = false;
+                response.Message = "Failed to update data.";
+                response.ErrorMessages = new List<string> { ex.Message };
+            }
+            catch (DbException ex)
+            {
+                response.Success = false;
+                response.Message = "Database error occurred.";
+                response.ErrorMessages = new List<string> { ex.Message };
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Error";
+                response.ErrorMessages = new List<string> { ex.Message };
+            }
+            return response;
+        }
+
+        public async Task<ServiceResponse<bool>> DeleteCartAsync()
         {
             var response = new ServiceResponse<bool>();
             try
             {
-                var cart = _unitOfWork.CartRepository.GetByIdAsync(id);
+                var cart = await _unitOfWork.CartRepository.GetCartForUserAsync(_claimsService.GetCurrentUserId.Value);
                 if (cart == null)
                 {
                     response.Success = false;
                     response.Message = "Cart is not existed";
                     return response;
                 }
-                await _unitOfWork.CartRepository.DeleteCartAsync(id);
+                _unitOfWork.CartRepository.DeleteCartItem(cart.Items);
+                await _unitOfWork.SaveChangeAsync();
+
+                _unitOfWork.CartRepository.DeleteCart(cart.Id);
+                await _unitOfWork.SaveChangeAsync();
+
+                response.Success = true;
+                response.Message = "Delete cart for this user successfully.";
+            }
+            catch (DbUpdateException ex)
+            {
+                response.Success = false;
+                response.Message = "Failed to update data.";
+                response.ErrorMessages = new List<string> { ex.Message };
             }
             catch (DbException ex)
             {

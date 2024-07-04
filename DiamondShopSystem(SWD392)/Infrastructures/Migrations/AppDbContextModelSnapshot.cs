@@ -841,6 +841,13 @@ namespace Infrastructures.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Payments", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PaymentMethod = "Payment in cash"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Product", b =>

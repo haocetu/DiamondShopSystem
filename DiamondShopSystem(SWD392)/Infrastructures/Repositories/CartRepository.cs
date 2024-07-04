@@ -13,18 +13,32 @@ namespace Infrastructures.Repositories
         {
             _context = context;
         }
-        public async Task DeleteCartAsync(int cartId)
+        public void DeleteCart(int cartId)
         {
-            var cart = await _context.Carts.FirstOrDefaultAsync(c=>c.Id == cartId);
+            var cart =  _context.Carts.FirstOrDefault(c => c.Id == cartId);
             if (cart != null)
             {
                 _context.Carts.Remove(cart);
-                await _context.SaveChangesAsync();
             }
         }
         public async Task<Cart> GetCartForUserAsync(int userId)
         {
-            return await _context.Carts.Include(c => c.Items).FirstOrDefaultAsync(c => c.AccountId == userId);
+            var result =  await _context.Carts.Include(c => c.Items)
+                                        .ThenInclude(ci => ci.Product)
+                                        .FirstOrDefaultAsync(c => c.AccountId == userId);
+            if (result != null)
+            {
+                return result;
+            }
+            return null;
+        }
+
+        public void DeleteCartItem(List<CartItem> items)
+        {
+            foreach (var item in items)
+            {
+                _context.CartItems.Remove(item);
+            }
         }
     }
 }

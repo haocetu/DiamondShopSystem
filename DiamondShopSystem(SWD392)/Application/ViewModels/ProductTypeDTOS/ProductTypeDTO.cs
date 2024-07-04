@@ -8,6 +8,7 @@ namespace Application.ViewModels.ProductTypeDTOS
 {
 	public class ProductTypeDTO
 	{
+		public int Id { get; set; }
 		public string Material {  get; set; }
 		public decimal Price { get; set; }
 	}

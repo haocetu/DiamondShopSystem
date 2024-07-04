@@ -8,6 +8,7 @@ namespace Application.ViewModels.CategoryDTOs
 {
 	public class CategoryDTO
 	{
+		public int Id { get; set; }
 		public string Name { get; set; }
 		public float Size { get; set; }
 		public float Length { get; set; }

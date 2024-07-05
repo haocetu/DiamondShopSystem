@@ -7,6 +7,7 @@ using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Drawing;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -159,15 +160,15 @@ namespace Application.Services
         public decimal DiscountFromPoint(decimal price, int point)
         {
             decimal result;
-            if (point > 20000)
+            if (point >= 20000)
             {
                 result = price * 1.5m;
             }
-            else if (point > 15000)
+            else if (point >= 15000)
             {
                 result = price * 1m;
             }
-            else if (point > 10000)
+            else if (point >= 10000)
             {
                 result = price * 0.5m;
             }
@@ -181,19 +182,38 @@ namespace Application.Services
         public int GetPromotionIdFromPoint(int point)
         {
             var result = 0;
-            if (point > 20000)
+            if (point >= 20000)
             {
                 result = 3;
             }
-            else if (point > 15000)
+            else if (point >= 15000)
             {
                 result = 2;
             }
-            else if (point > 10000)
+            else if (point >= 10000)
             {
                 result = 1;
             }
             return result;
+        }
+
+        public async Task<float> GetDiscountPercentageForUser(int userId)
+        {
+            var user = await _unitOfWork.AccountRepository.GetByIdAsync(userId);
+            float discount = 0f;
+            if (user.Point >= 20000)
+            {
+                discount = 1.5f;
+            }
+            else if (user.Point >= 15000)
+            {
+                discount = 1f;
+            }
+            else if (user.Point >= 10000)
+            {
+                discount = 0.5f;
+            }
+            return discount;
         }
     }
 }

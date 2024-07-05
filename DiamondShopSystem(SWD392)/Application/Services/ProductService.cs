@@ -41,39 +41,36 @@ namespace Application.Services
 
 				foreach (var product in products)
 				{
-					if (product.IsDeleted == false)
+					var pro = _mapper.Map<ProductDTO>(product);
+					pro.Images = _unitOfWork.ImageRepository.GetImagesByProductId(pro.Id);
+
+					var cat = await _unitOfWork.CategoryRepository.GetByIdAsync(pro.CategoryId);
+					if (cat != null)
 					{
-						var pro = _mapper.Map<ProductDTO>(product);
-						pro.Images = _unitOfWork.ImageRepository.GetImagesByProductId(pro.Id);
-
-						var cat = await _unitOfWork.CategoryRepository.GetByIdAsync(pro.CategoryId);
-						if (cat != null)
-						{
-							pro.Category = _mapper.Map<CategoryDTO>(cat);
-						}
-
-						var type = await _unitOfWork.ProductTypeRepository.GetByIdAsync(pro.ProductTypeId);
-						if (type != null)
-						{
-							pro.ProductType = _mapper.Map<ProductTypeDTO>(type);
-						}
-
-						var pridia = _unitOfWork.ProductDiamondRepository.GetPrimaryDiamondsByProductId(pro.Id);
-						var subdia = _unitOfWork.ProductDiamondRepository.GetSubDiamondsByProductId(pro.Id);
-						pro.PrimaryDiamonds = new List<DiamondDTO>();
-						foreach (var i in pridia)
-						{
-							var diamond = await _unitOfWork.DiamondRepository.GetByIdAsync(i);
-							pro.PrimaryDiamonds.Add(_mapper.Map<DiamondDTO>(diamond));
-						}
-						pro.SubDiamonds = new List<DiamondDTO>();
-						foreach (var i in subdia)
-						{
-							var diamond = await _unitOfWork.DiamondRepository.GetByIdAsync(i);
-							pro.SubDiamonds.Add(_mapper.Map<DiamondDTO>(diamond));
-						}
-						productsDTO.Add(pro);
+						pro.Category = _mapper.Map<CategoryDTO>(cat);
 					}
+
+					var type = await _unitOfWork.ProductTypeRepository.GetByIdAsync(pro.ProductTypeId);
+					if (type != null)
+					{
+						pro.ProductType = _mapper.Map<ProductTypeDTO>(type);
+					}
+
+					var pridia = _unitOfWork.ProductDiamondRepository.GetPrimaryDiamondsByProductId(pro.Id);
+					var subdia = _unitOfWork.ProductDiamondRepository.GetSubDiamondsByProductId(pro.Id);
+					pro.PrimaryDiamonds = new List<DiamondDTO>();
+					foreach (var i in pridia)
+					{
+						var diamond = await _unitOfWork.DiamondRepository.GetByIdAsync(i);
+						pro.PrimaryDiamonds.Add(_mapper.Map<DiamondDTO>(diamond));
+					}
+					pro.SubDiamonds = new List<DiamondDTO>();
+					foreach (var i in subdia)
+					{
+						var diamond = await _unitOfWork.DiamondRepository.GetByIdAsync(i);
+						pro.SubDiamonds.Add(_mapper.Map<DiamondDTO>(diamond));
+					}
+					productsDTO.Add(pro);
 				}
 
 				if (productsDTO.Count != 0)
@@ -106,11 +103,11 @@ namespace Application.Services
 				response.Success = false;
 				response.Message = "Product is not existed!";
 			}
-			else if (exist.IsDeleted == true)
-			{
-				response.Success = false;
-				response.Message = "Product have been deleted from the system.";
-			}
+			//else if (exist.IsDeleted == true)
+			//{
+			//	response.Success = false;
+			//	response.Message = "Product have been deleted from the system.";
+			//}
 			else
 			{
 				response.Success = true;
@@ -150,31 +147,28 @@ namespace Application.Services
 
 				foreach (var product in products)
 				{
-					if (product.IsDeleted == false)
-					{
-						var pro = _mapper.Map<ProductDTO>(product);
-						pro.Images = _unitOfWork.ImageRepository.GetImagesByProductId(pro.Id);
-						var cat = await _unitOfWork.CategoryRepository.GetByIdAsync(pro.CategoryId);
-						pro.Category = _mapper.Map<CategoryDTO>(cat);
-						var type = await _unitOfWork.ProductTypeRepository.GetByIdAsync(pro.ProductTypeId);
-						pro.ProductType = _mapper.Map<ProductTypeDTO>(type);
+					var pro = _mapper.Map<ProductDTO>(product);
+					pro.Images = _unitOfWork.ImageRepository.GetImagesByProductId(pro.Id);
+					var cat = await _unitOfWork.CategoryRepository.GetByIdAsync(pro.CategoryId);
+					pro.Category = _mapper.Map<CategoryDTO>(cat);
+					var type = await _unitOfWork.ProductTypeRepository.GetByIdAsync(pro.ProductTypeId);
+					pro.ProductType = _mapper.Map<ProductTypeDTO>(type);
 
-						var pridia = _unitOfWork.ProductDiamondRepository.GetPrimaryDiamondsByProductId(pro.Id);
-						var subdia = _unitOfWork.ProductDiamondRepository.GetSubDiamondsByProductId(pro.Id);
-						pro.PrimaryDiamonds = new List<DiamondDTO>();
-						foreach (var i in pridia)
-						{
-							var diamond = await _unitOfWork.DiamondRepository.GetByIdAsync(i);
-							pro.PrimaryDiamonds.Add(_mapper.Map<DiamondDTO>(diamond));
-						}
-						pro.SubDiamonds = new List<DiamondDTO>();
-						foreach (var i in subdia)
-						{
-							var diamond = await _unitOfWork.DiamondRepository.GetByIdAsync(i);
-							pro.SubDiamonds.Add(_mapper.Map<DiamondDTO>(diamond));
-						}
-						productsDTO.Add(pro);
+					var pridia = _unitOfWork.ProductDiamondRepository.GetPrimaryDiamondsByProductId(pro.Id);
+					var subdia = _unitOfWork.ProductDiamondRepository.GetSubDiamondsByProductId(pro.Id);
+					pro.PrimaryDiamonds = new List<DiamondDTO>();
+					foreach (var i in pridia)
+					{
+						var diamond = await _unitOfWork.DiamondRepository.GetByIdAsync(i);
+						pro.PrimaryDiamonds.Add(_mapper.Map<DiamondDTO>(diamond));
 					}
+					pro.SubDiamonds = new List<DiamondDTO>();
+					foreach (var i in subdia)
+					{
+						var diamond = await _unitOfWork.DiamondRepository.GetByIdAsync(i);
+						pro.SubDiamonds.Add(_mapper.Map<DiamondDTO>(diamond));
+					}
+					productsDTO.Add(pro);
 				}
 
 				if (productsDTO.Count != 0)

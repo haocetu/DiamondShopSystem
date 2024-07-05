@@ -50,7 +50,7 @@ namespace Application.Utils
             {
             new Claim("Id", account.Id.ToString()),
             new Claim("Email", account.Email),
-            new Claim("RoleID", rolename),
+            new Claim("role", rolename),
         };
 
             var token = new JwtSecurityToken(

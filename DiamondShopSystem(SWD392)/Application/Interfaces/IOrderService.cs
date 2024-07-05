@@ -9,5 +9,6 @@ namespace Application.Interfaces
         Task<ServiceResponse<OrderViewModel>> ChangeOrderStatusAsync(int orderid, string status);
         Task<ServiceResponse<List<OrderDetailsViewModel>>> GetOrdersAsync();
         Task<ServiceResponse<OrderDetailsViewModel>> GetOrderDetailsAsync(int orderid);
+        Task<ServiceResponse<List<OrderDetailsViewModel>>> GetOrdersForUserAsync();
     }
 }

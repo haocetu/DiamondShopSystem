@@ -82,10 +82,10 @@ namespace Application.Services
                 response.Data = new OrderDetailsViewModel
                 {
                     Id = order.Id,
-                    UserId = order.AccountId,
+                    UserName = order.Account.Name,
                     Status = order.Status,
                     TotalPrice = order.TotalPrice,
-                    PaymentId = order.PaymentId,
+                    PaymentName = order.Payment.PaymentMethod,
                     OrderDate = order.CreatedDate.Value,
                     ShipDate = order.ShipDate,
                     Items = order.Items.Select(i => new OrderItemViewModel
@@ -111,6 +111,54 @@ namespace Application.Services
             return response;
         }
 
+        public async Task<ServiceResponse<List<OrderDetailsViewModel>>> GetOrdersForUserAsync()
+        {
+            var response = new ServiceResponse<List<OrderDetailsViewModel>>();
+            try
+            {
+                var orders = await _unitOfWork.OrderRepository.GetOrderByUserIDAsync(_claimsService.GetCurrentUserId.Value);
+                var discount = await _promotionService.GetDiscountPercentageForUser(_claimsService.GetCurrentUserId.Value);
+
+                var result = orders.Select(order => new OrderDetailsViewModel
+                {
+                    Id = order.Id,
+                    UserName = order.Account.Name,
+                    Status = order.Status,
+                    DiscountPercentage = discount,
+                    TotalPrice = order.TotalPrice,
+                    PaymentName = order.Payment.PaymentMethod,
+                    OrderDate = order.CreatedDate.Value,
+                    ShipDate = order.ShipDate,
+                    Items = order.Items.Select(i => new OrderItemViewModel
+                    {
+                        ProductId = i.ProductId,
+                        Quantity = i.Quantity,
+                        Price = i.Price
+                    }).ToList()
+                }).ToList();
+
+                if (result.Count != 0)
+                {
+                    response.Success = true;
+                    response.Message = "Orders retrieved successfully";
+                    response.Data = result;
+                }
+                else
+                {
+                    response.Success = true;
+                    response.Message = "Not have any orders";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Error";
+                response.ErrorMessages = new List<string> { Convert.ToString(ex.Message) };
+            }
+
+            return response;
+        }
+
         public async Task<ServiceResponse<List<OrderDetailsViewModel>>> GetOrdersAsync()
         {
             var response = new ServiceResponse<List<OrderDetailsViewModel>>();
@@ -121,10 +169,11 @@ namespace Application.Services
                 var result = orders.Select(order => new OrderDetailsViewModel
                 {
                     Id = order.Id,
-                    UserId = order.AccountId,
+                    UserName = order.Account.Name,
                     Status = order.Status,
+                    DiscountPercentage = (_promotionService.GetDiscountPercentageForUser(order.AccountId)).Result,
                     TotalPrice = order.TotalPrice,
-                    PaymentId = order.PaymentId,
+                    PaymentName = order.Payment.PaymentMethod,
                     OrderDate = order.CreatedDate.Value,
                     ShipDate = order.ShipDate,
                     Items = order.Items.Select(i => new OrderItemViewModel
@@ -204,10 +253,9 @@ namespace Application.Services
                 response.Data = new OrderViewModel
                 {
                     Id = order.Id,
-                    UserId = order.AccountId,
+                    UserName = order.Account.Name,
                     OrderDate = order.CreatedDate.Value,
                     TotalAmount = order.TotalPrice,
-                    PromotionId = _promotionService.GetPromotionIdFromPoint(userpoint),
                     Items = order.Items.Select(i => new OrderItemViewModel
                     {
                         ProductId = i.ProductId,

@@ -16,5 +16,6 @@ namespace Application.Interfaces
         Task<ServiceResponse<bool>> DeletePromotionAsync(int id);
         decimal DiscountFromPoint(decimal price, int point);
         int GetPromotionIdFromPoint(int point);
+        Task<float> GetDiscountPercentageForUser(int userId);
     }
 }

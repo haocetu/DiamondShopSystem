@@ -83,7 +83,14 @@ namespace Infrastructures.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Material = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Weight = table.Column<float>(type: "real", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<int>(type: "int", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<int>(type: "int", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<int>(type: "int", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -467,13 +474,18 @@ namespace Infrastructures.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Payments",
+                columns: new[] { "Id", "PaymentMethod" },
+                values: new object[] { 1, "Payment in cash" });
+
+            migrationBuilder.InsertData(
                 table: "ProductType",
-                columns: new[] { "Id", "Material", "Price", "Weight" },
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "IsDeleted", "Material", "ModifiedBy", "ModifiedDate", "Price", "Weight" },
                 values: new object[,]
                 {
-                    { 1, "Gold", 5567000m, 3.75f },
-                    { 2, "Platium", 827287m, 1f },
-                    { 3, "Sliver", 22325m, 1f }
+                    { 1, null, null, null, null, null, "Gold", null, null, 5567000m, 3.75f },
+                    { 2, null, null, null, null, null, "Platium", null, null, 827287m, 1f },
+                    { 3, null, null, null, null, null, "Sliver", null, null, 22325m, 1f }
                 });
 
             migrationBuilder.InsertData(

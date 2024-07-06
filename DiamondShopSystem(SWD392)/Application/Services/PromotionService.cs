@@ -7,6 +7,7 @@ using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Drawing;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -24,7 +25,7 @@ namespace Application.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<ServiceResponse<IEnumerable<PromotionDTO>>>GetListPromotionAsync()
+        public async Task<ServiceResponse<IEnumerable<PromotionDTO>>> GetListPromotionAsync()
         {
             var response = new ServiceResponse<IEnumerable<PromotionDTO>>();
             try
@@ -33,9 +34,9 @@ namespace Application.Services
 
                 var promotionList = new List<PromotionDTO>();
 
-                foreach ( var promotion in list)
+                foreach (var promotion in list)
                 {
-                    if(promotion.IsDeleted == false)
+                    if (promotion.IsDeleted == false)
                     {
                         promotionList.Add(_mapper.Map<PromotionDTO>(promotion));
                     }
@@ -60,7 +61,7 @@ namespace Application.Services
             }
             return response;
         }
-        public async Task<ServiceResponse<PromotionDTO>>GetPromotionByIdAsync(int id)
+        public async Task<ServiceResponse<PromotionDTO>> GetPromotionByIdAsync(int id)
         {
             var response = new ServiceResponse<PromotionDTO>();
 
@@ -80,7 +81,7 @@ namespace Application.Services
 
             return response;
         }
-        public async Task<ServiceResponse<PromotionDTO>>CreatePromotionAsync(CreatePromotionDTO newPromotion)
+        public async Task<ServiceResponse<PromotionDTO>> CreatePromotionAsync(CreatePromotionDTO newPromotion)
         {
             var response = new ServiceResponse<PromotionDTO>();
             try
@@ -96,7 +97,7 @@ namespace Application.Services
                 if (isSuccess)
                 {
                     var data = _mapper.Map<PromotionDTO>(promotion);
-                    response.Data = data; 
+                    response.Data = data;
                     response.Success = true;
                     response.Message = "Promotion created successfully.";
                 }
@@ -154,6 +155,65 @@ namespace Application.Services
             }
 
             return response;
+        }
+
+        public decimal DiscountFromPoint(decimal price, int point)
+        {
+            decimal result;
+            if (point >= 20000)
+            {
+                result = price * 1.5m;
+            }
+            else if (point >= 15000)
+            {
+                result = price * 1m;
+            }
+            else if (point >= 10000)
+            {
+                result = price * 0.5m;
+            }
+            else
+            {
+                result = price;
+            }
+            return result;
+        }
+
+        public int GetPromotionIdFromPoint(int point)
+        {
+            var result = 0;
+            if (point >= 20000)
+            {
+                result = 3;
+            }
+            else if (point >= 15000)
+            {
+                result = 2;
+            }
+            else if (point >= 10000)
+            {
+                result = 1;
+            }
+            return result;
+        }
+
+        public async Task<float> GetDiscountPercentageForUser(int userId)
+        {
+            var user = await _unitOfWork.AccountRepository.GetByIdAsync(userId);
+            float discount = 0f;
+            if (user.Point >= 20000)
+            {
+                discount = 1.5f;
+            }
+            else if (user.Point >= 15000)
+            {
+                discount = 1f;
+            }
+            else if (user.Point >= 10000)
+            {
+                discount = 0.5f;
+            }
+            return discount;
         }
     }
 }

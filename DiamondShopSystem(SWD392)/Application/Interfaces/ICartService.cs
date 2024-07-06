@@ -7,7 +7,8 @@ namespace Application.Interfaces
     public interface ICartService
     {
         Task<ServiceResponse<CartViewModel>> GetCartForUserAsync();
-        Task<ServiceResponse<CartViewModel>> AddOrUpdateCartAsync(CartRequestModel request);
-        Task<ServiceResponse<bool>> DeleteCartAsync(int id);
+        Task<ServiceResponse<CartViewModel>> AddToCartAsync(CartRequestModel request);
+        Task<ServiceResponse<CartViewModel>> RemoveFromCartAsync(CartRequestModel request);
+        Task<ServiceResponse<bool>> DeleteCartAsync();
     }
 }

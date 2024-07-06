@@ -21,35 +21,39 @@ namespace DiamondShopSystem_SWD392_.Controllers
         public async Task<IActionResult> GetCartItemsForUser()
         {
             var result = await _cartService.GetCartForUserAsync();
-            if (!result.Success)
-            {
-                return BadRequest(result.ErrorMessages);
-            }
             return Ok(result);
         }
 
         [HttpPatch("add-to-cart")]
         [Authorize]
-        public async Task<IActionResult> AddOrUpdateCartAsync(CartRequestModel request)
+        public async Task<IActionResult> AddToCartAsync(CartRequestModel request)
         {
-            var result = await _cartService.AddOrUpdateCartAsync(request);
-            if (!result.Success)
+            if (!ModelState.IsValid)
             {
-                return BadRequest(result.ErrorMessages);
+                return BadRequest(ModelState);
             }
-            return Ok();
+            var result = await _cartService.AddToCartAsync(request);
+            return Ok(result);
         }
 
-        [HttpDelete("delete-cart/{id}")]
+        [HttpPatch("remove-from-cart")]
         [Authorize]
-        public async Task<IActionResult> DeleteCartAsync(int id)
+        public async Task<IActionResult> RemoveFromCartAsync(CartRequestModel request)
         {
-            var result = await _cartService.DeleteCartAsync(id);
-            if (!result.Success)
+            if (!ModelState.IsValid)
             {
-                return BadRequest(result.ErrorMessages);
+                return BadRequest(ModelState);
             }
-            return Ok();
+            var result = await _cartService.RemoveFromCartAsync(request);
+            return Ok(result);
+        }
+
+        [HttpDelete("delete-cart")]
+        [Authorize]
+        public async Task<IActionResult> DeleteCartAsync()
+        {
+            var result = await _cartService.DeleteCartAsync();
+            return Ok(result);
         }
     }
 }

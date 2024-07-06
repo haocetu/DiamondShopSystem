@@ -149,9 +149,12 @@ namespace Infrastructures
                 );
             //Promotion
             modelBuilder.Entity<Promotion>().HasData(
-                new Promotion { Id = 1, Point = 10000, DiscountPercentage = 0.5m, IsDeleted = false},
-                new Promotion { Id = 2, Point = 15000, DiscountPercentage = 1, IsDeleted = false},
-                new Promotion { Id = 3, Point = 20000, DiscountPercentage = 1.5m, IsDeleted = false}
+                new Promotion { Id = 1, Point = 10000, DiscountPercentage = 0.5m, IsDeleted = false },
+                new Promotion { Id = 2, Point = 15000, DiscountPercentage = 1, IsDeleted = false },
+                new Promotion { Id = 3, Point = 20000, DiscountPercentage = 1.5m, IsDeleted = false });
+            // Payment
+            modelBuilder.Entity<Payment>().HasData(
+                new Payment { Id = 1, PaymentMethod = "Payment in cash"}
                 );
             #endregion
         }

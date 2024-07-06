@@ -841,6 +841,13 @@ namespace Infrastructures.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Payments", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PaymentMethod = "Payment in cash"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Product", b =>
@@ -1039,9 +1046,30 @@ namespace Infrastructures.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Material")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");

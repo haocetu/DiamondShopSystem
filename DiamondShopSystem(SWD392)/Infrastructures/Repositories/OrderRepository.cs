@@ -14,11 +14,30 @@ namespace Infrastructures.Repositories
         }
         public async Task<Order> GetOrderByIdAsync(int orderId)
         {
-            return await _dbContext.Orders.Include(o => o.Items).FirstOrDefaultAsync(o => o.Id == orderId);
+            return await _dbContext.Orders.Include(o => o.Items)
+                                        .Include(o=>o.Account)
+                                        .Include(o=>o.Payment)
+                                        .Include(o=>o.ProductWarranties)
+                                        .FirstOrDefaultAsync(o => o.Id == orderId);
         }
+
+        public async Task<List<Order>> GetOrdersAsync()
+        {
+            return await _dbContext.Orders.Include(o => o.Items)
+                                        .Include(o => o.Account)
+                                        .Include(o => o.Payment)
+                                        .Include(o => o.ProductWarranties)
+                                        .ToListAsync();
+        }
+
         public async Task<List<Order>> GetOrderByUserIDAsync(int userId)
         {
-            var result = await _dbContext.Orders.Where(o => o.AccountId == userId).ToListAsync();
+            var result = await _dbContext.Orders.Include(o => o.Items)
+                                        .Include(o => o.Account)
+                                        .Include(o => o.Payment)
+                                        .Include(o => o.ProductWarranties)
+                                        .Where(o => o.AccountId == userId)
+                                        .ToListAsync();
             return result;
         }
     }

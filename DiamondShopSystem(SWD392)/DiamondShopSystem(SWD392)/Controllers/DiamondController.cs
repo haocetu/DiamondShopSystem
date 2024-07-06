@@ -2,6 +2,7 @@
 using Application.Services;
 using Application.ViewModels.AccountDTOs;
 using Application.ViewModels.DiamondDTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
@@ -46,6 +47,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
             }
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateDiamond([FromForm] CreateDiamondDTO createdDiamondDTO)
         {
 
@@ -69,6 +71,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
 
         [HttpPut]
         [Route("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateDiamond(int id, [FromForm] UpdateDiamondDTO diamondDTO)
         {
             var updatedDiamond = await _diamondService.UpdateDiamondAsync(id, diamondDTO);
@@ -79,6 +82,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
             return Ok(updatedDiamond);
         }
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteDiamond(int id)
         {
             var deletedDiamond = await _diamondService.DeleteDiamondAsync(id);

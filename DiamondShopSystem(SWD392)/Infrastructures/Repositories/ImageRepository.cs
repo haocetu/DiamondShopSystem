@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.Repositories;
+using Application.ViewModels.ImageDTOs;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,5 +26,9 @@ namespace Infrastructures.Repositories
 			//return _appDbContext.Images.Where(x => x.ProductId == id).ToList();
             return _appDbContext.Images.Where(x => x.ProductId == id).Select(x => x.UrlPath).ToList();
 		}
-	}
+        public async Task<IEnumerable<Image>>GetImagesByDiamondIdAsync(int id)
+        {
+            return await _appDbContext.Images.Where(x => x.DiamondId == id).ToListAsync();
+        }
+    }
 }

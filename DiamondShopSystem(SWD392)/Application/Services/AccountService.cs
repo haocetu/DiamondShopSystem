@@ -136,10 +136,10 @@ namespace Application.Services
 
                 foreach (var user in users)
                 {
-                    if (user.IsDeleted == false)
-                    {
+                    //if (user.IsDeleted == false)
+                    //{
                         userDTOs.Add(_mapper.Map<AccountDTO>(user));
-                    }
+                    //}
                 }
 
                 if (userDTOs.Count != 0)
@@ -228,7 +228,7 @@ namespace Application.Services
 
         public async Task<ServiceResponse<AccountDTO>> UpdateUserAsync(int id, UpdateAccountDTO userDTO)
         {
-            var response = new ServiceResponse< AccountDTO>();
+            var response = new ServiceResponse<AccountDTO>();
 
             try
             {

@@ -247,40 +247,39 @@ namespace Application.Services
                     response.Message = "Diamond has been deleted in system";
                     return response;
                 }
-                if(diamondDTO.OriginName == null)
+                //If any value is null, it will be equal to the original value
+                diamondDTO.OriginName ??= existingDiamond.OriginName;
+                diamondDTO.CaratWeight ??= existingDiamond.CaratWeight;
+                diamondDTO.ClarityName ??= existingDiamond.ClarityName;
+                diamondDTO.CutName ??= existingDiamond.CutName;
+                diamondDTO.Color ??= existingDiamond.Color;
+                diamondDTO.Price ??= existingDiamond.Price;
+                diamondDTO.Quantity ??= existingDiamond.Quantity;
+                //Image
+                if (diamondDTO.UpdateImages != null)
                 {
-                    diamondDTO.OriginName = existingDiamond.OriginName;
+                    
+                    
+                   await _imageService.UploadDiamondImages(diamondDTO.UpdateImages, existingDiamond.Id);
                 }
-                if(diamondDTO.CaratWeight == null)
-                {
-                    diamondDTO.CaratWeight = existingDiamond.CaratWeight;
-                }
-                //if(diamondDTO.ClarityName  == null)
-                //{
-                //    diamondDTO.ClarityName = existingDiamond.ClarityName;
-                //}
                 //Mapping
-                var update = _mapper.Map(existingDiamond, diamondDTO);
-
-                 _unitOfWork.DiamondRepository.Update(existingDiamond);
+                var update = _mapper.Map(diamondDTO, existingDiamond);
+                update.Name = update.OriginName + " " + update.CutName + " " + update.ClarityName;
+                _unitOfWork.DiamondRepository.Update(update);
 
                 var updatedDiamond = _mapper.Map<DiamondDTO>(update);
 
 				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
-                //if (!diamondDTO.DiamondImages.IsNullOrEmpty())
-                //{
-                //    await _imageService.UploadDiamondImages(diamondDTO.DiamondImages, diamond.Id);
-                //}
                 if (isSuccess)
 				{
                     response.Data = updatedDiamond;
                     response.Success = true;
-                    response.Message = "Diamond created successfully.";
+                    response.Message = "Diamond update successfully.";
                 }
 				else
 				{
 					response.Success = false;
-					response.Message = "Error saving the user.";
+					response.Message = "Error saving the diamond.";
 				}
 			}
 			catch (DbException ex)

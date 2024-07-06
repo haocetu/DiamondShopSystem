@@ -36,6 +36,7 @@ namespace Infrastructures
             services.AddScoped<IProductService, ProductService>();
 
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IProductTypeService, ProductTypeService>();
             //Firebase
             services.AddSingleton(opt => StorageClient.Create());
             

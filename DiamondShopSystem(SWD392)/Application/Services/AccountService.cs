@@ -136,10 +136,10 @@ namespace Application.Services
 
                 foreach (var user in users)
                 {
-                    if (user.IsDeleted == false)
-                    {
+                    //if (user.IsDeleted == false)
+                    //{
                         userDTOs.Add(_mapper.Map<AccountDTO>(user));
-                    }
+                    //}
                 }
 
                 if (userDTOs.Count != 0)

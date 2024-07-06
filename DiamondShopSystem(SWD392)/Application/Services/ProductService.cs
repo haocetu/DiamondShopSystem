@@ -339,7 +339,6 @@ namespace Application.Services
 				response.Message = "Error.";
 				response.ErrorMessages = new List<string> { ex.Message };
 			}
-
 			return response;
 		}
 		public async Task<ServiceResponse<bool>> DeleteProductAsync(int id)

@@ -32,10 +32,7 @@ namespace Application.Services
 				var categoryDTOs = new List<CategoryDTO>();
 				foreach (var cat in categories)
 				{
-					if (cat.IsDeleted == false)
-					{
-						categoryDTOs.Add(_mapper.Map<CategoryDTO>(cat));
-					}
+					categoryDTOs.Add(_mapper.Map<CategoryDTO>(cat));
 				}
 				if (categoryDTOs.Count > 0)
 				{
@@ -72,11 +69,6 @@ namespace Application.Services
 			{
 				response.Success = false;
 				response.Message = "Cannot found category.";
-			}
-			else if (exist.IsDeleted == true)
-			{
-				response.Success = false;
-				response.Message = "Category was deleted from the system.";
 			}
 			else
 			{
@@ -119,6 +111,87 @@ namespace Application.Services
 			{
 				response.Success = false;
 				response.Message = "Error.";
+				response.ErrorMessages = new List<string> { ex.Message };
+			}
+			return response;
+		}
+		public async Task<ServiceResponse<CategoryDTO>> UpdateCategoryAsync(int id, CreateCategoryDTO cat)
+		{
+			var response = new ServiceResponse<CategoryDTO>();
+			try
+			{
+				var exist = await _unitOfWork.CategoryRepository.GetByIdAsync(id);
+				if (exist == null)
+				{
+					response.Success = false;
+					response.Message = "Category not found.";
+					return response;
+				}
+				if (exist.IsDeleted == true)
+				{
+					response.Success = false;
+					response.Message = "Category has been deleted from the system.";
+					return response;
+				}
+				exist = _mapper.Map(cat, exist);
+				_unitOfWork.CategoryRepository.Update(exist);
+				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
+				if (isSuccess == true)
+				{
+					response.Success = true;
+					response.Message = "Update successfully.";
+					response.Data = _mapper.Map<CategoryDTO>(exist);
+				}
+				else
+				{
+					response.Success = false;
+					response.Message = "Cannot update.";
+				}
+			}
+			catch (Exception ex)
+			{
+				response.Success = false;
+				response.Message = "Error.";
+				response.ErrorMessages = new List<string> { ex.Message };
+			}
+			return response;
+		}
+		public async Task<ServiceResponse<bool>> DeleteCategoryAsync(int id)
+		{
+			var response = new ServiceResponse<bool>();
+
+			var exist = await _unitOfWork.CategoryRepository.GetByIdAsync(id);
+			if (exist == null)
+			{
+				response.Success = false;
+				response.Message = "Category is not existed!";
+				return response;
+			}
+			else if (exist.IsDeleted == true)
+			{
+				response.Success = false;
+				response.Message = "Category have been deleted from the system!";
+				return response;
+			}
+			try
+			{
+				_unitOfWork.CategoryRepository.SoftRemove(exist);
+				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
+				if (isSuccess)
+				{
+					response.Success = true;
+					response.Message = "Category deleted successfully!";
+				}
+				else
+				{
+					response.Success = false;
+					response.Message = "Error deleting category!";
+				}
+			}
+			catch (Exception ex)
+			{
+				response.Success = false;
+				response.Message = "Error";
 				response.ErrorMessages = new List<string> { ex.Message };
 			}
 			return response;

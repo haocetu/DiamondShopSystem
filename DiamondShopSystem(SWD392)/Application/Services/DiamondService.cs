@@ -255,18 +255,21 @@ namespace Application.Services
                 diamondDTO.Color ??= existingDiamond.Color;
                 diamondDTO.Price ??= existingDiamond.Price;
                 diamondDTO.Quantity ??= existingDiamond.Quantity;
+                //Image
+                if (diamondDTO.UpdateImages != null)
+                {
+                    
+                    
+                   await _imageService.UploadDiamondImages(diamondDTO.UpdateImages, existingDiamond.Id);
+                }
                 //Mapping
-                var update = _mapper.Map(existingDiamond, diamondDTO);
-
-                 _unitOfWork.DiamondRepository.Update(existingDiamond);
+                var update = _mapper.Map(diamondDTO, existingDiamond);
+                update.Name = update.OriginName + " " + update.CutName + " " + update.ClarityName;
+                _unitOfWork.DiamondRepository.Update(update);
 
                 var updatedDiamond = _mapper.Map<DiamondDTO>(update);
 
 				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
-                //if (!diamondDTO.DiamondImages.IsNullOrEmpty())
-                //{
-                //    await _imageService.UploadDiamondImages(diamondDTO.DiamondImages, diamond.Id);
-                //}
                 if (isSuccess)
 				{
                     response.Data = updatedDiamond;

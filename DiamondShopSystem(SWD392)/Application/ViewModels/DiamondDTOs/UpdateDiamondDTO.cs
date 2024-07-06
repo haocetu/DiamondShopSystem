@@ -1,4 +1,5 @@
 ﻿using Domain.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,5 +18,7 @@ namespace Application.ViewModels.DiamondDTOs
         public DiamondColor? Color { get; set; }
         public decimal? Price { get; set; }
         public int? Quantity { get; set; }
+        public List<IFormFile> UpdateImages { get; set; } = [];
+
     }
 }

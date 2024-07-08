@@ -26,7 +26,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> LoginAsync(AuthenticationAccountDTO loginObject)
+        public async Task<IActionResult> LoginAsync([FromForm]AuthenticationAccountDTO loginObject)
         {
             var result = await _authenticationService.LoginAsync(loginObject);
 

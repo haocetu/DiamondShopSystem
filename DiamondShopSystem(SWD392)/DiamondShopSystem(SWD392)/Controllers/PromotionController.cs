@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
 {
+    [Authorize(Policy = "Admin")]
     public class PromotionController : BaseController
     {
         private readonly IPromotionService _promotionService;

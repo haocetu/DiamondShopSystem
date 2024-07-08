@@ -4,9 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class OrderController : ControllerBase
+    [Authorize(Policy = "Customer")]
+    public class OrderController : BaseController
     {
         private readonly IOrderService _orderService;
 

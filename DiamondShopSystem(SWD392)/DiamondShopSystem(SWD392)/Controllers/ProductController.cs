@@ -2,10 +2,12 @@
 using Application.Services;
 using Application.ViewModels.ProductDTOs;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
 {
+	[Authorize(Policy = "Staff")]
 	public class ProductController : BaseController
 	{
 		private readonly IProductService productService;

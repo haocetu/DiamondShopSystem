@@ -17,33 +17,44 @@ namespace Infrastructures
 
             
             services.AddScoped<ICurrentTime, CurrentTime>();
-            
+            //account
             services.AddScoped<IAccountService, AccountService>();
-
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            //promotion
             services.AddScoped<IPromotionService, PromotionService>();
-            
+            services.AddScoped<IPromotionRepository, PromotionRepository>();
+            //authen
             services.AddScoped<IAuthenticationService, AuthenticationService>();
-            
+            //diamond
             services.AddScoped<IDiamondService, DiamondService>();
-            
+            services.AddScoped<IDiamondRepository, DiamondRepository>();
+            //payment
             services.AddScoped<IPaymentRepository, PaymentRepository>();
-
+            //cart
             services.AddScoped<ICartService, CartService>();
-            
+            services.AddScoped<ICartRepository, CartRepository>();
+            //order
             services.AddScoped<IOrderService, OrderService>();
-
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            //product
             services.AddScoped<IProductService, ProductService>();
-
+            services.AddScoped<IProductRepository, ProductRepository>();
+            //category
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            //productType
             services.AddScoped<IProductTypeService, ProductTypeService>();
+            services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
+            //ProductDiamond
+            services.AddScoped<IProductDiamondRepository, ProductDiamondRepository>();
+
             //Firebase
             services.AddSingleton(opt => StorageClient.Create());
-            
             services.AddScoped<IFirebaseStorageService, FirebaseStorageService>();
-            
+            //Image
             services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<IImageRepository, ImageRepository>();
             
-            services.AddScoped<ICartService, CartService>();
 
             services.AddDbContext<AppDbContext>(option =>
             {

@@ -7,10 +7,6 @@ namespace Infrastructures
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext()
-        {
-
-        }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -32,33 +28,33 @@ namespace Infrastructures
         public DbSet<Role> Roles { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            string root = Directory.GetParent(Directory.GetCurrentDirectory())?.FullName;
-            string apiDirectory = Path.Combine(root, "DiamondShopSystem(SWD392)");
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(apiDirectory)
-                .AddJsonFile("appsettings.Development.json")
-                .Build();
-            var connectionString = configuration.GetConnectionString("DatabaseConnection");
-            optionsBuilder.UseSqlServer(connectionString);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    string root = Directory.GetParent(Directory.GetCurrentDirectory())?.FullName;
+        //    string apiDirectory = Path.Combine(root, "DiamondShopSystem(SWD392)");
+        //    var configuration = new ConfigurationBuilder()
+        //        .SetBasePath(apiDirectory)
+        //        .AddJsonFile("appsettings.Development.json")
+        //        .Build();
+        //    var connectionString = configuration.GetConnectionString("DatabaseConnection");
+        //    optionsBuilder.UseSqlServer(connectionString);
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new AccountConfiguration());
-            modelBuilder.ApplyConfiguration(new RoleConfiguration());
-            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
-            modelBuilder.ApplyConfiguration(new ProductConfiguration());
-            modelBuilder.ApplyConfiguration(new DiamondConfiguration());
-            modelBuilder.ApplyConfiguration(new ProductDiamondConfiguration());
-            modelBuilder.ApplyConfiguration(new ImageConfiguration());
-            modelBuilder.ApplyConfiguration(new OrderConfiguration());
-            modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
-            modelBuilder.ApplyConfiguration(new CartConfiguration());
-            modelBuilder.ApplyConfiguration(new CartItemConfiguration());
-            modelBuilder.ApplyConfiguration(new PaymentConfiguration());
-            modelBuilder.ApplyConfiguration(new PromotionConfiguration());
+            //modelBuilder.ApplyConfiguration(new AccountConfiguration());
+            //modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            //modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            //modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            //modelBuilder.ApplyConfiguration(new DiamondConfiguration());
+            //modelBuilder.ApplyConfiguration(new ProductDiamondConfiguration());
+            //modelBuilder.ApplyConfiguration(new ImageConfiguration());
+            //modelBuilder.ApplyConfiguration(new OrderConfiguration());
+            //modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
+            //modelBuilder.ApplyConfiguration(new CartConfiguration());
+            //modelBuilder.ApplyConfiguration(new CartItemConfiguration());
+            //modelBuilder.ApplyConfiguration(new PaymentConfiguration());
+            //modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             #region insert data
             //Role
             modelBuilder.Entity<Role>().HasData(

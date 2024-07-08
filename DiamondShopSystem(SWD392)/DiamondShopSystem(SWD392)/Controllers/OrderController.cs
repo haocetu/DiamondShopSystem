@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
 {
-    [Authorize(Policy = "Customer")]
+
     public class OrderController : BaseController
     {
         private readonly IOrderService _orderService;
@@ -15,7 +15,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpPost("place-order")]
-        [Authorize]
+        [Authorize(Policy = "Customer")]
         public async Task<IActionResult> PlaceOrderAsync()
         {
             var result = await _orderService.PlaceOrderAsync();
@@ -23,7 +23,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpPost("change-status/{id}")]
-        [Authorize(Roles = "SaleStaff,Admin")]
+        [Authorize(Policy = "Staff")]
         public async Task<IActionResult> ChangeOrderStatusAsync(int id, string status)
         {
             var result = await _orderService.ChangeOrderStatusAsync(id, status);
@@ -31,7 +31,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpGet("order/{id}")]
-        [Authorize(Roles = "SaleStaff, Admin")]
+        [Authorize(Policy = "Staff")]
         public async Task<IActionResult> GetOrderDetailsAsync(int id)
         {
             var result = await _orderService.GetOrderDetailsAsync(id);
@@ -39,7 +39,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "SaleStaff, Admin")]
+        [Authorize(Policy = "Staff")]
         public async Task<IActionResult> GetOrdersAsync()
         {
             var result = await _orderService.GetOrdersAsync();
@@ -47,7 +47,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpGet("orders/user")]
-        [Authorize]
+        [Authorize(Policy = "Staff")]
         public async Task<IActionResult> GetOrdersForUserAsync()
         {
             var result = await _orderService.GetOrdersForUserAsync();

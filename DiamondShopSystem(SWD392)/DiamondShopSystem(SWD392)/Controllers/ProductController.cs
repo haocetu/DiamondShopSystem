@@ -1,6 +1,5 @@
 ﻿using Application.Interfaces;
 using Application.Services;
-using Application.ViewModels.DiamondDTOs;
 using Application.ViewModels.ProductDTOs;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;

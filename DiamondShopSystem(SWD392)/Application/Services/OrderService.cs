@@ -26,7 +26,15 @@ namespace Application.Services
             var response = new ServiceResponse<OrderViewModel>();
             try
             {
-                var userid = _claimsService.GetCurrentUserId;
+                var user = await _unitOfWork.AccountRepository.GetByIdAsync(_claimsService.GetCurrentUserId.Value); ;
+
+                if (user.RoleId != (int)Domain.Enums.Role.SalesStaff || user.RoleId != (int)Domain.Enums.Role.Admin)
+                {
+                    response.Success = false;
+                    response.Message = "You do not have permission to do this action.";
+                    return response;
+                }
+
                 var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderid);
                 if (order == null)
                 {
@@ -36,7 +44,7 @@ namespace Application.Services
                 }
 
                 order.Status = status;
-                order.ModifiedBy = userid;
+                order.ModifiedBy = user.Id;
                 order.ModifiedDate = DateTime.Now;
 
                 _unitOfWork.OrderRepository.Update(order);
@@ -164,6 +172,8 @@ namespace Application.Services
             var response = new ServiceResponse<List<OrderDetailsViewModel>>();
             try
             {
+                var user = await _unitOfWork.AccountRepository.GetByIdAsync(_claimsService.GetCurrentUserId.Value); ;
+
                 var orders = await _unitOfWork.OrderRepository.GetOrdersAsync();
 
                 var result = orders.Select(order => new OrderDetailsViewModel

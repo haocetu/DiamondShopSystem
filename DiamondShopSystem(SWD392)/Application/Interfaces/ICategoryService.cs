@@ -14,8 +14,8 @@ namespace Application.Interfaces
 	{
 		Task<ServiceResponse<IEnumerable<CategoryDTO>>> GetCategoriesAsync();
 		Task<ServiceResponse<CategoryDTO>> GetCategoryByIdAsync(int id);
-		//Task<ServiceResponse<CategoryDTO>> UpdateCategoryAsync(int id, CategoryDTO cat);
-		//Task<ServiceResponse<bool>> DeleteCategoryAsync(int id);
+		Task<ServiceResponse<CategoryDTO>> UpdateCategoryAsync(int id, CreateCategoryDTO cat);
+		Task<ServiceResponse<bool>> DeleteCategoryAsync(int id);
 		Task<ServiceResponse<CategoryDTO>> CreateCategoryAsync(CreateCategoryDTO cat);
 	}
 }

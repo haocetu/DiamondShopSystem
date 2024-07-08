@@ -31,7 +31,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpGet("order/{id}")]
-        [Authorize(Roles = "SaleStaff,Admin")]
+        [Authorize(Roles = "SaleStaff, Admin")]
         public async Task<IActionResult> GetOrderDetailsAsync(int id)
         {
             var result = await _orderService.GetOrderDetailsAsync(id);
@@ -39,7 +39,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "SaleStaff,Admin")]
+        [Authorize(Roles = "SaleStaff, Admin")]
         public async Task<IActionResult> GetOrdersAsync()
         {
             var result = await _orderService.GetOrdersAsync();

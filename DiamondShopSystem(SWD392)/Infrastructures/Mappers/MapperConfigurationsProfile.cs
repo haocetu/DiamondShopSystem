@@ -15,40 +15,35 @@ using System.Threading.Tasks;
 
 namespace Infrastructures.Mappers
 {
-    public class MapperConfigurationsProfile : Profile
-    {
-        public MapperConfigurationsProfile()
-        {
-            //Account
-            CreateMap<Account, AccountDTO>().ReverseMap();
-            CreateMap<Account, CreateAccountDTO>().ReverseMap();
-            CreateMap<Account, UpdateAccountDTO>().ReverseMap();
-            CreateMap<Account, RegisterAccountDTO>().ReverseMap();
+	public class MapperConfigurationsProfile : Profile
+	{
+		public MapperConfigurationsProfile()
+		{
+			//Account
+			CreateMap<Account, AccountDTO>().ReverseMap();
+			CreateMap<Account, CreateAccountDTO>().ReverseMap();
+			CreateMap<Account, UpdateAccountDTO>().ReverseMap();
+			CreateMap<Account, RegisterAccountDTO>().ReverseMap();
 			//Diamond
 			CreateMap<Diamond, DiamondDTO>().ReverseMap();
-            CreateMap<Diamond, UpdateDiamondDTO>().ReverseMap();
-            CreateMap<Diamond, CreateDiamondDTO>().ReverseMap();
-            CreateMap<DiamondDTO, UpdateDiamondDTO>().ReverseMap();
-
-            //Product
-            CreateMap<Product, CreateProductDTO>().ReverseMap();
-            CreateMap<Product, ProductDTO>().ReverseMap();
-            CreateMap<Product, UpdateProductDTO>().ReverseMap();
-            //Image
-            CreateMap<Image, ImageDTO>().ReverseMap();
-            //Category
-            CreateMap<Category, CategoryDTO>().ReverseMap();
+			CreateMap<Diamond, UpdateDiamondDTO>().ReverseMap();
+			CreateMap<Diamond, CreateDiamondDTO>().ReverseMap();
+			CreateMap<DiamondDTO, UpdateDiamondDTO>().ReverseMap();
+			//Product
+			CreateMap<Product, CreateProductDTO>().ReverseMap();
+			CreateMap<Product, ProductDTO>().ReverseMap();
+			CreateMap<Product, UpdateProductDTO>().ReverseMap();
+			//Image
+			CreateMap<Image, ImageDTO>().ReverseMap();
+			//Category
+			CreateMap<Category, CategoryDTO>().ReverseMap();
 			CreateMap<Category, CreateCategoryDTO>().ReverseMap();
 			//ProductType
 			CreateMap<ProductType, ProductTypeDTO>().ReverseMap();
-            //Promotion
-            CreateMap<Promotion, PromotionDTO>().ReverseMap();
-            CreateMap<Promotion, CreatePromotionDTO>().ReverseMap();
-            
-
-
-
-
+			CreateMap<ProductType, CreateProductTypeDTO>().ReverseMap();
+			//Promotion
+			CreateMap<Promotion, PromotionDTO>().ReverseMap();
+			CreateMap<Promotion, CreatePromotionDTO>().ReverseMap();
 		}
-    }
+	}
 }

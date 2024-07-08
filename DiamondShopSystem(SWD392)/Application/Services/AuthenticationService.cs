@@ -18,15 +18,13 @@ namespace Application.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICurrentTime _currentTime;
-        private readonly IConfiguration _configuration;
-
-        //private IValidator<Account> _validator;
+        private readonly AppConfiguration _configuration;
         private readonly IMapper _mapper;
 
         public AuthenticationService(
         IUnitOfWork unitOfWork,
         ICurrentTime currentTime,
-        IConfiguration configuration,
+        AppConfiguration configuration,
         IMapper mapper
 )
         {
@@ -63,15 +61,12 @@ namespace Application.Services
                     return response;
                 }
 
-                var generate = new GenerateJsonWebTokenString(_unitOfWork);
 
-                var token = generate.GenerateJsonWebToken(user, _configuration, _configuration.GetSection("JWTSection:SecretKey").Value , _currentTime.GetCurrentTime());
-
-                //var token = user.GenerateJsonWebToken(
-                //    _configuration,
-                //    _configuration.JWTSection.SecretKey,
-                //    _currentTime.GetCurrentTime()
-                //    );
+                var token = user.GenerateJsonWebToken(
+                    _configuration,
+                    _configuration.JWTSection.SecretKey,
+                    _currentTime.GetCurrentTime()
+                    );
 
                 response.Success = true;
                 response.Message = "Login successfully.";

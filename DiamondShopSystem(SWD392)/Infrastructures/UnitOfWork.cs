@@ -13,169 +13,49 @@ namespace Infrastructures
     public class UnitOfWork : IUnitOfWork
     {
         private readonly AppDbContext _dbContext;
-        private ICurrentTime _currentTime;
-        private IClaimsService _claimsService;
+        private readonly IAccountRepository _accountRepository;
+        private readonly IDiamondRepository _diamondRepository;
+        private readonly ICartRepository _cartRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IImageRepository _imageRepository;
+        private readonly IOrderRepository _orderRepository;
+        private readonly IPaymentRepository _paymentRepository;
+        private readonly IProductDiamondRepository _productDiamondRepository;
+        private readonly IProductRepository _productRepository;
+        private readonly IProductTypeRepository _productTypeRepository;
+        private readonly IPromotionRepository _promotionRepository;
 
-        public UnitOfWork(AppDbContext dbContext, ICurrentTime currentTime, IClaimsService claimsService)
+
+        public UnitOfWork(AppDbContext dbContext, IAccountRepository accountRepository, IDiamondRepository diamondRepository, ICartRepository cartRepository,
+                          ICategoryRepository categoryRepository, IImageRepository imageRepository, IOrderRepository orderRepository, IPaymentRepository paymentRepository,
+                          IProductDiamondRepository productDiamondRepository, IProductRepository productRepository, IProductTypeRepository productTypeRepository,
+                          IPromotionRepository promotionRepository)
         {
             _dbContext = dbContext;
-            _currentTime = currentTime;
-            _claimsService = claimsService;
+            _accountRepository = accountRepository;
+            _diamondRepository = diamondRepository;
+            _cartRepository = cartRepository;
+            _categoryRepository = categoryRepository;
+            _imageRepository = imageRepository;
+            _orderRepository = orderRepository;
+            _paymentRepository = paymentRepository;
+            _productDiamondRepository = productDiamondRepository;
+            _productRepository = productRepository;
+            _productTypeRepository = productTypeRepository;
+            _promotionRepository = promotionRepository;
         }
 
-        private IDiamondRepository _diamondRepository;
-        public IDiamondRepository DiamondRepository
-        {
-            get
-            {
-                if (_diamondRepository is null)
-                {
-                    _diamondRepository = new DiamondRepository(_dbContext, _currentTime, _claimsService);
-                }
-                return _diamondRepository;
-            }
-        }
-
-        private IAccountRepository _accountRepository;
-        public IAccountRepository AccountRepository
-        {
-            get
-            {
-                if (_accountRepository is null)
-                {
-                    _accountRepository = new AccountRepository(_dbContext, _currentTime, _claimsService);
-                }
-                return _accountRepository;
-            }
-        }
-
-        private IOrderRepository _orderRepository;
-        public IOrderRepository OrderRepository
-        {
-            get
-            {
-                if (_orderRepository is null)
-                {
-                    _orderRepository = new OrderRepository(_dbContext, _currentTime, _claimsService);
-                }
-                return _orderRepository;
-            }
-        }
-        private IImageRepository _imageRepository;
-        public IImageRepository ImageRepository
-        {
-            get
-            {
-                if (_imageRepository is null)
-                {
-                    _imageRepository = new ImageRepository(_dbContext, _currentTime, _claimsService);
-                }
-                return _imageRepository;
-            }
-        }
-        private IPaymentRepository _paymentRepository;
-        public IPaymentRepository PaymentRepository
-        {
-            get
-            {
-                if (_paymentRepository is null)
-                {
-                    _paymentRepository = new PaymentRepository(_dbContext);
-                }
-                return _paymentRepository;
-            }
-        }
-
-		private IProductRepository _productRepository;
-		public IProductRepository ProductRepository
-		{
-			get
-			{
-				if (_productRepository is null)
-				{
-					_productRepository = new ProductRepository(_dbContext, _currentTime, _claimsService);
-				}
-				return _productRepository;
-			}
-		}
-        private ICartRepository _cartRepository;
-        public ICartRepository CartRepository
-        {
-            get
-            {
-                if (_cartRepository is null)
-                {
-                    _cartRepository = new CartRepository(_dbContext,_currentTime,_claimsService);
-                }
-                return _cartRepository;
-            }
-        }
-
-        private IProductDiamondRepository _productDiamondRepository;
-		public IProductDiamondRepository ProductDiamondRepository
-		{
-			get
-			{
-				if (_productDiamondRepository is null)
-				{
-					_productDiamondRepository = new ProductDiamondRepository(_dbContext, _currentTime, _claimsService);
-				}
-				return _productDiamondRepository;
-			}
-		}
-
-        private ICategoryRepository _categoryRepository;
-		public ICategoryRepository CategoryRepository
-		{
-			get
-			{
-				if (_categoryRepository is null)
-				{
-					_categoryRepository = new CategoryRepository(_dbContext, _currentTime, _claimsService);
-				}
-				return _categoryRepository;
-			}
-		}
-
-        private IRoleRepository _roleRepository; 
-        public IRoleRepository RoleRepository
-        {
-            get
-            {
-                if (_roleRepository is null)
-                {
-                    _roleRepository = new RoleRepository(_dbContext);
-                }
-                return (_roleRepository);
-            }
-        }
-
-		private IProductTypeRepository _productTypeRepository;
-		public IProductTypeRepository ProductTypeRepository
-		{
-			get
-			{
-				if (_productTypeRepository is null)
-				{
-					_productTypeRepository = new ProductTypeRepository(_dbContext, _currentTime, _claimsService);
-				}
-				return (_productTypeRepository);
-			}
-		}
-        private IPromotionRepository _promotionRepository;
-        public IPromotionRepository PromotionRepository
-        {
-            get
-            {
-                if (_promotionRepository is null)
-                {
-                    _promotionRepository = new PromotionRepository(_dbContext, _currentTime, _claimsService);
-                }
-                return _promotionRepository;
-            }
-        }
-
-
+        public IAccountRepository AccountRepository  => _accountRepository;
+        public IDiamondRepository DiamondRepository => _diamondRepository;
+        public ICartRepository CartRepository => _cartRepository;
+        public ICategoryRepository CategoryRepository => _categoryRepository;
+        public IImageRepository ImageRepository => _imageRepository;
+        public IOrderRepository OrderRepository => _orderRepository;
+        public IPaymentRepository PaymentRepository => _paymentRepository;
+        public IProductDiamondRepository ProductDiamondRepository => _productDiamondRepository;
+        public IProductRepository ProductRepository => _productRepository;
+        public IPromotionRepository PromotionRepository => _promotionRepository;
+        public IProductTypeRepository ProductTypeRepository => _productTypeRepository;
         public async Task<int> SaveChangeAsync()
         {
             return await _dbContext.SaveChangesAsync();

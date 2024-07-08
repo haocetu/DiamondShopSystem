@@ -17,7 +17,9 @@ var configuration = builder.Configuration.Get<AppConfiguration>() ?? new AppConf
 builder.Services.AddInfrastructuresService(configuration.DatabaseConnection);
 builder.Services.AddWebAPIService();
 
-
+// Load JWT settings from configuration
+var jwtSettings = builder.Configuration.GetSection("JWTSection").Get<JWTSection>();
+var key = Encoding.UTF8.GetBytes(jwtSettings.SecretKey);
 // Add services to the container.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -28,12 +30,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = configuration.JWTSection.Issuer,
-            ValidAudience = configuration.JWTSection.Audience,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.JWTSection.SecretKey)),
+            ValidIssuer = jwtSettings.Issuer,
+            ValidAudience = jwtSettings.Audience,
+            IssuerSigningKey = new SymmetricSecurityKey(key)
         };
     });
-
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Customer", policy =>
+        policy.RequireClaim("RoleID", "1"));
+    options.AddPolicy("Admin", policy =>
+        policy.RequireClaim("RoleID", "2"));
+    options.AddPolicy("Staff", policy =>
+        policy.RequireClaim("RoleID", "3"));
+});
 builder.Services.AddSwaggerGen(setup =>
 {
     // Include 'SecurityScheme' to use JWT Authentication

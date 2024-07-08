@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
 {
+    [Authorize(Policy = "Admin")]
     public class AccountController : BaseController
     {
         private readonly IAccountService _accountService;
@@ -13,7 +14,6 @@ namespace DiamondShopSystem_SWD392_.Controllers
         {
             _accountService = accountService;
         }
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAccountList()
         {
@@ -21,7 +21,6 @@ namespace DiamondShopSystem_SWD392_.Controllers
             return Ok(User);
 
         }
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAccountById(int id)
         {
@@ -32,7 +31,6 @@ namespace DiamondShopSystem_SWD392_.Controllers
             }
             return Ok(findaccountUser);
         }
-        [Authorize]
         [HttpGet("{name}")]
         public async Task<IActionResult> SearchByName(string name)
         {
@@ -49,14 +47,12 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> CreateUser([FromForm] CreateAccountDTO createdAccountDTO)
         {
           
             // return await _accountService.CreateAccountAsync(createdAccountDTO);
            return Created(nameof(CreateUser), await _accountService.CreateAccountAsync(createdAccountDTO));
         }
-        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAccount(int id, [FromForm] UpdateAccountDTO accountDTO)
         {
@@ -67,7 +63,6 @@ namespace DiamondShopSystem_SWD392_.Controllers
             }
             return Ok(updatedUser);
         }
-        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAccount(int id)
         {

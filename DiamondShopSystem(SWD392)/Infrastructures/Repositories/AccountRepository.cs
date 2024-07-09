@@ -43,7 +43,7 @@ namespace Infrastructures.Repositories
 
         public async Task<Account> GetUserByEmailAndPassword(string email, string password)
         {
-            var user = await _dbContext.Accounts.FirstOrDefaultAsync(record => record.Email == email
+            var user = await _dbContext.Accounts.Include(u=>u.Role).FirstOrDefaultAsync(record => record.Email == email
                                                                 && record.Password == password);
             if (user is null)
             {

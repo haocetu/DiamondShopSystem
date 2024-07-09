@@ -27,8 +27,8 @@ namespace Application.Services
 
                 if (cart == null)
                 {
-                    response.Success = false;
-                    response.Message = "Cart is null. Add item to cart and try again.";
+                    response.Success = true;
+                    response.Message = "There are nothing product in your cart. Add some product to cart and try again.";
                     return response;
                 }
 
@@ -276,6 +276,19 @@ namespace Application.Services
                     response.Message = "Cart is not existed";
                     return response;
                 }
+
+                foreach (var cartItem in cart.Items)
+                {
+                    var product = await _unitOfWork.ProductRepository.GetByIdAsync(cartItem.ProductId);
+                    if (product != null)
+                    {
+                        product.Quantity += cartItem.Quantity;
+                        _unitOfWork.ProductRepository.Update(product);
+                        await _unitOfWork.SaveChangeAsync();
+                    }
+                }
+
+
                 _unitOfWork.CartRepository.DeleteCartItem(cart.Items);
                 await _unitOfWork.SaveChangeAsync();
 

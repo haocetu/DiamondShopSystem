@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
 {
-    [Authorize(Policy = "Customer")]
     public class CartController : BaseController
     {
         private readonly ICartService _cartService;
@@ -16,7 +15,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpGet("view-cart")]
-        [Authorize(Roles = "Customer")]
+        [Authorize]
         public async Task<IActionResult> GetCartItemsForUser()
         {
             var result = await _cartService.GetCartForUserAsync();
@@ -24,7 +23,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpPatch("add-to-cart")]
-        [Authorize(Roles = "Customer")]
+        [Authorize]
         public async Task<IActionResult> AddToCartAsync(CartRequestModel request)
         {
             if (!ModelState.IsValid)
@@ -36,7 +35,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpPatch("remove-from-cart")]
-        [Authorize(Roles = "Customer")]
+        [Authorize]
         public async Task<IActionResult> RemoveFromCartAsync(CartRequestModel request)
         {
             if (!ModelState.IsValid)
@@ -48,7 +47,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpDelete("delete-cart")]
-        [Authorize(Roles = "Customer")]
+        [Authorize]
         public async Task<IActionResult> DeleteCartAsync()
         {
             var result = await _cartService.DeleteCartAsync();

@@ -118,6 +118,13 @@ namespace Application.Services
             try
             {
                 var orders = await _unitOfWork.OrderRepository.GetOrderByUserIDAsync(_claimsService.GetCurrentUserId.Value);
+                if (orders.Count == 0)
+                {
+                    response.Success = false;
+                    response.Message = "This user does not have any orders";
+                    return response;
+                }
+
                 var discount = await _promotionService.GetDiscountPercentageForUser(_claimsService.GetCurrentUserId.Value);
 
                 var result = orders.Select(order => new OrderDetailsViewModel
@@ -169,6 +176,13 @@ namespace Application.Services
 
                 var orders = await _unitOfWork.OrderRepository.GetOrdersAsync();
 
+                if (orders.Count == 0)
+                {
+                    response.Success = true;
+                    response.Message = "Not have any orders";
+                    return response;
+                }
+
                 var result = orders.Select(order => new OrderDetailsViewModel
                 {
                     Id = order.Id,
@@ -193,11 +207,6 @@ namespace Application.Services
                     response.Message = "Orders retrieved successfully";
                     response.Data = result;
                 }
-                else
-                {
-                    response.Success = true;
-                    response.Message = "Not have any orders";
-                }
             }
             catch (Exception ex)
             {
@@ -215,10 +224,10 @@ namespace Application.Services
             try
             {
                 var cart = await _unitOfWork.CartRepository.GetCartForUserAsync(_claimsService.GetCurrentUserId.Value);
-                if (cart == null)
+                if (cart == null || cart.Items.Count == 0)
                 {
                     response.Success = false;
-                    response.Message = "Cart does not exist";
+                    response.Message = "Nothing to order, add some product to cart and try again.";
                     return response;
                 }
 

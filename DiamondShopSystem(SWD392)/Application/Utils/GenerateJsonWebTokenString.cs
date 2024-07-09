@@ -20,10 +20,10 @@ namespace Application.Utils
 
             var claims = new[]
             {
-        new Claim("Id", user.Id.ToString()),
-        new Claim("Email", user.Email),
-        new Claim("RoleID", user.RoleId.ToString()),
-    };
+                new Claim("id", user.Id.ToString()),
+                new Claim("email", user.Email),
+                new Claim("role", user.Role.Name),
+            };
 
             var token = new JwtSecurityToken(
                 issuer: appSettingConfiguration.JWTSection.Issuer,

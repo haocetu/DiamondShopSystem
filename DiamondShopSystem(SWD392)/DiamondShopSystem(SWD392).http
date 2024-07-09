@@ -1,0 +1,6 @@
+@DiamondShopSystem_SWD392__HostAddress = http://localhost:5132
+
+GET {{DiamondShopSystem_SWD392__HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

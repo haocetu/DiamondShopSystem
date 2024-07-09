@@ -5,7 +5,6 @@ using Application.ViewModels.OrderItem;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
-using static Google.Apis.Requests.BatchRequest;
 
 namespace Application.Services
 {
@@ -43,6 +42,8 @@ namespace Application.Services
                 _unitOfWork.OrderRepository.Update(order);
                 await _unitOfWork.SaveChangeAsync();
 
+                response.Success = true;
+                response.Message = "Change order status successfully.";
             }
             catch (DbUpdateException ex)
             {

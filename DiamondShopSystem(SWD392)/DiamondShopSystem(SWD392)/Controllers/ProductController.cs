@@ -1,14 +1,11 @@
 ﻿using Application.Interfaces;
-using Application.Services;
 using Application.ViewModels.ProductDTOs;
-using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiamondShopSystem_SWD392_.Controllers
 {
-	[Authorize(Policy = "Staff")]
-	public class ProductController : BaseController
+    public class ProductController : BaseController
 	{
 		private readonly IProductService productService;
 		public ProductController(IProductService productService)
@@ -51,6 +48,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "SaleStaff, Admin")]
 		public async Task<IActionResult> CreateProduct([FromForm] CreateProductDTO createProduct)
 		{
 
@@ -74,7 +72,8 @@ namespace DiamondShopSystem_SWD392_.Controllers
 
 		[HttpPut]
 		[Route("{id}")]
-		public async Task<IActionResult> UpdateProduct(int id, [FromBody] UpdateProductDTO productDTO)
+        [Authorize(Roles = "SaleStaff, Admin")]
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] UpdateProductDTO productDTO)
 		{
 			var result = await productService.UpdateProductAsync(id, productDTO);
 			if (!result.Success)
@@ -85,7 +84,8 @@ namespace DiamondShopSystem_SWD392_.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> DeleteProduct(int id)
+        [Authorize(Roles = "SaleStaff, Admin")]
+        public async Task<IActionResult> DeleteProduct(int id)
 		{
 			var product = await productService.DeleteProductAsync(id);
 			if (!product.Success)

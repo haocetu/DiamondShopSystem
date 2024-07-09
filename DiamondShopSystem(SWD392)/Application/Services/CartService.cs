@@ -36,6 +36,7 @@ namespace Application.Services
                 {
                     Id = cart.Id,
                     UserId = cart.AccountId,
+                    NumberItems = cart.Items.Count(),
                     Items = cart.Items.Select(i => new CartItemViewModel
                     {
                         ProductId = i.ProductId,
@@ -148,6 +149,7 @@ namespace Application.Services
                 {
                     Id = cart.Id,
                     UserId = cart.AccountId,
+                    NumberItems = cart.Items.Count(),
                     Items = cart.Items.Select(i => new CartItemViewModel
                     {
                         ProductId = i.ProductId,
@@ -228,6 +230,7 @@ namespace Application.Services
                 {
                     Id = cart.Id,
                     UserId = cart.AccountId,
+                    NumberItems = cart.Items.Count(),
                     Items = cart.Items.Select(i => new CartItemViewModel
                     {
                         ProductId = i.ProductId,

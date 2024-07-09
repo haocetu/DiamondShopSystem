@@ -16,6 +16,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpGet("view-cart")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> GetCartItemsForUser()
         {
             var result = await _cartService.GetCartForUserAsync();
@@ -23,6 +24,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpPatch("add-to-cart")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> AddToCartAsync(CartRequestModel request)
         {
             if (!ModelState.IsValid)
@@ -34,6 +36,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpPatch("remove-from-cart")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> RemoveFromCartAsync(CartRequestModel request)
         {
             if (!ModelState.IsValid)
@@ -45,6 +48,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpDelete("delete-cart")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> DeleteCartAsync()
         {
             var result = await _cartService.DeleteCartAsync();

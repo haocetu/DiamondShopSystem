@@ -28,13 +28,6 @@ namespace Application.Services
             {
                 var user = await _unitOfWork.AccountRepository.GetByIdAsync(_claimsService.GetCurrentUserId.Value); ;
 
-                if (user.RoleId != (int)Domain.Enums.Role.SalesStaff || user.RoleId != (int)Domain.Enums.Role.Admin)
-                {
-                    response.Success = false;
-                    response.Message = "You do not have permission to do this action.";
-                    return response;
-                }
-
                 var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderid);
                 if (order == null)
                 {
@@ -226,6 +219,7 @@ namespace Application.Services
                 {
                     response.Success = false;
                     response.Message = "Cart does not exist";
+                    return response;
                 }
 
                 var userpoint = await _unitOfWork.AccountRepository.GetPoint(_claimsService.GetCurrentUserId.Value);

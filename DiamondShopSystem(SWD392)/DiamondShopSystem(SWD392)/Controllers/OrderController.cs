@@ -23,7 +23,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpPost("change-status/{id}")]
-        [Authorize(Policy = "Staff")]
+        [Authorize(Roles = "SaleStaff, Admin")]
         public async Task<IActionResult> ChangeOrderStatusAsync(int id, string status)
         {
             var result = await _orderService.ChangeOrderStatusAsync(id, status);

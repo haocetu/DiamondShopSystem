@@ -294,11 +294,9 @@ namespace Application.Services
 		public async Task<ServiceResponse<ProductDTO>> UpdateProductAsync(int id, UpdateProductDTO updatedProduct)
 		{
 			var response = new ServiceResponse<ProductDTO>();
-
 			try
 			{
 				var existProduct = await _unitOfWork.ProductRepository.GetByIdAsync(id);
-
 				if (existProduct == null)
 				{
 					response.Success = false;
@@ -306,21 +304,15 @@ namespace Application.Services
 					return response;
 				}
 
-				if (existProduct.IsDeleted == true)
-				{
-					response.Success = false;
-					response.Message = "Product has been deleted in the system.";
-					return response;
-				}
+				if (existProduct.Quantity == 0 & updatedProduct.Quantity > 0) existProduct.IsDeleted = false;
 
 				var newProduct = _mapper.Map(updatedProduct, existProduct);
-				//
+				if (existProduct.Quantity == 0) existProduct.IsDeleted = true;
 				_unitOfWork.ProductRepository.Update(existProduct);
-				//
+				
 				var result = _mapper.Map<ProductDTO>(newProduct);
-				//
+				
 				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
-
 				if (isSuccess)
 				{
 					response.Data = result;

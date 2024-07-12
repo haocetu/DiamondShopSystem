@@ -231,7 +231,7 @@ namespace Application.Services
             return response;
         }
 
-        public async Task<ServiceResponse<OrderViewModel>> PlaceOrderAsync(string? address)
+        public async Task<ServiceResponse<OrderViewModel>> PlaceOrderAsync(string? address, string? phonenumber)
         {
             var response = new ServiceResponse<OrderViewModel>();
             try
@@ -247,6 +247,7 @@ namespace Application.Services
                 var userpoint = await _unitOfWork.AccountRepository.GetPoint(user.Id);
 
                 var deliveryAddress = !string.IsNullOrEmpty(address) ? address : user.Address;
+                var receiverPhoneNumber = !string.IsNullOrEmpty(phonenumber) ? phonenumber : user.PhoneNumber;
 
                 var order = new Order
                 {
@@ -261,7 +262,8 @@ namespace Application.Services
                     }).ToList(),
                     CreatedBy = _claimsService.GetCurrentUserId.Value,
                     IsDeleted = false,
-                    DeliveryAddress = deliveryAddress,  
+                    DeliveryAddress = deliveryAddress,
+                    ReceiverPhoneNumber = receiverPhoneNumber,
                     Status = "New Order",
                     PaymentId = 1,
                     DeliveryDate = DateTime.UtcNow.AddDays(10),

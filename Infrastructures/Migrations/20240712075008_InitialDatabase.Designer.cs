@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructures.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240712031138_InitialDatabase")]
+    [Migration("20240712075008_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -786,6 +786,10 @@ namespace Infrastructures.Migrations
 
                     b.Property<int>("PaymentId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ReceiverPhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
                         .IsRequired()

@@ -765,6 +765,13 @@ namespace Infrastructures.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("DeliveryAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DeliveryDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -776,9 +783,6 @@ namespace Infrastructures.Migrations
 
                     b.Property<int>("PaymentId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("ShipDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
                         .IsRequired()

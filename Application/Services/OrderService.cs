@@ -5,7 +5,6 @@ using Application.ViewModels.OrderItem;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
-using static Google.Apis.Requests.BatchRequest;
 
 namespace Application.Services
 {
@@ -21,21 +20,14 @@ namespace Application.Services
             _promotionService = promotionService;
         }
 
-        public async Task<ServiceResponse<OrderViewModel>> ChangeOrderStatusAsync(int orderid, string status)
+        public async Task<ServiceResponse<OrderDetailsViewModel>> ChangeOrderStatusAsync(int orderid, string status)
         {
-            var response = new ServiceResponse<OrderViewModel>();
+            var response = new ServiceResponse<OrderDetailsViewModel>();
             try
             {
                 var user = await _unitOfWork.AccountRepository.GetByIdAsync(_claimsService.GetCurrentUserId.Value); ;
 
-                if (user.RoleId != (int)Domain.Enums.Role.SalesStaff || user.RoleId != (int)Domain.Enums.Role.Admin)
-                {
-                    response.Success = false;
-                    response.Message = "You do not have permission to do this action.";
-                    return response;
-                }
-
-                var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderid);
+                var order = await _unitOfWork.OrderRepository.GetOrderByIdAsync(orderid);
                 if (order == null)
                 {
                     response.Success = false;
@@ -49,6 +41,26 @@ namespace Application.Services
 
                 _unitOfWork.OrderRepository.Update(order);
                 await _unitOfWork.SaveChangeAsync();
+
+                response.Success = true;
+                response.Message = "Change order status successfully.";
+                response.Data = new OrderDetailsViewModel
+                {
+                    Id = order.Id,
+                    UserName = user.Name,
+                    Status = order.Status,
+                    TotalPrice = order.TotalPrice,
+                    PaymentName = order.Payment.PaymentMethod,
+                    NumberItems = order.Items.Count,
+                    OrderDate = order.CreatedDate.Value,
+                    ShipDate = order.DeliveryDate,
+                    Items = order.Items.Select(i => new OrderItemViewModel
+                    {
+                        ProductId = i.ProductId,
+                        Quantity = i.Quantity,
+                        Price = i.Price
+                    }).ToList()
+                };
 
             }
             catch (DbUpdateException ex)
@@ -94,8 +106,9 @@ namespace Application.Services
                     Status = order.Status,
                     TotalPrice = order.TotalPrice,
                     PaymentName = order.Payment.PaymentMethod,
+                    NumberItems = order.Items.Count,
                     OrderDate = order.CreatedDate.Value,
-                    ShipDate = order.ShipDate,
+                    ShipDate = order.DeliveryDate,
                     Items = order.Items.Select(i => new OrderItemViewModel
                     {
                         ProductId = i.ProductId,
@@ -134,9 +147,10 @@ namespace Application.Services
                     Status = order.Status,
                     DiscountPercentage = discount,
                     TotalPrice = order.TotalPrice,
+                    NumberItems = order.Items.Count,
                     PaymentName = order.Payment.PaymentMethod,
                     OrderDate = order.CreatedDate.Value,
-                    ShipDate = order.ShipDate,
+                    ShipDate = order.DeliveryDate,
                     Items = order.Items.Select(i => new OrderItemViewModel
                     {
                         ProductId = i.ProductId,
@@ -183,9 +197,10 @@ namespace Application.Services
                     Status = order.Status,
                     DiscountPercentage = (_promotionService.GetDiscountPercentageForUser(order.AccountId)).Result,
                     TotalPrice = order.TotalPrice,
+                    NumberItems = order.Items.Count,
                     PaymentName = order.Payment.PaymentMethod,
                     OrderDate = order.CreatedDate.Value,
-                    ShipDate = order.ShipDate,
+                    ShipDate = order.DeliveryDate,
                     Items = order.Items.Select(i => new OrderItemViewModel
                     {
                         ProductId = i.ProductId,
@@ -216,7 +231,7 @@ namespace Application.Services
             return response;
         }
 
-        public async Task<ServiceResponse<OrderViewModel>> PlaceOrderAsync()
+        public async Task<ServiceResponse<OrderViewModel>> PlaceOrderAsync(string? address)
         {
             var response = new ServiceResponse<OrderViewModel>();
             try
@@ -228,7 +243,10 @@ namespace Application.Services
                     response.Message = "Cart does not exist";
                 }
 
-                var userpoint = await _unitOfWork.AccountRepository.GetPoint(_claimsService.GetCurrentUserId.Value);
+                var user = await _unitOfWork.AccountRepository.GetByIdAsync(_claimsService.GetCurrentUserId.Value);
+                var userpoint = await _unitOfWork.AccountRepository.GetPoint(user.Id);
+
+                var deliveryAddress = !string.IsNullOrEmpty(address) ? address : user.Address;
 
                 var order = new Order
                 {
@@ -243,12 +261,25 @@ namespace Application.Services
                     }).ToList(),
                     CreatedBy = _claimsService.GetCurrentUserId.Value,
                     IsDeleted = false,
+                    DeliveryAddress = deliveryAddress,  
                     Status = "New Order",
                     PaymentId = 1,
-                    ShipDate = DateTime.UtcNow.AddDays(10),
+                    DeliveryDate = DateTime.UtcNow.AddDays(10),
                 };
 
                 await _unitOfWork.AccountRepository.UpdatePoint(_claimsService.GetCurrentUserId.Value, order.TotalPrice);
+                await _unitOfWork.SaveChangeAsync();
+
+                foreach (var item in cart.Items)
+                {
+                    var product = await _unitOfWork.ProductRepository.GetByIdAsync(item.ProductId);
+                    if (product != null)
+                    {
+                        product.Quantity -= item.Quantity;
+                        _unitOfWork.ProductRepository.Update(product);
+                    }
+                }
+
                 await _unitOfWork.SaveChangeAsync();
 
                 await _unitOfWork.OrderRepository.AddAsync(order);
@@ -265,7 +296,9 @@ namespace Application.Services
                     Id = order.Id,
                     UserName = order.Account.Name,
                     OrderDate = order.CreatedDate.Value,
+                    DeliveryAddress = deliveryAddress,
                     TotalAmount = order.TotalPrice,
+                    NumberItems = order.Items.Count,
                     Items = order.Items.Select(i => new OrderItemViewModel
                     {
                         ProductId = i.ProductId,
@@ -275,7 +308,6 @@ namespace Application.Services
                 };
                 response.Success = true;
                 response.Message = "Order created successfully.";
-                return response;
             }
             catch (DbUpdateException ex)
             {

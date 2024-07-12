@@ -16,10 +16,10 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpPost("place-order")]
-        [Authorize]
-        public async Task<IActionResult> PlaceOrderAsync()
+        [Authorize(Roles ="Customer")]
+        public async Task<IActionResult> PlaceOrderAsync(string? address)
         {
-            var result = await _orderService.PlaceOrderAsync();
+            var result = await _orderService.PlaceOrderAsync(address);
             return Ok(result);
         }
 
@@ -32,7 +32,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpGet("order/{id}")]
-        [Authorize(Roles = "SaleStaff, Admin")]
+        [Authorize(Roles = "SaleStaff,Admin")]
         public async Task<IActionResult> GetOrderDetailsAsync(int id)
         {
             var result = await _orderService.GetOrderDetailsAsync(id);
@@ -40,7 +40,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "SaleStaff, Admin")]
+        [Authorize(Roles = "SaleStaff,Admin")]
         public async Task<IActionResult> GetOrdersAsync()
         {
             var result = await _orderService.GetOrdersAsync();
@@ -48,7 +48,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
         }
 
         [HttpGet("orders/user")]
-        [Authorize]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> GetOrdersForUserAsync()
         {
             var result = await _orderService.GetOrdersForUserAsync();

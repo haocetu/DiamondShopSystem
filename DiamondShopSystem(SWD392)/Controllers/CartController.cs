@@ -7,6 +7,7 @@ namespace DiamondShopSystem_SWD392_.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Customer")]
     public class CartController : ControllerBase
     {
         private readonly ICartService _cartService;

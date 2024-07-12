@@ -10,6 +10,7 @@
         public Payment Payment { get; set; }
         public DateTime DeliveryDate { get; set; }
         public string DeliveryAddress { get; set; }
+        public string ReceiverPhoneNumber { get; set; }
         public List<OrderItem> Items { get; set; }
         public List<ProductWarranty> ProductWarranties { get; set; }
     }

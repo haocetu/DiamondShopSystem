@@ -20,6 +20,8 @@ namespace Infrastructures.FluentAPIs
 
             builder.Property(o => o.DeliveryAddress).IsRequired();
 
+            builder.Property(o => o.ReceiverPhoneNumber).IsRequired();
+
             builder.HasOne(o => o.Account).WithMany(a => a.Orders).HasForeignKey(o => o.AccountId).OnDelete(DeleteBehavior.NoAction);
          
             builder.HasOne(o => o.Payment).WithMany(a => a.Orders).HasForeignKey(o=>o.PaymentId).OnDelete(DeleteBehavior.NoAction);   

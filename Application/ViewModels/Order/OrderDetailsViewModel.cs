@@ -9,6 +9,7 @@ namespace Application.ViewModels.Order
         public string Status { get; set; }
         public float DiscountPercentage { get; set; }
         public decimal TotalPrice { get; set; }
+        public int NumberItems { get; set; }
         public string PaymentName { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ShipDate { get; set; }

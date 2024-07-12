@@ -8,7 +8,8 @@
         public decimal TotalPrice { get; set; }
         public int PaymentId { get; set; }
         public Payment Payment { get; set; }
-        public DateTime ShipDate { get; set; }
+        public DateTime DeliveryDate { get; set; }
+        public string DeliveryAddress { get; set; }
         public List<OrderItem> Items { get; set; }
         public List<ProductWarranty> ProductWarranties { get; set; }
     }

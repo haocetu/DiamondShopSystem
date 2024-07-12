@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructures.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240704103029_InitialDatabase")]
+    [Migration("20240712031138_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -768,6 +768,13 @@ namespace Infrastructures.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("DeliveryAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DeliveryDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -779,9 +786,6 @@ namespace Infrastructures.Migrations
 
                     b.Property<int>("PaymentId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("ShipDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
                         .IsRequired()

@@ -5,8 +5,8 @@ namespace Application.Interfaces
 {
     public interface IOrderService
     {
-        Task<ServiceResponse<OrderViewModel>> PlaceOrderAsync();
-        Task<ServiceResponse<OrderViewModel>> ChangeOrderStatusAsync(int orderid, string status);
+        Task<ServiceResponse<OrderViewModel>> PlaceOrderAsync(string? address);
+        Task<ServiceResponse<OrderDetailsViewModel>> ChangeOrderStatusAsync(int orderid, string status);
         Task<ServiceResponse<List<OrderDetailsViewModel>>> GetOrdersAsync();
         Task<ServiceResponse<OrderDetailsViewModel>> GetOrderDetailsAsync(int orderid);
         Task<ServiceResponse<List<OrderDetailsViewModel>>> GetOrdersForUserAsync();

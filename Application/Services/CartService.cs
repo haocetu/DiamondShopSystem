@@ -88,8 +88,6 @@ namespace Application.Services
                                 Quantity = item.Quantity,
                                 Price = product.Price
                             });
-                            product.Quantity -= item.Quantity;
-                            _unitOfWork.ProductRepository.Update(product);
                         }
                         else
                         {
@@ -130,8 +128,6 @@ namespace Application.Services
                                     Price = product.Price
                                 });
                             }
-                            product.Quantity -= item.Quantity;
-                            _unitOfWork.ProductRepository.Update(product);
                         }
                         else
                         {
@@ -211,14 +207,11 @@ namespace Application.Services
                         if (item.Quantity >= cartItem.Quantity)
                         {
                             cart.Items.Remove(cartItem);
-                            product.Quantity += cartItem.Quantity;
                         }
                         else
                         {
                             cartItem.Quantity -= item.Quantity;
-                            product.Quantity += item.Quantity;
                         }
-                        _unitOfWork.ProductRepository.Update(product);
                     }
                 }
                 _unitOfWork.CartRepository.Update(cart);

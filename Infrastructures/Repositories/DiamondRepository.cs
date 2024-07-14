@@ -20,7 +20,7 @@ namespace Infrastructures.Repositories
 
         public async Task<IEnumerable<Diamond>> SearchDiamondByOriginAsync(string origin)
         {
-            return await _dbContext.Diamonds.Where(u => u.OriginName.Contains(origin)).ToListAsync();
+            return await _dbContext.Diamonds.Where(u => u.Origin.Contains(origin)).ToListAsync();
         }
 
     }

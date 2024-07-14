@@ -11,11 +11,16 @@ namespace Application.ViewModels.DiamondDTOs
 {
     public class UpdateDiamondDTO
     {
-        public string? OriginName { get; set; }
         public float? CaratWeight { get; set; }
-        public DiamondClarity? ClarityName { get; set; }
-        public DiamondCut? CutName { get; set; }
-        public DiamondColor? Color { get; set; }
+        [EnumDataType(typeof(DiamondOrigin))]
+        public string? OriginName { get; set; }
+
+        [EnumDataType(typeof(DiamondClarity))]
+        public string? ClarityName { get; set; }
+        [EnumDataType(typeof(DiamondCut))]
+        public string? CutName { get; set; }
+        [EnumDataType(typeof(DiamondColor))]
+        public string? Color { get; set; }
         public decimal? Price { get; set; }
         public int? Quantity { get; set; }
         public List<IFormFile> UpdateImages { get; set; } = [];

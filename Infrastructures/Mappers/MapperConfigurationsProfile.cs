@@ -1,5 +1,6 @@
 ﻿using Application.ViewModels.AccountDTOs;
 using Application.ViewModels.CategoryDTOs;
+using Application.ViewModels.CertificateDTOs;
 using Application.ViewModels.DiamondDTOs;
 using Application.ViewModels.ImageDTOs;
 using Application.ViewModels.ProductDTOs;
@@ -44,6 +45,9 @@ namespace Infrastructures.Mappers
 			//Promotion
 			CreateMap<Promotion, PromotionDTO>().ReverseMap();
 			CreateMap<Promotion, CreatePromotionDTO>().ReverseMap();
-		}
+            //Certificates
+            CreateMap<Certificates, CertificateDTO>().ReverseMap();
+            CreateMap<Certificates, CreateCertificateDTO>().ReverseMap();
+        }
 	}
 }

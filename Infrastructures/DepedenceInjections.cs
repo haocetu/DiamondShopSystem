@@ -15,6 +15,8 @@ namespace Infrastructures
         public static IServiceCollection AddInfrastructuresService(this IServiceCollection services, string databaseConnection)
         {
 
+            services.AddScoped<ICertificateService, CertificateService>();
+
             services.AddScoped<IRoleService, RoleService>();
             
             services.AddScoped<ICurrentTime, CurrentTime>();

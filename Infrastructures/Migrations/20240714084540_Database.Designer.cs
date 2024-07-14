@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructures.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240714073055_Database")]
+    [Migration("20240714084540_Database")]
     partial class Database
     {
         /// <inheritdoc />
@@ -601,11 +601,13 @@ namespace Infrastructures.Migrations
                     b.Property<decimal>("CaratWeight")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Clarity")
-                        .HasColumnType("int");
+                    b.Property<string>("Clarity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Color")
-                        .HasColumnType("int");
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
@@ -622,8 +624,9 @@ namespace Infrastructures.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DiamondCut")
-                        .HasColumnType("int");
+                    b.Property<string>("DiamondCut")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
@@ -634,8 +637,9 @@ namespace Infrastructures.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Origin")
-                        .HasColumnType("int");
+                    b.Property<string>("Origin")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ReportNumber")
                         .IsRequired()

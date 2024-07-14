@@ -30,7 +30,7 @@ namespace Infrastructures
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Role> Roles { get; set; }
-
+        public DbSet<Certificates> Certificates { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -59,6 +59,8 @@ namespace Infrastructures
             modelBuilder.ApplyConfiguration(new CartItemConfiguration());
             modelBuilder.ApplyConfiguration(new PaymentConfiguration());
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
+            modelBuilder.ApplyConfiguration(new CertificateConfiguration());
+
             #region insert data
             //Role
             modelBuilder.Entity<Role>().HasData(

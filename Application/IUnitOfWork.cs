@@ -22,6 +22,7 @@ namespace Application
         public IProductTypeRepository ProductTypeRepository { get; }
         public IPromotionRepository PromotionRepository { get; }
         public IProductWarrantyRepository ProductWarrantyRepository { get; }
+        public ICertificateRepository CertificateRepository { get; }
         public Task<int> SaveChangeAsync();
     }
 }

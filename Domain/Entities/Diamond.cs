@@ -10,13 +10,15 @@ namespace Domain.Entities
     public class Diamond : BaseEntity
     {
         public string Name { get; set; }
-        public string OriginName {  get; set; }
+        public int CertificateId { get; set; }
+        public string Origin {  get; set; }
         public float CaratWeight {  get; set; }
-        public DiamondClarity ClarityName { get; set; }
-        public DiamondCut CutName { get; set; }
-        public DiamondColor Color { get; set; }
+        public string Clarity { get; set; }
+        public string Cut { get; set; }
+        public string Color { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
+        public Certificates Certificates { get; set; }
         public List<ProductDiamond> ProductDiamonds { get; set; } = [];
         public List<Image> Images { get; set; }
     }

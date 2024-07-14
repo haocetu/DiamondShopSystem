@@ -33,9 +33,27 @@ namespace Application.Services
             var response = new ServiceResponse<DiamondDTO>();
             try
             {
+                
+                var checkCertificate = await _unitOfWork.CertificateRepository.GetByIdAsync(createdDiamondDTO.CertificateId);
+                var getDiamondList = await _unitOfWork.DiamondRepository.GetAllAsync();
+                foreach(var diamond1 in getDiamondList)
+                {
+                    if(diamond1.CertificateId == createdDiamondDTO.CertificateId)
+                    {
+                        response.Success = false;
+                        response.Message = "This certificate belong to another diamond";
+                        return response;
+                    }
+                }
+                if(checkCertificate == null)
+                {
+                    response.Success = false;
+                    response.Message = "Certificate not exist";
+                    return response;
+                }
                 var diamond = _mapper.Map<Diamond>(createdDiamondDTO);
                 diamond.IsDeleted = false;
-                diamond.Name = diamond.OriginName+ " " + diamond.CutName +" "+ diamond.ClarityName;
+                diamond.Name = diamond.Origin+ " " + diamond.Cut +" "+ diamond.Clarity;
                 await _unitOfWork.DiamondRepository.AddAsync(diamond);
                 
 
@@ -248,10 +266,10 @@ namespace Application.Services
                     return response;
                 }
                 //If any value is null, it will be equal to the original value
-                diamondDTO.OriginName ??= existingDiamond.OriginName;
+                diamondDTO.OriginName ??= existingDiamond.Origin;
                 diamondDTO.CaratWeight ??= existingDiamond.CaratWeight;
-                diamondDTO.ClarityName ??= existingDiamond.ClarityName;
-                diamondDTO.CutName ??= existingDiamond.CutName;
+                diamondDTO.ClarityName ??= existingDiamond.Clarity;
+                diamondDTO.CutName ??= existingDiamond.Cut;
                 diamondDTO.Color ??= existingDiamond.Color;
                 diamondDTO.Price ??= existingDiamond.Price;
                 diamondDTO.Quantity ??= existingDiamond.Quantity;
@@ -264,7 +282,7 @@ namespace Application.Services
                 }
                 //Mapping
                 var update = _mapper.Map(diamondDTO, existingDiamond);
-                update.Name = update.OriginName + " " + update.CutName + " " + update.ClarityName;
+                update.Name = update.Origin + " " + update.Cut + " " + update.Clarity;
                 _unitOfWork.DiamondRepository.Update(update);
 
                 var updatedDiamond = _mapper.Map<DiamondDTO>(update);

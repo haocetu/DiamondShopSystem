@@ -173,7 +173,19 @@ namespace Infrastructures
 				return (_productTypeRepository);
 			}
 		}
-        private IPromotionRepository _promotionRepository;
+		private IProductWarrantyRepository _productWarrantyRepository;
+		public IProductWarrantyRepository ProductWarrantyRepository
+		{
+			get
+			{
+				if (_productWarrantyRepository is null)
+				{
+					_productWarrantyRepository = new ProductWarrantyRepository(_dbContext, _currentTime, _claimsService);
+				}
+				return (_productWarrantyRepository);
+			}
+		}
+		private IPromotionRepository _promotionRepository;
         public IPromotionRepository PromotionRepository
         {
             get

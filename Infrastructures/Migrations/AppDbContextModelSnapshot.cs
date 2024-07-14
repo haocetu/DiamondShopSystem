@@ -654,7 +654,7 @@ namespace Infrastructures.Migrations
                             Clarity = "FL",
                             Color = "D",
                             Cut = "Excellent",
-                            DateOfIssue = new DateTime(2024, 7, 14, 16, 38, 22, 947, DateTimeKind.Local).AddTicks(9935),
+                            DateOfIssue = new DateTime(2024, 7, 14, 20, 10, 44, 656, DateTimeKind.Local).AddTicks(9405),
                             IsDeleted = false,
                             Origin = "GIA",
                             ReportNumber = "111"
@@ -666,7 +666,7 @@ namespace Infrastructures.Migrations
                             Clarity = "IF",
                             Color = "E",
                             Cut = "VeryGood",
-                            DateOfIssue = new DateTime(2024, 7, 14, 16, 38, 22, 947, DateTimeKind.Local).AddTicks(9949),
+                            DateOfIssue = new DateTime(2024, 7, 14, 20, 10, 44, 656, DateTimeKind.Local).AddTicks(9416),
                             IsDeleted = false,
                             Origin = "HRD",
                             ReportNumber = "222"
@@ -678,7 +678,7 @@ namespace Infrastructures.Migrations
                             Clarity = "I1",
                             Color = "M",
                             Cut = "Good",
-                            DateOfIssue = new DateTime(2024, 7, 14, 16, 38, 22, 947, DateTimeKind.Local).AddTicks(9951),
+                            DateOfIssue = new DateTime(2024, 7, 14, 20, 10, 44, 656, DateTimeKind.Local).AddTicks(9417),
                             IsDeleted = false,
                             Origin = "CGL",
                             ReportNumber = "333"
@@ -1231,11 +1231,32 @@ namespace Infrastructures.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("OrderId")

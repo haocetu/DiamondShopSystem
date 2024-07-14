@@ -13,9 +13,10 @@ namespace Domain.Entities
         public string Origin { get; set; }
         public string Color { get; set; }
         public string Clarity { get; set; }
-        public string DiamondCut { get; set; }
+        public string Cut { get; set; }
         public decimal CaratWeight { get; set; }
         public DateTime DateOfIssue {  get; set; }
+        public Diamond Diamond {  get; set; }
 
     }
 }

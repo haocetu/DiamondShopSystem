@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class ProductWarranty
+    public class ProductWarranty : BaseEntity
     {
         public int Id { get; set; }
         public int ProductId { get; set; }

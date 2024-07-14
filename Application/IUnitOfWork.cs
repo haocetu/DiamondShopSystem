@@ -21,6 +21,7 @@ namespace Application
         public IRoleRepository RoleRepository { get;}
         public IProductTypeRepository ProductTypeRepository { get; }
         public IPromotionRepository PromotionRepository { get; }
+        public IProductWarrantyRepository ProductWarrantyRepository { get; }
         public Task<int> SaveChangeAsync();
     }
 }

@@ -40,7 +40,13 @@ namespace Application.Services
                 order.ModifiedDate = DateTime.Now;
 
                 _unitOfWork.OrderRepository.Update(order);
-                await _unitOfWork.SaveChangeAsync();
+
+				if (status == "Finished")
+				{
+					await _unitOfWork.ProductWarrantyRepository.CreateWarrantyByOrderId(orderid);
+				}
+
+				await _unitOfWork.SaveChangeAsync();
 
                 response.Success = true;
                 response.Message = "Change order status successfully.";

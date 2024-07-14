@@ -61,6 +61,11 @@ namespace Infrastructures
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new CertificateConfiguration());
 
+            modelBuilder.Entity<Diamond>()
+                .HasOne(d => d.Certificates)
+                .WithOne(c => c.Diamond)
+                .HasForeignKey<Diamond>(d => d.CertificateId);
+
             #region insert data
             //Role
             modelBuilder.Entity<Role>().HasData(
@@ -129,11 +134,49 @@ namespace Infrastructures
                 new Category { Id = 45, Name = "Bangles", Length = 40, IsDeleted = false },
                 new Category { Id = 46, Name = "Bangles", Length = 42, IsDeleted = false }
                 );
+            //Certificate
+            modelBuilder.Entity<Certificates>().HasData(
+                new Certificates { 
+                                   Id = 1, 
+                                   ReportNumber = "111", 
+                                   Origin = "GIA", 
+                                   Color = "D", 
+                                   Clarity = "FL",
+                                   Cut = "Excellent",
+                                   CaratWeight = 2.3m,
+                                   DateOfIssue = DateTime.Now,
+                                   IsDeleted = false
+                                 },
+                new Certificates
+                                {
+                                    Id = 2,
+                                    ReportNumber = "222",
+                                    Origin = "HRD",
+                                    Color = "E",
+                                    Clarity = "IF",
+                                    Cut = "VeryGood",
+                                    CaratWeight = 2.5m,
+                                    DateOfIssue = DateTime.Now,
+                                    IsDeleted = false
+                                },
+                new Certificates
+                                {
+                                    Id = 3,
+                                    ReportNumber = "333",
+                                    Origin = "CGL",
+                                    Color = "M",
+                                    Clarity = "I1",
+                                    Cut = "Good",
+                                    CaratWeight = 3.5m,
+                                    DateOfIssue = DateTime.Now,
+                                    IsDeleted = false
+                                }
+                );
             //Diamond
             modelBuilder.Entity<Diamond>().HasData(
-                new Diamond { Id = 1, Name = "Kim cương Good FL", OriginName = "Kim cương", CaratWeight = 2.5f, ClarityName = 0, CutName = 0, Color = 0, Price = 5000000000, Quantity = 10, IsDeleted = false},
-                new Diamond { Id = 2, Name = "Kim cương Excellent I1", OriginName = "Kim cương", CaratWeight = 2.5f, ClarityName = 0, CutName = 0, Color = 0, Price = 6000000000, Quantity = 10, IsDeleted = false},
-                new Diamond { Id = 3, Name = "Kim cương Very Good I2", OriginName = "Kim cương", CaratWeight = 2.5f, ClarityName = 0, CutName = 0, Color = 0, Price = 7000000000, Quantity = 10, IsDeleted = false}
+                new Diamond { Id = 1, CertificateId = 1, Name = "GIA FL Excellent D ", Origin = "GIA", CaratWeight = 2.3f, Clarity = "FL", Cut = "Excellent", Color = "D", Price = 5000000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 2, CertificateId = 2, Name = "Kim cương Excellent I1", Origin = "HRD", CaratWeight = 2.5f, Clarity = "IF", Cut = "VeryGood", Color = "E", Price = 6000000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 3, CertificateId = 3, Name = "Kim cương Very Good I2", Origin = "CGL", CaratWeight = 3.5f, Clarity = "I1", Cut = "Good", Color = "M", Price = 7000000000, Quantity = 10, IsDeleted = false}
                 );
             //Product
             modelBuilder.Entity<Product>().HasData(

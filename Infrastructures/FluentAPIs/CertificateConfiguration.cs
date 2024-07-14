@@ -15,6 +15,7 @@ namespace Infrastructures.FluentAPIs
         {
             builder.ToTable("Certificates");
             builder.HasKey(x => x.Id);
+            builder.HasOne(x => x.Diamond).WithOne(x => x.Certificates);
         }
     }
 }

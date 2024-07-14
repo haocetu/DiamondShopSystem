@@ -12,15 +12,18 @@ namespace Application.ViewModels.DiamondDTOs
     public class CreateDiamondDTO
     {
         [Required]
-        public string OriginName { get; set; }
+        public int CertificateId {  get; set; }
+        [Required]
+        [EnumDataType(typeof(DiamondOrigin))]
+        public string Origin { get; set; }
         [Required]
         public float CaratWeight { get; set; }
         [Required]
         [EnumDataType(typeof(DiamondClarity))]
-        public string ClarityName { get; set; }
+        public string Clarity { get; set; }
         [Required]
         [EnumDataType(typeof(DiamondCut))]
-        public string CutName { get; set; }
+        public string Cut { get; set; }
         [Required]
         [EnumDataType(typeof(DiamondColor))]
         public string Color { get; set; }

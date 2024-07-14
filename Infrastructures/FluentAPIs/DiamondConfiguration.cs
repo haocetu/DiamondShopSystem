@@ -13,17 +13,19 @@ namespace Infrastructures.FluentAPIs
             builder.HasKey(d => d.Id);
             builder.Property(d => d.Name).HasMaxLength(100);
 
-            builder.Property(d => d.OriginName).HasMaxLength(100).IsRequired();
+            builder.Property(d => d.Origin).HasMaxLength(100).IsRequired();
 
             builder.Property(d => d.CaratWeight).HasColumnType("decimal(18,2)").IsRequired();
 
-            builder.Property(d => d.ClarityName).HasMaxLength(50).IsRequired();
+            builder.Property(d => d.Clarity).HasMaxLength(50).IsRequired();
 
-            builder.Property(d => d.CutName).HasMaxLength(50).IsRequired();
+            builder.Property(d => d.Cut).HasMaxLength(50).IsRequired();
 
             builder.Property(d => d.Color).HasMaxLength(50).IsRequired();
 
             builder.Property(d => d.Price).HasColumnType("decimal(18,2)").IsRequired();
+
+            builder.HasOne(d => d.Certificates).WithOne(d => d.Diamond);
         }
     }
 }

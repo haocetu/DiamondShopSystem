@@ -304,14 +304,42 @@ namespace Application.Services
 					return response;
 				}
 
+				if (existProduct.Wage != updatedProduct.Wage)
+				{
+					existProduct.Price = existProduct.Price - existProduct.Wage + updatedProduct.Wage;
+				}
+
+				if (existProduct.ProductTypeId != updatedProduct.ProductTypeId)
+				{
+					var oldProductType = await _unitOfWork.ProductTypeRepository.GetByIdAsync(existProduct.ProductTypeId);
+					var newProductType = await _unitOfWork.ProductTypeRepository.GetByIdAsync(updatedProduct.ProductTypeId);
+					if (newProductType != null && oldProductType != null)
+					{
+						existProduct.Price = (existProduct.Price
+						- (oldProductType.Price * existProduct.Weight))
+						+ (newProductType.Price * updatedProduct.Weight);
+					}
+				}
+
+				if (existProduct.Weight != updatedProduct.Weight)
+				{
+					var productType = await _unitOfWork.ProductTypeRepository.GetByIdAsync(existProduct.ProductTypeId);
+					if (productType != null)
+					{
+						existProduct.Price = existProduct.Price
+							- existProduct.Weight * productType.Price
+							+ updatedProduct.Weight * productType.Price;
+					}
+				}
+
 				if (existProduct.Quantity == 0 & updatedProduct.Quantity > 0) existProduct.IsDeleted = false;
 
 				var newProduct = _mapper.Map(updatedProduct, existProduct);
 				if (existProduct.Quantity == 0) existProduct.IsDeleted = true;
 				_unitOfWork.ProductRepository.Update(existProduct);
-				
+
 				var result = _mapper.Map<ProductDTO>(newProduct);
-				
+
 				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
 				if (isSuccess)
 				{

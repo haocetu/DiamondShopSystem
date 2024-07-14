@@ -428,7 +428,14 @@ namespace Infrastructures.Migrations
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<int>(type: "int", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<int>(type: "int", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<int>(type: "int", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -503,9 +510,9 @@ namespace Infrastructures.Migrations
                 columns: new[] { "Id", "CaratWeight", "Clarity", "Color", "CreatedBy", "CreatedDate", "Cut", "DateOfIssue", "DeletedBy", "DeletedDate", "IsDeleted", "ModifiedBy", "ModifiedDate", "Origin", "ReportNumber" },
                 values: new object[,]
                 {
-                    { 1, 2.3m, "FL", "D", null, null, "Excellent", new DateTime(2024, 7, 14, 16, 38, 22, 947, DateTimeKind.Local).AddTicks(9935), null, null, false, null, null, "GIA", "111" },
-                    { 2, 2.5m, "IF", "E", null, null, "VeryGood", new DateTime(2024, 7, 14, 16, 38, 22, 947, DateTimeKind.Local).AddTicks(9949), null, null, false, null, null, "HRD", "222" },
-                    { 3, 3.5m, "I1", "M", null, null, "Good", new DateTime(2024, 7, 14, 16, 38, 22, 947, DateTimeKind.Local).AddTicks(9951), null, null, false, null, null, "CGL", "333" }
+                    { 1, 2.3m, "FL", "D", null, null, "Excellent", new DateTime(2024, 7, 14, 20, 10, 44, 656, DateTimeKind.Local).AddTicks(9405), null, null, false, null, null, "GIA", "111" },
+                    { 2, 2.5m, "IF", "E", null, null, "VeryGood", new DateTime(2024, 7, 14, 20, 10, 44, 656, DateTimeKind.Local).AddTicks(9416), null, null, false, null, null, "HRD", "222" },
+                    { 3, 3.5m, "I1", "M", null, null, "Good", new DateTime(2024, 7, 14, 20, 10, 44, 656, DateTimeKind.Local).AddTicks(9417), null, null, false, null, null, "CGL", "333" }
                 });
 
             migrationBuilder.InsertData(

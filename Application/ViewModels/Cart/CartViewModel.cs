@@ -7,6 +7,7 @@ namespace Application.ViewModels.Cart
         public int Id { get; set; }
         public int UserId { get; set; }
         public int NumberItems { get; set; }
+        public decimal TotalPrice { get; set; }
         public ICollection<CartItemViewModel> Items { get; set; }
     }
 

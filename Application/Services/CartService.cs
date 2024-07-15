@@ -40,10 +40,11 @@ namespace Application.Services
                     Items = cart.Items.Select(i => new CartItemViewModel
                     {
                         ProductId = i.ProductId,
-                        ProductName = cart.Items.FirstOrDefault(ci=>ci.ProductId == i.ProductId).Product.Name,
+                        ProductName = cart.Items.FirstOrDefault(ci => ci.ProductId == i.ProductId).Product.Name,
                         Quantity = i.Quantity,
                         Price = i.Price
-                    }).ToList()
+                    }).ToList(),
+                    TotalPrice = cart.Items.Sum(i => i.Price * i.Quantity)
                 };
                 response.Success = true;
                 response.Message = "This is cart for user.";
@@ -152,7 +153,8 @@ namespace Application.Services
                         ProductName = i.Product.Name,
                         Quantity = i.Quantity,
                         Price = i.Price
-                    }).ToList()
+                    }).ToList(),
+                    TotalPrice = cart.Items.Sum(i => i.Price * i.Quantity)
                 };
                 response.Success = true;
                 response.Message = "Add to cart successfully.";
@@ -230,7 +232,8 @@ namespace Application.Services
                         ProductName = i.Product.Name,
                         Quantity = i.Quantity,
                         Price = i.Price
-                    }).ToList()
+                    }).ToList(),
+                    TotalPrice = cart.Items.Sum(i => i.Price * i.Quantity)
                 };
                 response.Success = true;
                 response.Message = "Removed from cart successfully.";

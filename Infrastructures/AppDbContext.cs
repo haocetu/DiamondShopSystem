@@ -30,6 +30,7 @@ namespace Infrastructures
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<ProductWarranty> ProductWarranties { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

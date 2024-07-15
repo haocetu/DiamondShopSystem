@@ -4,6 +4,7 @@ using Application.ViewModels.DiamondDTOs;
 using Application.ViewModels.ImageDTOs;
 using Application.ViewModels.ProductDTOs;
 using Application.ViewModels.ProductTypeDTOS;
+using Application.ViewModels.ProductWarrantyDTOs;
 using Application.ViewModels.PromotionDTOs;
 using AutoMapper;
 using Domain.Entities;
@@ -41,6 +42,8 @@ namespace Infrastructures.Mappers
 			//ProductType
 			CreateMap<ProductType, ProductTypeDTO>().ReverseMap();
 			CreateMap<ProductType, CreateProductTypeDTO>().ReverseMap();
+			//ProductWarranty
+			CreateMap<ProductWarranty, ProductWarrantyDTO>().ReverseMap();
 			//Promotion
 			CreateMap<Promotion, PromotionDTO>().ReverseMap();
 			CreateMap<Promotion, CreatePromotionDTO>().ReverseMap();

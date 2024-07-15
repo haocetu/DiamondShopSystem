@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.Repositories;
+using Application.ViewModels.ProductWarrantyDTOs;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -38,6 +39,22 @@ namespace Infrastructures.Repositories
 				}
 			}
 			await _dbContext.SaveChangesAsync();
+		}
+		public async Task<ProductWarrantyDTO> GetWarrantyByItem(int orderId, int productId)
+		{
+			var warranty = await _dbContext.ProductWarranties.Where(x => x.OrderId == orderId && x.ProductId == productId).FirstOrDefaultAsync();
+			if (warranty != null)
+			{
+				return new ProductWarrantyDTO
+				{
+					OrderId = orderId,
+					ProductId = productId,
+					Description = warranty.Description,
+					StartDate = warranty.StartDate,
+					EndDate = warranty.EndDate,
+				};
+			}
+			return new ProductWarrantyDTO();
 		}
 	}
 }

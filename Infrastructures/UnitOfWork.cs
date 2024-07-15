@@ -22,18 +22,7 @@ namespace Infrastructures
             _currentTime = currentTime;
             _claimsService = claimsService;
         }
-        private ICertificateRepository _certificateRepository;
-        public ICertificateRepository CertificateRepository 
-        {
-            get 
-            {
-                if (_certificateRepository is null)
-                {
-                    _certificateRepository = new CertificateRepository(_dbContext, _currentTime, _claimsService);
-                }
-                return _certificateRepository; 
-            } 
-        }
+
         private IDiamondRepository _diamondRepository;
         public IDiamondRepository DiamondRepository
         {

@@ -36,18 +36,19 @@ namespace Infrastructures.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Certificates",
+                name: "Diamonds",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ReportNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Origin = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Clarity = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cut = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Origin = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     CaratWeight = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DateOfIssue = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Clarity = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Cut = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<int>(type: "int", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -58,7 +59,7 @@ namespace Infrastructures.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Certificates", x => x.Id);
+                    table.PrimaryKey("PK_Diamonds", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -128,40 +129,6 @@ namespace Infrastructures.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Diamonds",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CertificateId = table.Column<int>(type: "int", nullable: false),
-                    Origin = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CaratWeight = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Clarity = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Cut = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<int>(type: "int", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<int>(type: "int", nullable: true),
-                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<int>(type: "int", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Diamonds", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Diamonds_Certificates_CertificateId",
-                        column: x => x.CertificateId,
-                        principalTable: "Certificates",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -506,13 +473,13 @@ namespace Infrastructures.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Certificates",
-                columns: new[] { "Id", "CaratWeight", "Clarity", "Color", "CreatedBy", "CreatedDate", "Cut", "DateOfIssue", "DeletedBy", "DeletedDate", "IsDeleted", "ModifiedBy", "ModifiedDate", "Origin", "ReportNumber" },
+                table: "Diamonds",
+                columns: new[] { "Id", "CaratWeight", "Clarity", "Color", "CreatedBy", "CreatedDate", "Cut", "DeletedBy", "DeletedDate", "IsDeleted", "ModifiedBy", "ModifiedDate", "Name", "Origin", "Price", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, 2.3m, "FL", "D", null, null, "Excellent", new DateTime(2024, 7, 14, 20, 10, 44, 656, DateTimeKind.Local).AddTicks(9405), null, null, false, null, null, "GIA", "111" },
-                    { 2, 2.5m, "IF", "E", null, null, "VeryGood", new DateTime(2024, 7, 14, 20, 10, 44, 656, DateTimeKind.Local).AddTicks(9416), null, null, false, null, null, "HRD", "222" },
-                    { 3, 3.5m, "I1", "M", null, null, "Good", new DateTime(2024, 7, 14, 20, 10, 44, 656, DateTimeKind.Local).AddTicks(9417), null, null, false, null, null, "CGL", "333" }
+                    { 1, 2.3m, "FL", "D", null, null, "Excellent", null, null, false, null, null, "GIA FL Excellent D ", "GIA", 5000000000m, 10 },
+                    { 2, 2.5m, "IF", "E", null, null, "VeryGood", null, null, false, null, null, "Kim cương Excellent I1", "HRD", 6000000000m, 10 },
+                    { 3, 3.5m, "I1", "M", null, null, "Good", null, null, false, null, null, "Kim cương Very Good I2", "CGL", 7000000000m, 10 }
                 });
 
             migrationBuilder.InsertData(
@@ -549,16 +516,6 @@ namespace Infrastructures.Migrations
                     { 2, "Admin" },
                     { 3, "SaleStaff" },
                     { 4, "DeliveryStaff" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Diamonds",
-                columns: new[] { "Id", "CaratWeight", "CertificateId", "Clarity", "Color", "CreatedBy", "CreatedDate", "Cut", "DeletedBy", "DeletedDate", "IsDeleted", "ModifiedBy", "ModifiedDate", "Name", "Origin", "Price", "Quantity" },
-                values: new object[,]
-                {
-                    { 1, 2.3m, 1, "FL", "D", null, null, "Excellent", null, null, false, null, null, "GIA FL Excellent D ", "GIA", 5000000000m, 10 },
-                    { 2, 2.5m, 2, "IF", "E", null, null, "VeryGood", null, null, false, null, null, "Kim cương Excellent I1", "HRD", 6000000000m, 10 },
-                    { 3, 3.5m, 3, "I1", "M", null, null, "Good", null, null, false, null, null, "Kim cương Very Good I2", "CGL", 7000000000m, 10 }
                 });
 
             migrationBuilder.InsertData(
@@ -602,12 +559,6 @@ namespace Infrastructures.Migrations
                 name: "IX_Carts_AccountId",
                 table: "Carts",
                 column: "AccountId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Diamonds_CertificateId",
-                table: "Diamonds",
-                column: "CertificateId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Images_DiamondId",
@@ -702,9 +653,6 @@ namespace Infrastructures.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Certificates");
 
             migrationBuilder.DropTable(
                 name: "Accounts");

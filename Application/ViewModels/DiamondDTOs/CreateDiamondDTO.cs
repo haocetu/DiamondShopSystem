@@ -11,8 +11,7 @@ namespace Application.ViewModels.DiamondDTOs
 {
     public class CreateDiamondDTO
     {
-        [Required]
-        public int CertificateId {  get; set; }
+
         [Required]
         [EnumDataType(typeof(DiamondOrigin))]
         public string Origin { get; set; }

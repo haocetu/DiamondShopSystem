@@ -33,24 +33,7 @@ namespace Application.Services
             var response = new ServiceResponse<DiamondDTO>();
             try
             {
-                
-                var checkCertificate = await _unitOfWork.CertificateRepository.GetByIdAsync(createdDiamondDTO.CertificateId);
-                var getDiamondList = await _unitOfWork.DiamondRepository.GetAllAsync();
-                foreach(var diamond1 in getDiamondList)
-                {
-                    if(diamond1.CertificateId == createdDiamondDTO.CertificateId)
-                    {
-                        response.Success = false;
-                        response.Message = "This certificate belong to another diamond";
-                        return response;
-                    }
-                }
-                if(checkCertificate == null)
-                {
-                    response.Success = false;
-                    response.Message = "Certificate not exist";
-                    return response;
-                }
+
                 var diamond = _mapper.Map<Diamond>(createdDiamondDTO);
                 diamond.IsDeleted = false;
                 diamond.Name = diamond.Origin+ " " + diamond.Cut +" "+ diamond.Clarity;
@@ -274,10 +257,8 @@ namespace Application.Services
                 diamondDTO.Price ??= existingDiamond.Price;
                 diamondDTO.Quantity ??= existingDiamond.Quantity;
                 //Image
-                if (diamondDTO.UpdateImages != null)
+                if (diamondDTO.UpdateImages.Count != 0)
                 {
-                    
-                    
                    await _imageService.UploadDiamondImages(diamondDTO.UpdateImages, existingDiamond.Id);
                 }
                 //Mapping

@@ -587,104 +587,6 @@ namespace Infrastructures.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.Certificates", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("CaratWeight")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Clarity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Cut")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateOfIssue")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("DeletedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Origin")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReportNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Certificates", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CaratWeight = 2.3m,
-                            Clarity = "FL",
-                            Color = "D",
-                            Cut = "Excellent",
-                            DateOfIssue = new DateTime(2024, 7, 14, 20, 10, 44, 656, DateTimeKind.Local).AddTicks(9405),
-                            IsDeleted = false,
-                            Origin = "GIA",
-                            ReportNumber = "111"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CaratWeight = 2.5m,
-                            Clarity = "IF",
-                            Color = "E",
-                            Cut = "VeryGood",
-                            DateOfIssue = new DateTime(2024, 7, 14, 20, 10, 44, 656, DateTimeKind.Local).AddTicks(9416),
-                            IsDeleted = false,
-                            Origin = "HRD",
-                            ReportNumber = "222"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CaratWeight = 3.5m,
-                            Clarity = "I1",
-                            Color = "M",
-                            Cut = "Good",
-                            DateOfIssue = new DateTime(2024, 7, 14, 20, 10, 44, 656, DateTimeKind.Local).AddTicks(9417),
-                            IsDeleted = false,
-                            Origin = "CGL",
-                            ReportNumber = "333"
-                        });
-                });
-
             modelBuilder.Entity("Domain.Entities.Diamond", b =>
                 {
                     b.Property<int>("Id")
@@ -695,9 +597,6 @@ namespace Infrastructures.Migrations
 
                     b.Property<decimal>("CaratWeight")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("CertificateId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Clarity")
                         .IsRequired()
@@ -753,9 +652,6 @@ namespace Infrastructures.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CertificateId")
-                        .IsUnique();
-
                     b.ToTable("Diamonds", (string)null);
 
                     b.HasData(
@@ -763,7 +659,6 @@ namespace Infrastructures.Migrations
                         {
                             Id = 1,
                             CaratWeight = 2.3m,
-                            CertificateId = 1,
                             Clarity = "FL",
                             Color = "D",
                             Cut = "Excellent",
@@ -777,7 +672,6 @@ namespace Infrastructures.Migrations
                         {
                             Id = 2,
                             CaratWeight = 2.5m,
-                            CertificateId = 2,
                             Clarity = "IF",
                             Color = "E",
                             Cut = "VeryGood",
@@ -791,7 +685,6 @@ namespace Infrastructures.Migrations
                         {
                             Id = 3,
                             CaratWeight = 3.5m,
-                            CertificateId = 3,
                             Clarity = "I1",
                             Color = "M",
                             Cut = "Good",
@@ -1420,17 +1313,6 @@ namespace Infrastructures.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Diamond", b =>
-                {
-                    b.HasOne("Domain.Entities.Certificates", "Certificates")
-                        .WithOne("Diamond")
-                        .HasForeignKey("Domain.Entities.Diamond", "CertificateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Certificates");
-                });
-
             modelBuilder.Entity("Domain.Entities.Image", b =>
                 {
                     b.HasOne("Domain.Entities.Diamond", "Diamond")
@@ -1558,12 +1440,6 @@ namespace Infrastructures.Migrations
             modelBuilder.Entity("Domain.Entities.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Certificates", b =>
-                {
-                    b.Navigation("Diamond")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.Diamond", b =>

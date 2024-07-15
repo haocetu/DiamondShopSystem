@@ -11,7 +11,6 @@ namespace Application.ViewModels.DiamondDTOs
     public class DiamondDTO
     {
         public int Id {  get; set; }
-        public int CertificateId { get; set; }
         public string Name { get; set; }
         public string Origin { get; set; }
         public float CaratWeight { get; set; }

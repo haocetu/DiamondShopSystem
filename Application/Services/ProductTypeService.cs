@@ -3,6 +3,7 @@ using Application.Interfaces;
 using Application.ViewModels.ProductTypeDTOS;
 using AutoMapper;
 using Domain.Entities;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -133,6 +134,12 @@ namespace Application.Services
 					response.Message = "Product type has been deleted from the system.";
 					return response;
 				}
+				var products = await _unitOfWork.ProductRepository.GetAllAsync();
+				foreach (var product in products)
+				{
+					if (product.ProductTypeId == id)
+						product.Price = product.Price + product.Weight * t.Price - product.Weight * exist.Price;
+				}
 				exist = _mapper.Map(t, exist);
 				_unitOfWork.ProductTypeRepository.Update(exist);
 				var isSuccess = await _unitOfWork.SaveChangeAsync() > 0;
@@ -173,6 +180,15 @@ namespace Application.Services
 				response.Message = "Product type have been deleted from the system!";
 				return response;
 			}
+
+			var isInUsed = await _unitOfWork.ProductRepository.ProductTypeInUsed(id);
+			if (isInUsed)
+			{
+				response.Success = false;
+				response.Message = "This ProductType is in used. Delete fail.";
+				return response;
+			}
+
 			try
 			{
 				_unitOfWork.ProductTypeRepository.SoftRemove(exist);

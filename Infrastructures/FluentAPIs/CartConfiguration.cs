@@ -14,6 +14,8 @@ namespace Infrastructures.FluentAPIs
 
             builder.HasOne(c => c.Account).WithMany(a => a.Carts).HasForeignKey(c => c.AccountId);
 
+            builder.Property(p => p.TotalPrice).IsRequired();
+
             builder.HasMany(c => c.Items).WithOne(ci => ci.Cart).HasForeignKey(ci => ci.CartId);
         }
     }

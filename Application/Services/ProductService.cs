@@ -207,6 +207,8 @@ namespace Application.Services
 						if (diamond != 0)
 						{
 							var dia = await _unitOfWork.DiamondRepository.GetByIdAsync(diamond);
+							if (dia != null) dia.Quantity--;
+							_unitOfWork.DiamondRepository.Update(dia);
 							product.Price += dia.Price;
 						}
 					}
@@ -218,6 +220,8 @@ namespace Application.Services
 						if (diamond != 0)
 						{
 							var dia = await _unitOfWork.DiamondRepository.GetByIdAsync(diamond);
+							if (dia != null) dia.Quantity--;
+							_unitOfWork.DiamondRepository.Update(dia);
 							product.Price += dia.Price;
 						}
 					}

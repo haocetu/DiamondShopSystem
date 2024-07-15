@@ -25,7 +25,6 @@ namespace Infrastructures.FluentAPIs
 
             builder.Property(d => d.Price).HasColumnType("decimal(18,2)").IsRequired();
 
-            builder.HasOne(d => d.Certificates).WithOne(d => d.Diamond);
         }
     }
 }

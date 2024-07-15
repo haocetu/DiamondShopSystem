@@ -11,5 +11,6 @@ namespace Application.Repositories
 	{
 		Task<IEnumerable<Product>> SearchProduct(string search);
 		Task<bool> ProductTypeInUsed(int id);
+		Task<bool> CategoryInUsed(int id);
 	}
 }

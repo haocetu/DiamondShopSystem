@@ -173,6 +173,15 @@ namespace Application.Services
 				response.Message = "Category have been deleted from the system!";
 				return response;
 			}
+
+			var isInUsed = await _unitOfWork.ProductRepository.CategoryInUsed(id);
+			if (isInUsed)
+			{
+				response.Success = false;
+				response.Message = "This Category is in used. Delete fail.";
+				return response;
+			}
+
 			try
 			{
 				_unitOfWork.CategoryRepository.SoftRemove(exist);

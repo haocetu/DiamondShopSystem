@@ -10,5 +10,7 @@ namespace Application.Repositories
 	public interface IProductRepository : IGenericRepository<Product>
 	{
 		Task<IEnumerable<Product>> SearchProduct(string search);
+		Task<bool> ProductTypeInUsed(int id);
+		Task<bool> CategoryInUsed(int id);
 	}
 }

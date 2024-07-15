@@ -2,6 +2,7 @@
 using Application.Repositories;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,16 @@ namespace Infrastructures.Repositories
 		public async Task<IEnumerable<Product>> SearchProduct(string search)
 		{
 			return await _dbContext.Products.Where(u => u.Name.Contains(search)).ToListAsync();
+		}
+		public async Task<bool> ProductTypeInUsed(int id)
+		{
+			var product = await _dbContext.Products.Where(x => x.ProductTypeId == id).FirstOrDefaultAsync();
+			return product != null;
+		}
+		public async Task<bool> CategoryInUsed(int id)
+		{
+			var product = await _dbContext.Products.Where(x => x.CategoryId == id).FirstOrDefaultAsync();
+			return product != null;
 		}
 	}
 }

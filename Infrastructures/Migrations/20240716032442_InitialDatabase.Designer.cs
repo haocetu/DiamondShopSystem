@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructures.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240715151144_InitialDatabase")]
+    [Migration("20240716032442_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -1167,7 +1167,7 @@ namespace Infrastructures.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductWarranty");
+                    b.ToTable("ProductWarranties");
                 });
 
             modelBuilder.Entity("Domain.Entities.Promotion", b =>

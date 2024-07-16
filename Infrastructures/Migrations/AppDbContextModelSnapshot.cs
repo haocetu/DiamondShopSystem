@@ -1164,7 +1164,7 @@ namespace Infrastructures.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductWarranty");
+                    b.ToTable("ProductWarranties");
                 });
 
             modelBuilder.Entity("Domain.Entities.Promotion", b =>

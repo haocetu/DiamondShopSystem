@@ -41,12 +41,12 @@ namespace Application.Services
 
                 _unitOfWork.OrderRepository.Update(order);
 
-				if (status == "Finished")
-				{
-					await _unitOfWork.ProductWarrantyRepository.CreateWarrantyByOrderId(orderid);
-				}
+                if (status == "Finished")
+                {
+                    await _unitOfWork.ProductWarrantyRepository.CreateWarrantyByOrderId(orderid);
+                }
 
-				await _unitOfWork.SaveChangeAsync();
+                await _unitOfWork.SaveChangeAsync();
 
                 response.Success = true;
                 response.Message = "Change order status successfully.";
@@ -56,6 +56,7 @@ namespace Application.Services
                     UserName = user.Name,
                     Status = order.Status,
                     TotalPrice = order.TotalPrice,
+                    DiscountPercentage = (_promotionService.GetDiscountPercentageForUser(order.AccountId)).Result,
                     PaymentName = order.Payment.PaymentMethod,
                     NumberItems = order.Items.Count,
                     OrderDate = order.CreatedDate.Value,
@@ -112,6 +113,7 @@ namespace Application.Services
                     Status = order.Status,
                     TotalPrice = order.TotalPrice,
                     PaymentName = order.Payment.PaymentMethod,
+                    DiscountPercentage = (_promotionService.GetDiscountPercentageForUser(order.AccountId)).Result,
                     NumberItems = order.Items.Count,
                     OrderDate = order.CreatedDate.Value,
                     ShipDate = order.DeliveryDate,
@@ -305,6 +307,7 @@ namespace Application.Services
                     UserName = order.Account.Name,
                     OrderDate = order.CreatedDate.Value,
                     DeliveryAddress = deliveryAddress,
+                    ReceiverPhoneNumber = receiverPhoneNumber,
                     TotalAmount = order.TotalPrice,
                     NumberItems = order.Items.Count,
                     Items = order.Items.Select(i => new OrderItemViewModel

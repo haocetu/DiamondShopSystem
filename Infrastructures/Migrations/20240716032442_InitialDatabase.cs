@@ -385,7 +385,7 @@ namespace Infrastructures.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductWarranty",
+                name: "ProductWarranties",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -405,14 +405,14 @@ namespace Infrastructures.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductWarranty", x => x.Id);
+                    table.PrimaryKey("PK_ProductWarranties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductWarranty_Orders_OrderId",
+                        name: "FK_ProductWarranties_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ProductWarranty_Products_ProductId",
+                        name: "FK_ProductWarranties_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id");
@@ -610,13 +610,13 @@ namespace Infrastructures.Migrations
                 column: "ProductTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductWarranty_OrderId",
-                table: "ProductWarranty",
+                name: "IX_ProductWarranties_OrderId",
+                table: "ProductWarranties",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductWarranty_ProductId",
-                table: "ProductWarranty",
+                name: "IX_ProductWarranties_ProductId",
+                table: "ProductWarranties",
                 column: "ProductId");
         }
 
@@ -636,7 +636,7 @@ namespace Infrastructures.Migrations
                 name: "ProductDiamonds");
 
             migrationBuilder.DropTable(
-                name: "ProductWarranty");
+                name: "ProductWarranties");
 
             migrationBuilder.DropTable(
                 name: "Promotions");

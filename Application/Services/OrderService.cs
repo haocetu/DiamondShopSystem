@@ -65,7 +65,10 @@ namespace Application.Services
                     {
                         ProductId = i.ProductId,
                         Quantity = i.Quantity,
-                        Price = i.Price
+                        Price = i.Price,
+                        WarrantyDescription = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.Description,
+                        WarrantyStartDate = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.StartDate,
+                        WarrantyEndDate = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.EndDate
                     }).ToList()
                 };
 
@@ -121,7 +124,10 @@ namespace Application.Services
                     {
                         ProductId = i.ProductId,
                         Quantity = i.Quantity,
-                        Price = i.Price
+                        Price = i.Price,
+                        WarrantyDescription = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.Description,
+                        WarrantyStartDate = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.StartDate,
+                        WarrantyEndDate = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.EndDate
                     }).ToList()
                 };
             }
@@ -163,7 +169,10 @@ namespace Application.Services
                     {
                         ProductId = i.ProductId,
                         Quantity = i.Quantity,
-                        Price = i.Price
+                        Price = i.Price,
+                        WarrantyDescription = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.Description,
+                        WarrantyStartDate = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.StartDate,
+                        WarrantyEndDate = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.EndDate
                     }).ToList()
                 }).ToList();
 
@@ -213,7 +222,10 @@ namespace Application.Services
                     {
                         ProductId = i.ProductId,
                         Quantity = i.Quantity,
-                        Price = i.Price
+                        Price = i.Price,
+                        WarrantyDescription = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.Description,
+                        WarrantyStartDate = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.StartDate,
+                        WarrantyEndDate = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.EndDate
                     }).ToList()
                 }).ToList();
 
@@ -314,7 +326,10 @@ namespace Application.Services
                     {
                         ProductId = i.ProductId,
                         Quantity = i.Quantity,
-                        Price = i.Price
+                        Price = i.Price,
+                        WarrantyDescription = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.Description,
+                        WarrantyStartDate = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.StartDate,
+                        WarrantyEndDate = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.EndDate
                     }).ToList()
                 };
                 response.Success = true;

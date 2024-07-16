@@ -11,6 +11,6 @@ namespace Application.Repositories
 	public interface IProductWarrantyRepository : IGenericRepository<ProductWarranty>
 	{
 		Task CreateWarrantyByOrderId(int id);
-		//Task<ProductWarrantyDTO> GetWarrantyByItem(int orderId, int productId);
+		Task<ProductWarrantyDTO> GetWarrantyByItem(int orderId, int productId);
 	}
 }

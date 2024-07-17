@@ -65,6 +65,7 @@ namespace Application.Services
                     {
                         ProductId = i.ProductId,
                         Quantity = i.Quantity,
+                        ProductName = i.Product.Name,
                         Price = i.Price,
                         WarrantyDescription = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.Description,
                         WarrantyStartDate = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.StartDate,
@@ -123,6 +124,7 @@ namespace Application.Services
                     Items = order.Items.Select(i => new OrderItemViewModel
                     {
                         ProductId = i.ProductId,
+                        ProductName = i.Product.Name,
                         Quantity = i.Quantity,
                         Price = i.Price,
                         WarrantyDescription = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.Description,
@@ -168,6 +170,7 @@ namespace Application.Services
                     Items = order.Items.Select(i => new OrderItemViewModel
                     {
                         ProductId = i.ProductId,
+                        ProductName = i.Product.Name,
                         Quantity = i.Quantity,
                         Price = i.Price,
                         WarrantyDescription = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.Description,
@@ -221,6 +224,7 @@ namespace Application.Services
                     Items = order.Items.Select(i => new OrderItemViewModel
                     {
                         ProductId = i.ProductId,
+                        ProductName = i.Product.Name,
                         Quantity = i.Quantity,
                         Price = i.Price,
                         WarrantyDescription = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.Description,
@@ -325,6 +329,7 @@ namespace Application.Services
                     Items = order.Items.Select(i => new OrderItemViewModel
                     {
                         ProductId = i.ProductId,
+                        ProductName = i.Product.Name,
                         Quantity = i.Quantity,
                         Price = i.Price,
                         WarrantyDescription = _unitOfWork.ProductWarrantyRepository.GetWarrantyByItem(order.Id, i.ProductId).Result.Description,

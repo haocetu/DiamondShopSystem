@@ -73,69 +73,69 @@ namespace Infrastructures
                 );
             //ProductType
             modelBuilder.Entity<ProductType>().HasData(
-                new ProductType { Id = 1, Material = "Gold", Weight = 3.75f, Price = 5567000},
-                new ProductType { Id = 2, Material = "Platium", Weight = 1, Price = 827287 },
-                new ProductType { Id = 3, Material = "Sliver", Weight = 1, Price = 22325 }
+                new ProductType { Id = 1, Material = "Vàng", Weight = 1, Price = 681000 },
+                new ProductType { Id = 2, Material = "Bạch kim", Weight = 1, Price = 827287 },
+                new ProductType { Id = 3, Material = "Bạc", Weight = 1, Price = 22325 }
                 );
             //Category
             modelBuilder.Entity<Category>().HasData(
                 //Ring (size: 6 -> 20)
-                new Category { Id = 1, Name = "Ring", Size = 6, IsDeleted = false },
-                new Category { Id = 2, Name = "Ring", Size = 7, IsDeleted = false },
-                new Category { Id = 3, Name = "Ring", Size = 8, IsDeleted = false },
-                new Category { Id = 4, Name = "Ring", Size = 9, IsDeleted = false },
-                new Category { Id = 5, Name = "Ring", Size = 10, IsDeleted = false },
-                new Category { Id = 6, Name = "Ring", Size = 11, IsDeleted = false },
-                new Category { Id = 7, Name = "Ring", Size = 12, IsDeleted = false },
-                new Category { Id = 8, Name = "Ring", Size  = 13, IsDeleted = false },
-                new Category { Id = 9, Name = "Ring", Size = 14, IsDeleted = false },
-                new Category { Id = 10, Name = "Ring", Size = 15, IsDeleted = false },
-                new Category { Id = 11, Name = "Ring", Size = 16, IsDeleted = false },
-                new Category { Id = 12, Name = "Ring", Size = 17, IsDeleted = false },
-                new Category { Id = 13, Name = "Ring", Size = 18, IsDeleted = false },
-                new Category { Id = 14, Name = "Ring", Size = 19, IsDeleted = false },
-                new Category { Id = 15, Name = "Ring", Size = 20, IsDeleted = false },
+                new Category { Id = 1, Name = "Nhẫn", Size = 6, IsDeleted = false },
+                new Category { Id = 2, Name = "Nhẫn", Size = 7, IsDeleted = false },
+                new Category { Id = 3, Name = "Nhẫn", Size = 8, IsDeleted = false },
+                new Category { Id = 4, Name = "Nhẫn", Size = 9, IsDeleted = false },
+                new Category { Id = 5, Name = "Nhẫn", Size = 10, IsDeleted = false },
+                new Category { Id = 6, Name = "Nhẫn", Size = 11, IsDeleted = false },
+                new Category { Id = 7, Name = "Nhẫn", Size = 12, IsDeleted = false },
+                new Category { Id = 8, Name = "Nhẫn", Size  = 13, IsDeleted = false },
+                new Category { Id = 9, Name = "Nhẫn", Size = 14, IsDeleted = false },
+                new Category { Id = 10, Name = "Nhẫn", Size = 15, IsDeleted = false },
+                new Category { Id = 11, Name = "Nhẫn", Size = 16, IsDeleted = false },
+                new Category { Id = 12, Name = "Nhẫn", Size = 17, IsDeleted = false },
+                new Category { Id = 13, Name = "Nhẫn", Size = 18, IsDeleted = false },
+                new Category { Id = 14, Name = "Nhẫn", Size = 19, IsDeleted = false },
+                new Category { Id = 15, Name = "Nhẫn", Size = 20, IsDeleted = false },
                 //Necklace (length: 36 -> 60)
-                new Category { Id = 16, Name = "Necklace", Length = 36, IsDeleted = false },
-                new Category { Id = 17, Name = "Necklace", Length = 38, IsDeleted = false },
-                new Category { Id = 18, Name = "Necklace", Length = 40, IsDeleted = false },
-                new Category { Id = 19, Name = "Necklace", Length = 42, IsDeleted = false },
-                new Category { Id = 20, Name = "Necklace", Length = 44, IsDeleted = false },
-                new Category { Id = 21, Name = "Necklace", Length = 46, IsDeleted = false },
-                new Category { Id = 22, Name = "Necklace", Length = 48, IsDeleted = false },
-                new Category { Id = 23, Name = "Necklace", Length = 50, IsDeleted = false },
-                new Category { Id = 24, Name = "Necklace", Length = 52, IsDeleted = false },
-                new Category { Id = 25, Name = "Necklace", Length = 54, IsDeleted = false },
-                new Category { Id = 26, Name = "Necklace", Length = 56, IsDeleted = false },
-                new Category { Id = 27, Name = "Necklace", Length = 58, IsDeleted = false },
-                new Category { Id = 28, Name = "Necklace", Length = 60, IsDeleted = false },
-                //Earring (no size, no length)
-                new Category { Id = 29, Name = "Earring", IsDeleted = false },
+                new Category { Id = 16, Name = "Dây chuyền", Length = 36, IsDeleted = false },
+                new Category { Id = 17, Name = "Dây chuyền", Length = 38, IsDeleted = false },
+                new Category { Id = 18, Name = "Dây chuyền", Length = 40, IsDeleted = false },
+                new Category { Id = 19, Name = "Dây chuyền", Length = 42, IsDeleted = false },
+                new Category { Id = 20, Name = "Dây chuyền", Length = 44, IsDeleted = false },
+                new Category { Id = 21, Name = "Dây chuyền", Length = 46, IsDeleted = false },
+                new Category { Id = 22, Name = "Dây chuyền", Length = 48, IsDeleted = false },
+                new Category { Id = 23, Name = "Dây chuyền", Length = 50, IsDeleted = false },
+                new Category { Id = 24, Name = "Dây chuyền", Length = 52, IsDeleted = false },
+                new Category { Id = 25, Name = "Dây chuyền", Length = 54, IsDeleted = false },
+                new Category { Id = 26, Name = "Dây chuyền", Length = 56, IsDeleted = false },
+                new Category { Id = 27, Name = "Dây chuyền", Length = 58, IsDeleted = false },
+                new Category { Id = 28, Name = "Dây chuyền", Length = 60, IsDeleted = false },
                 //Bracelet (size: 36 -> 60)
-                new Category { Id = 30, Name = "Bracelet", Size = 36, IsDeleted = false },
-                new Category { Id = 31, Name = "Bracelet", Size = 38, IsDeleted = false },
-                new Category { Id = 32, Name = "Bracelet", Size = 40, IsDeleted = false },
-                new Category { Id = 33, Name = "Bracelet", Size = 42, IsDeleted = false },
-                new Category { Id = 34, Name = "Bracelet", Size = 44, IsDeleted = false },
-                new Category { Id = 35, Name = "Bracelet", Size = 46, IsDeleted = false },
-                new Category { Id = 36, Name = "Bracelet", Size = 48, IsDeleted = false },
-                new Category { Id = 37, Name = "Bracelet", Size = 50, IsDeleted = false },
-                new Category { Id = 38, Name = "Bracelet", Size = 52, IsDeleted = false },
-                new Category { Id = 39, Name = "Bracelet", Size = 54, IsDeleted = false },
-                new Category { Id = 40, Name = "Bracelet", Size = 56, IsDeleted = false },
-                new Category { Id = 41, Name = "Bracelet", Size = 58, IsDeleted = false },
-                new Category { Id = 42, Name = "Bracelet", Size = 60, IsDeleted = false },
-                //Bangles (size 36 -> 42)
-                new Category { Id = 43, Name = "Bangles", Length = 36, IsDeleted = false },
-                new Category { Id = 44, Name = "Bangles", Length = 38, IsDeleted = false },
-                new Category { Id = 45, Name = "Bangles", Length = 40, IsDeleted = false },
-                new Category { Id = 46, Name = "Bangles", Length = 42, IsDeleted = false }
+                new Category { Id = 29, Name = "Vòng tay", Size = 36, IsDeleted = false },
+                new Category { Id = 30, Name = "Vòng tay", Size = 38, IsDeleted = false },
+                new Category { Id = 31, Name = "Vòng tay", Size = 40, IsDeleted = false },
+                new Category { Id = 32, Name = "Vòng tay", Size = 42, IsDeleted = false },
+                new Category { Id = 33, Name = "Vòng tay", Size = 44, IsDeleted = false },
+                new Category { Id = 34, Name = "Vòng tay", Size = 46, IsDeleted = false },
+                new Category { Id = 35, Name = "Vòng tay", Size = 48, IsDeleted = false },
+                new Category { Id = 36, Name = "Vòng tay", Size = 50, IsDeleted = false },
+                new Category { Id = 37, Name = "Vòng tay", Size = 52, IsDeleted = false },
+                new Category { Id = 38, Name = "Vòng tay", Size = 54, IsDeleted = false },
+                new Category { Id = 39, Name = "Vòng tay", Size = 56, IsDeleted = false },
+                new Category { Id = 40, Name = "Vòng tay", Size = 58, IsDeleted = false },
+                new Category { Id = 41, Name = "Vòng tay", Size = 60, IsDeleted = false }
                 );
             //Diamond
             modelBuilder.Entity<Diamond>().HasData(
-                new Diamond { Id = 1, Name = "GIA FL Excellent D ", Origin = "GIA", CaratWeight = 2.3f, Clarity = "FL", Cut = "Excellent", Color = "D", Price = 5000000000, Quantity = 10, IsDeleted = false},
-                new Diamond { Id = 2, Name = "Kim cương Excellent I1", Origin = "HRD", CaratWeight = 2.5f, Clarity = "IF", Cut = "VeryGood", Color = "E", Price = 6000000000, Quantity = 10, IsDeleted = false},
-                new Diamond { Id = 3, Name = "Kim cương Very Good I2", Origin = "CGL", CaratWeight = 3.5f, Clarity = "I1", Cut = "Good", Color = "M", Price = 7000000000, Quantity = 10, IsDeleted = false}
+                new Diamond { Id = 1, Name = "GIA Excellent FL ", Origin = "GIA", CaratWeight = 2.3f, Clarity = "FL", Cut = "Excellent", Color = "D", Price = 50000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 2, Name = "HRD VeryGood IF", Origin = "HRD", CaratWeight = 2.5f, Clarity = "IF", Cut = "VeryGood", Color = "E", Price = 60000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 3, Name = "IGI Good I1", Origin = "IGI", CaratWeight = 3.5f, Clarity = "I1", Cut = "Good", Color = "R", Price = 40000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 3, Name = "CGL Fair VVS1", Origin = "CGL", CaratWeight = 5f, Clarity = "VVS1", Cut = "Fair", Color = "S", Price = 70000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 3, Name = "EGL Excellent I3", Origin = "EGL", CaratWeight = 6.5f, Clarity = "I3", Cut = "Excellent", Color = "T", Price = 55000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 3, Name = "AGS VeryGood I2", Origin = "AGS", CaratWeight = 7.5f, Clarity = "I2", Cut = "VeryGood", Color = "X", Price = 60000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 3, Name = "CGL Good SI2", Origin = "CGL", CaratWeight = 5.3f, Clarity = "SI2", Cut = "Good", Color = "Y", Price = 65000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 3, Name = "EGL Fair I1", Origin = "EGL", CaratWeight = 4.7f, Clarity = "I1", Cut = "Fair", Color = "Z", Price = 80000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 3, Name = "AGS Excellent VS1", Origin = "AGS", CaratWeight = 2.7f, Clarity = "VS1", Cut = "Excellent", Color = "M", Price = 90000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 3, Name = "IGI VeryGood VVS2", Origin = "IGI", CaratWeight = 6.3f, Clarity = "VVS2", Cut = "VeryGood", Color = "N", Price = 75000000, Quantity = 10, IsDeleted = false}
                 );
             //Product
             modelBuilder.Entity<Product>().HasData(

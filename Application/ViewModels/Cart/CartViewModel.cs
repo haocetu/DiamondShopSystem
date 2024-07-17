@@ -8,6 +8,7 @@ namespace Application.ViewModels.Cart
         public int UserId { get; set; }
         public int NumberItems { get; set; }
         public decimal TotalPrice { get; set; }
+        public double DiscountPercentage { get; set; }
         public ICollection<CartItemViewModel> Items { get; set; }
     }
 

@@ -154,6 +154,12 @@ namespace Application.Services
             try
             {
                 var orders = await _unitOfWork.OrderRepository.GetOrderByUserIDAsync(_claimsService.GetCurrentUserId.Value);
+                if (orders.Count == 0)
+                {
+                    response.Success = false;
+                    response.Message = "No order for this user.";
+                    return response;
+                }
                 var discount = await _promotionService.GetDiscountPercentageForUser(_claimsService.GetCurrentUserId.Value);
 
                 var result = orders.Select(order => new OrderDetailsViewModel

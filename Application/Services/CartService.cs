@@ -13,10 +13,12 @@ namespace Application.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IClaimsService _claimsService;
-        public CartService(IUnitOfWork unitOfWork, IClaimsService claimsService)
+        private readonly IPromotionService _promotionService;
+        public CartService(IUnitOfWork unitOfWork, IClaimsService claimsService, IPromotionService promotionService)
         {
             _unitOfWork = unitOfWork;
             _claimsService = claimsService;
+            _promotionService = promotionService;
         }
         public async Task<ServiceResponse<CartViewModel>> GetCartForUserAsync()
         {
@@ -37,6 +39,7 @@ namespace Application.Services
                     Id = cart.Id,
                     UserId = cart.AccountId,
                     NumberItems = cart.Items.Count,
+                    DiscountPercentage = _promotionService.GetDiscountPercentageForUser(cart.AccountId).Result,
                     Items = cart.Items.Select(i => new CartItemViewModel
                     {
                         ProductId = i.ProductId,
@@ -167,6 +170,7 @@ namespace Application.Services
                     Id = cart.Id,
                     UserId = cart.AccountId,
                     NumberItems = cart.Items.Count,
+                    DiscountPercentage = _promotionService.GetDiscountPercentageForUser(cart.AccountId).Result,
                     Items = cart.Items.Select(i => new CartItemViewModel
                     {
                         ProductId = i.ProductId,
@@ -254,6 +258,7 @@ namespace Application.Services
                     Id = cart.Id,
                     UserId = cart.AccountId,
                     NumberItems = cart.Items.Count,
+                    DiscountPercentage = _promotionService.GetDiscountPercentageForUser(cart.AccountId).Result,
                     Items = cart.Items.Select(i => new CartItemViewModel
                     {
                         ProductId = i.ProductId,

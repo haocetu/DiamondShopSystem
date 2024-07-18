@@ -129,13 +129,13 @@ namespace Infrastructures
                 new Diamond { Id = 1, Name = "GIA Excellent FL ", Origin = "GIA", CaratWeight = 2.3f, Clarity = "FL", Cut = "Excellent", Color = "D", Price = 50000000, Quantity = 10, IsDeleted = false},
                 new Diamond { Id = 2, Name = "HRD VeryGood IF", Origin = "HRD", CaratWeight = 2.5f, Clarity = "IF", Cut = "VeryGood", Color = "E", Price = 60000000, Quantity = 10, IsDeleted = false},
                 new Diamond { Id = 3, Name = "IGI Good I1", Origin = "IGI", CaratWeight = 3.5f, Clarity = "I1", Cut = "Good", Color = "R", Price = 40000000, Quantity = 10, IsDeleted = false},
-                new Diamond { Id = 3, Name = "CGL Fair VVS1", Origin = "CGL", CaratWeight = 5f, Clarity = "VVS1", Cut = "Fair", Color = "S", Price = 70000000, Quantity = 10, IsDeleted = false},
-                new Diamond { Id = 3, Name = "EGL Excellent I3", Origin = "EGL", CaratWeight = 6.5f, Clarity = "I3", Cut = "Excellent", Color = "T", Price = 55000000, Quantity = 10, IsDeleted = false},
-                new Diamond { Id = 3, Name = "AGS VeryGood I2", Origin = "AGS", CaratWeight = 7.5f, Clarity = "I2", Cut = "VeryGood", Color = "X", Price = 60000000, Quantity = 10, IsDeleted = false},
-                new Diamond { Id = 3, Name = "CGL Good SI2", Origin = "CGL", CaratWeight = 5.3f, Clarity = "SI2", Cut = "Good", Color = "Y", Price = 65000000, Quantity = 10, IsDeleted = false},
-                new Diamond { Id = 3, Name = "EGL Fair I1", Origin = "EGL", CaratWeight = 4.7f, Clarity = "I1", Cut = "Fair", Color = "Z", Price = 80000000, Quantity = 10, IsDeleted = false},
-                new Diamond { Id = 3, Name = "AGS Excellent VS1", Origin = "AGS", CaratWeight = 2.7f, Clarity = "VS1", Cut = "Excellent", Color = "M", Price = 90000000, Quantity = 10, IsDeleted = false},
-                new Diamond { Id = 3, Name = "IGI VeryGood VVS2", Origin = "IGI", CaratWeight = 6.3f, Clarity = "VVS2", Cut = "VeryGood", Color = "N", Price = 75000000, Quantity = 10, IsDeleted = false}
+                new Diamond { Id = 4, Name = "CGL Fair VVS1", Origin = "CGL", CaratWeight = 5f, Clarity = "VVS1", Cut = "Fair", Color = "S", Price = 70000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 5, Name = "EGL Excellent I3", Origin = "EGL", CaratWeight = 6.5f, Clarity = "I3", Cut = "Excellent", Color = "T", Price = 55000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 6, Name = "AGS VeryGood I2", Origin = "AGS", CaratWeight = 7.5f, Clarity = "I2", Cut = "VeryGood", Color = "X", Price = 60000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 7, Name = "CGL Good SI2", Origin = "CGL", CaratWeight = 5.3f, Clarity = "SI2", Cut = "Good", Color = "Y", Price = 65000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 8, Name = "EGL Fair I1", Origin = "EGL", CaratWeight = 4.7f, Clarity = "I1", Cut = "Fair", Color = "Z", Price = 80000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 9, Name = "AGS Excellent VS1", Origin = "AGS", CaratWeight = 2.7f, Clarity = "VS1", Cut = "Excellent", Color = "M", Price = 90000000, Quantity = 10, IsDeleted = false},
+                new Diamond { Id = 10, Name = "IGI VeryGood VVS2", Origin = "IGI", CaratWeight = 6.3f, Clarity = "VVS2", Cut = "VeryGood", Color = "N", Price = 75000000, Quantity = 10, IsDeleted = false}
                 );
             //Product
             modelBuilder.Entity<Product>().HasData(

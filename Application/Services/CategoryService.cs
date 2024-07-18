@@ -125,13 +125,6 @@ namespace Application.Services
 		public async Task<ServiceResponse<CategoryDTO>> UpdateCategoryAsync(int id, CreateCategoryDTO cat)
 		{
 			var response = new ServiceResponse<CategoryDTO>();
-			var isExisted = await _unitOfWork.CategoryRepository.NameIsExisted(cat.Name, cat.Size, cat.Length);
-			if (isExisted)
-			{
-				response.Success = false;
-				response.Message = "This category is existed!";
-				return response;
-			}
 			try
 			{
 				var exist = await _unitOfWork.CategoryRepository.GetByIdAsync(id);

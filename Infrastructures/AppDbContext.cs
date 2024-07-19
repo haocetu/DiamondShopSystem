@@ -33,17 +33,17 @@ namespace Infrastructures
         public DbSet<ProductWarranty> ProductWarranties { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            string root = Directory.GetParent(Directory.GetCurrentDirectory())?.FullName;
-            string apiDirectory = Path.Combine(root, "DiamondShopSystem(SWD392)");
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(apiDirectory)
-                .AddJsonFile("appsettings.Development.json")
-                .Build();
-            var connectionString = configuration.GetConnectionString("DatabaseConnection");
-            optionsBuilder.UseSqlServer(connectionString);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    string root = Directory.GetParent(Directory.GetCurrentDirectory())?.FullName;
+        //    string apiDirectory = Path.Combine(root, "DiamondShopSystem(SWD392)");
+        //    var configuration = new ConfigurationBuilder()
+        //        .SetBasePath(apiDirectory)
+        //        .AddJsonFile("appsettings.json")
+        //        .Build();
+        //    var connectionString = configuration.GetConnectionString("DatabaseConnection");
+        //    optionsBuilder.UseSqlServer(connectionString);
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

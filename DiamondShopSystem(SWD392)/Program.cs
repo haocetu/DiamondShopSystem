@@ -1,11 +1,13 @@
 ﻿using Application.Commons;
 using DiamondShopSystem_SWD392_;
 using DiamondShopSystem_SWD392_.Middlewares;
+using Google.Apis.Auth.OAuth2;
 using Infrastructures;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Net.payOS;
+using Newtonsoft.Json.Linq;
 using Serilog;
 using System.Text;
 
@@ -77,9 +79,13 @@ builder.Services.AddSingleton(configuration);
 builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));
 
 //Firebase
-Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"D:\diamondshopswd392-firebase-adminsdk-zyw79-c676ac56f2.json");
-//end firebase
-
+var google = JObject.FromObject(configuration.GoogleImage);
+string g = google.ToString();
+string temp = Path.GetTempFileName();
+File.WriteAllText(temp, g);
+Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", temp);
+GoogleCredential credential = GoogleCredential.FromFile(temp);
+//End FireBase
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", builder =>

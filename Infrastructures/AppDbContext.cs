@@ -158,7 +158,8 @@ namespace Infrastructures
                 new Promotion { Id = 3, Point = 20000, DiscountPercentage = 1.5m, IsDeleted = false });
             // Payment
             modelBuilder.Entity<Payment>().HasData(
-                new Payment { Id = 1, PaymentMethod = "Payment in cash"}
+                new Payment { Id = 1, PaymentMethod = "Payment in cash"},
+                new Payment { Id = 2, PaymentMethod = "Payment by PayOS"}
                 );
             #endregion
         }

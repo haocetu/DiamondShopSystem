@@ -17,9 +17,9 @@ namespace DiamondShopSystem_SWD392_.Controllers
 
         [HttpPost("place-order")]
         [Authorize(Roles = "Customer")]
-        public async Task<IActionResult> PlaceOrderAsync(string? address, string? phonenumber)
+        public async Task<IActionResult> PlaceOrderAsync(string? address, string? phonenumber, int paymentid)
         {
-            var result = await _orderService.PlaceOrderAsync(address, phonenumber);
+            var result = await _orderService.PlaceOrderAsync(address, phonenumber, paymentid);
             return Ok(result);
         }
 

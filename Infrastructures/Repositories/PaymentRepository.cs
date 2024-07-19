@@ -1,9 +1,5 @@
 ﻿using Application.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain.Entities;
 
 namespace Infrastructures.Repositories
 {
@@ -16,9 +12,19 @@ namespace Infrastructures.Repositories
             _context = context;
         }
 
-        public async Task<bool> CheckPaymentMethodExisted(int paymentMethodId)
+        public async Task<bool> CheckPaymentMethodExisted(int id)
         {
-            return await _context.Payments.FindAsync(paymentMethodId) != null;
+            return await _context.Payments.FindAsync(id) != null;
+        }
+
+        public async Task<Payment> GetPaymentById(int id)
+        {
+            var payment = await _context.Payments.FindAsync(id);
+            if (payment != null)
+            {
+                return payment;
+            }
+            return null;
         }
     }
 }

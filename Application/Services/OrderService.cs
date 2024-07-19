@@ -261,7 +261,7 @@ namespace Application.Services
             return response;
         }
 
-        public async Task<ServiceResponse<OrderViewModel>> PlaceOrderAsync(string? address, string? phonenumber)
+        public async Task<ServiceResponse<OrderViewModel>> PlaceOrderAsync(string? address, string? phonenumber, int paymentid)
         {
             var response = new ServiceResponse<OrderViewModel>();
             try
@@ -271,6 +271,26 @@ namespace Application.Services
                 {
                     response.Success = false;
                     response.Message = "Cart does not exist";
+                    return response;
+                }
+
+                var cartItemsToRemove = new List<CartItem>();
+                foreach (var item in cart.Items)
+                {
+                    var product = await _unitOfWork.ProductRepository.GetByIdAsync(item.ProductId);
+                    if (product != null && product.Quantity < item.Quantity)
+                    {
+                        cartItemsToRemove.Add(item);
+                    }
+                }
+
+                if (cartItemsToRemove.Any())
+                {
+                    await _unitOfWork.CartRepository.DeleteCartItem(cartItemsToRemove);
+                    await _unitOfWork.SaveChangeAsync();
+                    response.Success = false;
+                    response.Message = "Some items in your cart are out of stock and have been removed. Please review your cart and try again.";
+                    return response;
                 }
 
                 var user = await _unitOfWork.AccountRepository.GetByIdAsync(_claimsService.GetCurrentUserId.Value);
@@ -278,6 +298,15 @@ namespace Application.Services
 
                 var deliveryAddress = !string.IsNullOrEmpty(address) ? address : user.Address;
                 var receiverPhoneNumber = !string.IsNullOrEmpty(phonenumber) ? phonenumber : user.PhoneNumber;
+
+
+                var payment = await _unitOfWork.PaymentRepository.GetPaymentById(paymentid);
+                if (payment == null)
+                {
+                    response.Success = false;
+                    response.Message = "Payment method does not exist.";
+                    return response;
+                }
 
                 var order = new Order
                 {
@@ -295,7 +324,7 @@ namespace Application.Services
                     DeliveryAddress = deliveryAddress,
                     ReceiverPhoneNumber = receiverPhoneNumber,
                     Status = "New Order",
-                    PaymentId = 1,
+                    PaymentId = payment.Id,
                     DeliveryDate = DateTime.UtcNow.AddDays(10),
                 };
 
@@ -308,6 +337,10 @@ namespace Application.Services
                     if (product != null)
                     {
                         product.Quantity -= item.Quantity;
+                        if (product.Quantity == 0)
+                        {
+                            product.IsDeleted = true;
+                        }
                         _unitOfWork.ProductRepository.Update(product);
                     }
                 }
@@ -317,10 +350,10 @@ namespace Application.Services
                 await _unitOfWork.OrderRepository.AddAsync(order);
                 await _unitOfWork.SaveChangeAsync();
 
-                _unitOfWork.CartRepository.DeleteCartItem(cart.Items);
+                await _unitOfWork.CartRepository.DeleteCartItem(cart.Items);
                 await _unitOfWork.SaveChangeAsync();
 
-                _unitOfWork.CartRepository.DeleteCart(cart.Id);
+                await _unitOfWork.CartRepository.DeleteCart(cart.Id);
                 await _unitOfWork.SaveChangeAsync();
 
                 response.Data = new OrderViewModel
@@ -345,6 +378,7 @@ namespace Application.Services
                 };
                 response.Success = true;
                 response.Message = "Order created successfully.";
+                return response;    
             }
             catch (DbUpdateException ex)
             {

@@ -69,6 +69,17 @@ namespace DiamondShopSystem_SWD392_.Controllers
                 return Redirect("https://localhost:5001/swagger/index.html");
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> Success( [FromQuery] int orderId, [FromQuery] string status)
+        {
+            if (status == "Cancel")
+            {
+                var cancel = await _orderService.ChangeOrderStatusAsync(orderId,"Cancel");
+                return Redirect("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf6Z7CgLJ3JfLy4IREsARVyxcBnQQnHN40jw&s");
+            }
+              await _orderService.ChangeOrderStatusAsync(orderId, "Paid");
+            return Redirect("https://icpih.com/media-intestinal-health-ihsig/PAYMENT-SUCCESS.png");
+        }
     }
 }
 

@@ -49,6 +49,7 @@ namespace Application.Utils
             var claims = new[]
             {
             new Claim("Id", account.Id.ToString()),
+            new Claim("Username", account.Name),
             new Claim("Email", account.Email),
             new Claim("role", rolename),
         };

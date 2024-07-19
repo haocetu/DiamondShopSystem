@@ -487,7 +487,11 @@ namespace Infrastructures.Migrations
             migrationBuilder.InsertData(
                 table: "Payments",
                 columns: new[] { "Id", "PaymentMethod" },
-                values: new object[] { 1, "Payment in cash" });
+                values: new object[,]
+                {
+                    { 1, "Payment in cash" },
+                    { 2, "Payment by PayOS" }
+                });
 
             migrationBuilder.InsertData(
                 table: "ProductTypes",

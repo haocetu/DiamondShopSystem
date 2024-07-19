@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructures.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240718164601_InitialDatabase")]
+    [Migration("20240719094528_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -909,6 +909,11 @@ namespace Infrastructures.Migrations
                         {
                             Id = 1,
                             PaymentMethod = "Payment in cash"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PaymentMethod = "Payment by PayOS"
                         });
                 });
 

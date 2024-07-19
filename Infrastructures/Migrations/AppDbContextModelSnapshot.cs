@@ -906,6 +906,11 @@ namespace Infrastructures.Migrations
                         {
                             Id = 1,
                             PaymentMethod = "Payment in cash"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PaymentMethod = "Payment by PayOS"
                         });
                 });
 

@@ -22,6 +22,8 @@ namespace Infrastructures
             
             services.AddScoped<IAccountService, AccountService>();
 
+            services.AddScoped<IPaymentService, PaymentService>();
+
             services.AddScoped<IPromotionService, PromotionService>();
             
             services.AddScoped<IAuthenticationService, AuthenticationService>();
@@ -37,6 +39,7 @@ namespace Infrastructures
             services.AddScoped<IProductService, ProductService>();
 
             services.AddScoped<ICategoryService, CategoryService>();
+
             services.AddScoped<IProductTypeService, ProductTypeService>();
             //Firebase
             services.AddSingleton(opt => StorageClient.Create());

@@ -14,8 +14,7 @@ namespace Application.Interfaces
         Task<ServiceResponse<PromotionDTO>> GetPromotionByIdAsync(int id);
         Task<ServiceResponse<PromotionDTO>> CreatePromotionAsync(CreatePromotionDTO newPromotion);
         Task<ServiceResponse<bool>> DeletePromotionAsync(int id);
-        decimal DiscountFromPoint(decimal price, int point);
-        int GetPromotionIdFromPoint(int point);
+        Task<decimal> DiscountFromPoint(decimal price, int point);
         Task<float> GetDiscountPercentageForUser(int userId);
     }
 }

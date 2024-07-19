@@ -170,62 +170,43 @@ namespace Application.Services
             return response;
         }
 
-        public decimal DiscountFromPoint(decimal price, int point)
+        public async Task<decimal> DiscountFromPoint(decimal price, int point)
         {
-            decimal result;
-            if (point >= 20000)
-            {
-                result = price * 1.5m;
-            }
-            else if (point >= 15000)
-            {
-                result = price * 1m;
-            }
-            else if (point >= 10000)
-            {
-                result = price * 0.5m;
-            }
-            else
-            {
-                result = price;
-            }
-            return result;
-        }
+            decimal result = 1;
+            decimal discount = 0;
 
-        public int GetPromotionIdFromPoint(int point)
-        {
-            var result = 0;
-            if (point >= 20000)
+            var getAllPromotionList =  await _unitOfWork.PromotionRepository.GetAllAsync();
+            List<Promotion> sortedList = getAllPromotionList.OrderBy(p => p.Point).ToList();
+
+            foreach (var promotion in sortedList)
             {
-                result = 3;
+                if(point >= promotion.Point)
+                {
+                    discount = promotion.DiscountPercentage;
+                }
             }
-            else if (point >= 15000)
-            {
-                result = 2;
-            }
-            else if (point >= 10000)
-            {
-                result = 1;
-            }
+
+            result = price - (discount * price);
+
             return result;
         }
 
         public async Task<float> GetDiscountPercentageForUser(int userId)
         {
+            float discount = 0;
+
             var user = await _unitOfWork.AccountRepository.GetByIdAsync(userId);
-            float discount = 0f;
-            if (user.Point >= 20000)
+            var getAllPromotionList = await _unitOfWork.PromotionRepository.GetAllAsync();
+            List<Promotion> sortedList = getAllPromotionList.OrderBy(p => p.Point).ToList();
+
+            foreach (var promotion in sortedList)
             {
-                discount = 1.5f;
+                if (user.Point >= promotion.Point)
+                {
+                    discount = (float)promotion.DiscountPercentage;
+                }
             }
-            else if (user.Point >= 15000)
-            {
-                discount = 1f;
-            }
-            else if (user.Point >= 10000)
-            {
-                discount = 0.5f;
-            }
+
             return discount;
         }
     }

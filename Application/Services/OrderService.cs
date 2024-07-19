@@ -283,7 +283,7 @@ namespace Application.Services
                 {
                     AccountId = _claimsService.GetCurrentUserId.Value,
                     CreatedDate = DateTime.UtcNow,
-                    TotalPrice = _promotionService.DiscountFromPoint(cart.Items.Sum(i => i.Price * i.Quantity), userpoint),
+                    TotalPrice =  await _promotionService.DiscountFromPoint(cart.Items.Sum(i => i.Price * i.Quantity), userpoint),
                     Items = cart.Items.Select(i => new OrderItem
                     {
                         ProductId = i.ProductId,

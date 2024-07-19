@@ -13,9 +13,9 @@ namespace Infrastructures.Repositories
         {
             _context = context;
         }
-        public void DeleteCart(int cartId)
+        public async Task DeleteCart(int cartId)
         {
-            var cart =  _context.Carts.FirstOrDefault(c => c.Id == cartId);
+            var cart = _context.Carts.FirstOrDefault(c => c.Id == cartId);
             if (cart != null)
             {
                 _context.Carts.Remove(cart);
@@ -23,7 +23,7 @@ namespace Infrastructures.Repositories
         }
         public async Task<Cart> GetCartForUserAsync(int userId)
         {
-            var result =  await _context.Carts.Include(c => c.Items)
+            var result = await _context.Carts.Include(c => c.Items)
                                         .ThenInclude(ci => ci.Product)
                                         .FirstOrDefaultAsync(c => c.AccountId == userId);
             if (result != null)
@@ -33,7 +33,7 @@ namespace Infrastructures.Repositories
             return null;
         }
 
-        public void DeleteCartItem(List<CartItem> items)
+        public async Task DeleteCartItem(List<CartItem> items)
         {
             foreach (var item in items)
             {

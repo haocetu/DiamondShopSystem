@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,6 +84,20 @@ namespace Application.Services
         public async Task<ServiceResponse<PromotionDTO>> CreatePromotionAsync(CreatePromotionDTO newPromotion)
         {
             var response = new ServiceResponse<PromotionDTO>();
+            var isExisted = await _unitOfWork.PromotionRepository.IsExisted(newPromotion.Point, newPromotion.DiscountPercentage);
+            var isValid = await _unitOfWork.PromotionRepository.IsValid(newPromotion.Point, newPromotion.DiscountPercentage);
+			if (isExisted)
+            {
+				response.Success = false;
+				response.Message = "Point or DiscountPercentage existed.";
+                return response;
+			}
+            if (!isValid)
+            {
+				response.Success = false;
+				response.Message = "Invalid DiscountPercentage.";
+                return response;
+			}
             try
             {
                 //Mapping

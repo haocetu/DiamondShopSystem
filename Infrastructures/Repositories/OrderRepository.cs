@@ -14,16 +14,16 @@ namespace Infrastructures.Repositories
         }
         public async Task<Order> GetOrderByIdAsync(int orderId)
         {
-            return await _dbContext.Orders.Include(o => o.Items)
-                                        .Include(o=>o.Account)
-                                        .Include(o=>o.Payment)
-                                        .Include(o=>o.ProductWarranties)
+            return await _dbContext.Orders.Include(o => o.Items).ThenInclude(i => i.Product)
+                                        .Include(o => o.Account)
+                                        .Include(o => o.Payment)
+                                        .Include(o => o.ProductWarranties)
                                         .FirstOrDefaultAsync(o => o.Id == orderId);
         }
 
         public async Task<List<Order>> GetOrdersAsync()
         {
-            return await _dbContext.Orders.Include(o => o.Items)
+            return await _dbContext.Orders.Include(o => o.Items).ThenInclude(i => i.Product)
                                         .Include(o => o.Account)
                                         .Include(o => o.Payment)
                                         .Include(o => o.ProductWarranties)
@@ -32,7 +32,7 @@ namespace Infrastructures.Repositories
 
         public async Task<List<Order>> GetOrderByUserIDAsync(int userId)
         {
-            var result = await _dbContext.Orders.Include(o => o.Items)
+            var result = await _dbContext.Orders.Include(o => o.Items).ThenInclude(i => i.Product)
                                         .Include(o => o.Account)
                                         .Include(o => o.Payment)
                                         .Include(o => o.ProductWarranties)

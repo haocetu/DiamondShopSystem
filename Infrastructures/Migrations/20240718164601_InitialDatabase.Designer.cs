@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructures.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240716183940_InitialDatabase")]
+    [Migration("20240718164601_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -222,7 +222,7 @@ namespace Infrastructures.Migrations
                             Id = 1,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 6m
                         },
                         new
@@ -230,7 +230,7 @@ namespace Infrastructures.Migrations
                             Id = 2,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 7m
                         },
                         new
@@ -238,7 +238,7 @@ namespace Infrastructures.Migrations
                             Id = 3,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 8m
                         },
                         new
@@ -246,7 +246,7 @@ namespace Infrastructures.Migrations
                             Id = 4,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 9m
                         },
                         new
@@ -254,7 +254,7 @@ namespace Infrastructures.Migrations
                             Id = 5,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 10m
                         },
                         new
@@ -262,7 +262,7 @@ namespace Infrastructures.Migrations
                             Id = 6,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 11m
                         },
                         new
@@ -270,7 +270,7 @@ namespace Infrastructures.Migrations
                             Id = 7,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 12m
                         },
                         new
@@ -278,7 +278,7 @@ namespace Infrastructures.Migrations
                             Id = 8,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 13m
                         },
                         new
@@ -286,7 +286,7 @@ namespace Infrastructures.Migrations
                             Id = 9,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 14m
                         },
                         new
@@ -294,7 +294,7 @@ namespace Infrastructures.Migrations
                             Id = 10,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 15m
                         },
                         new
@@ -302,7 +302,7 @@ namespace Infrastructures.Migrations
                             Id = 11,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 16m
                         },
                         new
@@ -310,7 +310,7 @@ namespace Infrastructures.Migrations
                             Id = 12,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 17m
                         },
                         new
@@ -318,7 +318,7 @@ namespace Infrastructures.Migrations
                             Id = 13,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 18m
                         },
                         new
@@ -326,7 +326,7 @@ namespace Infrastructures.Migrations
                             Id = 14,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 19m
                         },
                         new
@@ -334,7 +334,7 @@ namespace Infrastructures.Migrations
                             Id = 15,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Ring",
+                            Name = "Nhẫn",
                             Size = 20m
                         },
                         new
@@ -342,7 +342,7 @@ namespace Infrastructures.Migrations
                             Id = 16,
                             IsDeleted = false,
                             Length = 36m,
-                            Name = "Necklace",
+                            Name = "Dây chuyền",
                             Size = 0m
                         },
                         new
@@ -350,7 +350,7 @@ namespace Infrastructures.Migrations
                             Id = 17,
                             IsDeleted = false,
                             Length = 38m,
-                            Name = "Necklace",
+                            Name = "Dây chuyền",
                             Size = 0m
                         },
                         new
@@ -358,7 +358,7 @@ namespace Infrastructures.Migrations
                             Id = 18,
                             IsDeleted = false,
                             Length = 40m,
-                            Name = "Necklace",
+                            Name = "Dây chuyền",
                             Size = 0m
                         },
                         new
@@ -366,7 +366,7 @@ namespace Infrastructures.Migrations
                             Id = 19,
                             IsDeleted = false,
                             Length = 42m,
-                            Name = "Necklace",
+                            Name = "Dây chuyền",
                             Size = 0m
                         },
                         new
@@ -374,7 +374,7 @@ namespace Infrastructures.Migrations
                             Id = 20,
                             IsDeleted = false,
                             Length = 44m,
-                            Name = "Necklace",
+                            Name = "Dây chuyền",
                             Size = 0m
                         },
                         new
@@ -382,7 +382,7 @@ namespace Infrastructures.Migrations
                             Id = 21,
                             IsDeleted = false,
                             Length = 46m,
-                            Name = "Necklace",
+                            Name = "Dây chuyền",
                             Size = 0m
                         },
                         new
@@ -390,7 +390,7 @@ namespace Infrastructures.Migrations
                             Id = 22,
                             IsDeleted = false,
                             Length = 48m,
-                            Name = "Necklace",
+                            Name = "Dây chuyền",
                             Size = 0m
                         },
                         new
@@ -398,7 +398,7 @@ namespace Infrastructures.Migrations
                             Id = 23,
                             IsDeleted = false,
                             Length = 50m,
-                            Name = "Necklace",
+                            Name = "Dây chuyền",
                             Size = 0m
                         },
                         new
@@ -406,7 +406,7 @@ namespace Infrastructures.Migrations
                             Id = 24,
                             IsDeleted = false,
                             Length = 52m,
-                            Name = "Necklace",
+                            Name = "Dây chuyền",
                             Size = 0m
                         },
                         new
@@ -414,7 +414,7 @@ namespace Infrastructures.Migrations
                             Id = 25,
                             IsDeleted = false,
                             Length = 54m,
-                            Name = "Necklace",
+                            Name = "Dây chuyền",
                             Size = 0m
                         },
                         new
@@ -422,7 +422,7 @@ namespace Infrastructures.Migrations
                             Id = 26,
                             IsDeleted = false,
                             Length = 56m,
-                            Name = "Necklace",
+                            Name = "Dây chuyền",
                             Size = 0m
                         },
                         new
@@ -430,7 +430,7 @@ namespace Infrastructures.Migrations
                             Id = 27,
                             IsDeleted = false,
                             Length = 58m,
-                            Name = "Necklace",
+                            Name = "Dây chuyền",
                             Size = 0m
                         },
                         new
@@ -438,7 +438,7 @@ namespace Infrastructures.Migrations
                             Id = 28,
                             IsDeleted = false,
                             Length = 60m,
-                            Name = "Necklace",
+                            Name = "Dây chuyền",
                             Size = 0m
                         },
                         new
@@ -446,144 +446,104 @@ namespace Infrastructures.Migrations
                             Id = 29,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Earring",
-                            Size = 0m
+                            Name = "Vòng tay",
+                            Size = 36m
                         },
                         new
                         {
                             Id = 30,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Bracelet",
-                            Size = 36m
+                            Name = "Vòng tay",
+                            Size = 38m
                         },
                         new
                         {
                             Id = 31,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Bracelet",
-                            Size = 38m
+                            Name = "Vòng tay",
+                            Size = 40m
                         },
                         new
                         {
                             Id = 32,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Bracelet",
-                            Size = 40m
+                            Name = "Vòng tay",
+                            Size = 42m
                         },
                         new
                         {
                             Id = 33,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Bracelet",
-                            Size = 42m
+                            Name = "Vòng tay",
+                            Size = 44m
                         },
                         new
                         {
                             Id = 34,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Bracelet",
-                            Size = 44m
+                            Name = "Vòng tay",
+                            Size = 46m
                         },
                         new
                         {
                             Id = 35,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Bracelet",
-                            Size = 46m
+                            Name = "Vòng tay",
+                            Size = 48m
                         },
                         new
                         {
                             Id = 36,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Bracelet",
-                            Size = 48m
+                            Name = "Vòng tay",
+                            Size = 50m
                         },
                         new
                         {
                             Id = 37,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Bracelet",
-                            Size = 50m
+                            Name = "Vòng tay",
+                            Size = 52m
                         },
                         new
                         {
                             Id = 38,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Bracelet",
-                            Size = 52m
+                            Name = "Vòng tay",
+                            Size = 54m
                         },
                         new
                         {
                             Id = 39,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Bracelet",
-                            Size = 54m
+                            Name = "Vòng tay",
+                            Size = 56m
                         },
                         new
                         {
                             Id = 40,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Bracelet",
-                            Size = 56m
+                            Name = "Vòng tay",
+                            Size = 58m
                         },
                         new
                         {
                             Id = 41,
                             IsDeleted = false,
                             Length = 0m,
-                            Name = "Bracelet",
-                            Size = 58m
-                        },
-                        new
-                        {
-                            Id = 42,
-                            IsDeleted = false,
-                            Length = 0m,
-                            Name = "Bracelet",
+                            Name = "Vòng tay",
                             Size = 60m
-                        },
-                        new
-                        {
-                            Id = 43,
-                            IsDeleted = false,
-                            Length = 36m,
-                            Name = "Bangles",
-                            Size = 0m
-                        },
-                        new
-                        {
-                            Id = 44,
-                            IsDeleted = false,
-                            Length = 38m,
-                            Name = "Bangles",
-                            Size = 0m
-                        },
-                        new
-                        {
-                            Id = 45,
-                            IsDeleted = false,
-                            Length = 40m,
-                            Name = "Bangles",
-                            Size = 0m
-                        },
-                        new
-                        {
-                            Id = 46,
-                            IsDeleted = false,
-                            Length = 42m,
-                            Name = "Bangles",
-                            Size = 0m
                         });
                 });
 
@@ -663,9 +623,9 @@ namespace Infrastructures.Migrations
                             Color = "D",
                             Cut = "Excellent",
                             IsDeleted = false,
-                            Name = "GIA FL Excellent D ",
+                            Name = "GIA Excellent FL ",
                             Origin = "GIA",
-                            Price = 5000000000m,
+                            Price = 50000000m,
                             Quantity = 10
                         },
                         new
@@ -676,9 +636,9 @@ namespace Infrastructures.Migrations
                             Color = "E",
                             Cut = "VeryGood",
                             IsDeleted = false,
-                            Name = "Kim cương Excellent I1",
+                            Name = "HRD VeryGood IF",
                             Origin = "HRD",
-                            Price = 6000000000m,
+                            Price = 60000000m,
                             Quantity = 10
                         },
                         new
@@ -686,12 +646,103 @@ namespace Infrastructures.Migrations
                             Id = 3,
                             CaratWeight = 3.5m,
                             Clarity = "I1",
-                            Color = "M",
+                            Color = "R",
                             Cut = "Good",
                             IsDeleted = false,
-                            Name = "Kim cương Very Good I2",
+                            Name = "IGI Good I1",
+                            Origin = "IGI",
+                            Price = 40000000m,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CaratWeight = 5m,
+                            Clarity = "VVS1",
+                            Color = "S",
+                            Cut = "Fair",
+                            IsDeleted = false,
+                            Name = "CGL Fair VVS1",
                             Origin = "CGL",
-                            Price = 7000000000m,
+                            Price = 70000000m,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CaratWeight = 6.5m,
+                            Clarity = "I3",
+                            Color = "T",
+                            Cut = "Excellent",
+                            IsDeleted = false,
+                            Name = "EGL Excellent I3",
+                            Origin = "EGL",
+                            Price = 55000000m,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CaratWeight = 7.5m,
+                            Clarity = "I2",
+                            Color = "X",
+                            Cut = "VeryGood",
+                            IsDeleted = false,
+                            Name = "AGS VeryGood I2",
+                            Origin = "AGS",
+                            Price = 60000000m,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CaratWeight = 5.3m,
+                            Clarity = "SI2",
+                            Color = "Y",
+                            Cut = "Good",
+                            IsDeleted = false,
+                            Name = "CGL Good SI2",
+                            Origin = "CGL",
+                            Price = 65000000m,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CaratWeight = 4.7m,
+                            Clarity = "I1",
+                            Color = "Z",
+                            Cut = "Fair",
+                            IsDeleted = false,
+                            Name = "EGL Fair I1",
+                            Origin = "EGL",
+                            Price = 80000000m,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CaratWeight = 2.7m,
+                            Clarity = "VS1",
+                            Color = "M",
+                            Cut = "Excellent",
+                            IsDeleted = false,
+                            Name = "AGS Excellent VS1",
+                            Origin = "AGS",
+                            Price = 90000000m,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CaratWeight = 6.3m,
+                            Clarity = "VVS2",
+                            Color = "N",
+                            Cut = "VeryGood",
+                            IsDeleted = false,
+                            Name = "IGI VeryGood VVS2",
+                            Origin = "IGI",
+                            Price = 75000000m,
                             Quantity = 10
                         });
                 });
@@ -1097,21 +1148,21 @@ namespace Infrastructures.Migrations
                         new
                         {
                             Id = 1,
-                            Material = "Gold",
-                            Price = 5567000m,
-                            Weight = 3.75
+                            Material = "Vàng",
+                            Price = 681000m,
+                            Weight = 1.0
                         },
                         new
                         {
                             Id = 2,
-                            Material = "Platium",
+                            Material = "Bạch kim",
                             Price = 827287m,
                             Weight = 1.0
                         },
                         new
                         {
                             Id = 3,
-                            Material = "Sliver",
+                            Material = "Bạc",
                             Price = 22325m,
                             Weight = 1.0
                         });

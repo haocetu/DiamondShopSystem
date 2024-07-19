@@ -5,6 +5,7 @@ using Infrastructures;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Net.payOS;
 using Serilog;
 using System.Text;
 
@@ -33,6 +34,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.JWTSection.SecretKey)),
         };
     });
+
+//PayOS
+PayOS payOs = new PayOS(configuration.PayOSConfig.PAYOS_CLIENT_ID,
+                        configuration.PayOSConfig.PAYOS_API_KEY,
+                        configuration.PayOSConfig.PAYOS_CHECKSUM_KEY);
+builder.Services.AddSingleton(payOs);
+//End PayOS
 
 builder.Services.AddSwaggerGen(setup =>
 {
@@ -66,10 +74,11 @@ builder.Services.AddSwaggerGen(setup =>
     now we can use dependency injection for AppConfiguratio
 */
 builder.Services.AddSingleton(configuration);
-//Firebase
 builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));
 
+//Firebase
 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"D:\diamondshopswd392-firebase-adminsdk-zyw79-c676ac56f2.json");
+//end firebase
 
 builder.Services.AddCors(options =>
 {

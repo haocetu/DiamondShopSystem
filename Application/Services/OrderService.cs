@@ -56,7 +56,7 @@ namespace Application.Services
                     UserName = user.Name,
                     Status = order.Status,
                     TotalPrice = order.TotalPrice,
-                    DiscountPercentage = (_promotionService.GetDiscountPercentageForUser(order.AccountId)).Result,
+                    DiscountPercentage = order.DiscountPercentage,
                     PaymentName = order.Payment.PaymentMethod,
                     NumberItems = order.Items.Count,
                     OrderDate = order.CreatedDate.Value,
@@ -117,7 +117,7 @@ namespace Application.Services
                     Status = order.Status,
                     TotalPrice = order.TotalPrice,
                     PaymentName = order.Payment.PaymentMethod,
-                    DiscountPercentage = (_promotionService.GetDiscountPercentageForUser(order.AccountId)).Result,
+                    DiscountPercentage = order.DiscountPercentage,
                     NumberItems = order.Items.Count,
                     OrderDate = order.CreatedDate.Value,
                     ShipDate = order.DeliveryDate,
@@ -160,14 +160,13 @@ namespace Application.Services
                     response.Message = "No order for this user.";
                     return response;
                 }
-                var discount = await _promotionService.GetDiscountPercentageForUser(_claimsService.GetCurrentUserId.Value);
-
+                
                 var result = orders.Select(order => new OrderDetailsViewModel
                 {
                     Id = order.Id,
                     UserName = order.Account.Name,
                     Status = order.Status,
-                    DiscountPercentage = discount,
+                    DiscountPercentage = order.DiscountPercentage,
                     TotalPrice = order.TotalPrice,
                     NumberItems = order.Items.Count,
                     PaymentName = order.Payment.PaymentMethod,
@@ -221,7 +220,7 @@ namespace Application.Services
                     Id = order.Id,
                     UserName = order.Account.Name,
                     Status = order.Status,
-                    DiscountPercentage = (_promotionService.GetDiscountPercentageForUser(order.AccountId)).Result,
+                    DiscountPercentage = order.DiscountPercentage,
                     TotalPrice = order.TotalPrice,
                     NumberItems = order.Items.Count,
                     PaymentName = order.Payment.PaymentMethod,
@@ -319,6 +318,7 @@ namespace Application.Services
                         Quantity = i.Quantity,
                         Price = i.Price
                     }).ToList(),
+                    DiscountPercentage = await _promotionService.GetDiscountPercentageForUser(user.Id),
                     CreatedBy = _claimsService.GetCurrentUserId.Value,
                     IsDeleted = false,
                     DeliveryAddress = deliveryAddress,

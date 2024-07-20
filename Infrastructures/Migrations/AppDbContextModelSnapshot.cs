@@ -823,6 +823,9 @@ namespace Infrastructures.Migrations
                     b.Property<DateTime>("DeliveryDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<float>("DiscountPercentage")
+                        .HasColumnType("real");
+
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 

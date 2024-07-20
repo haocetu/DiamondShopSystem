@@ -16,6 +16,8 @@ namespace Infrastructures.FluentAPIs
 
             builder.Property(o => o.TotalPrice).HasColumnType("decimal(18,2)");
 
+            builder.Property(o => o.DiscountPercentage).IsRequired();
+
             builder.Property(o => o.DeliveryDate).IsRequired();
 
             builder.Property(o => o.DeliveryAddress).IsRequired();

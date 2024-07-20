@@ -5,6 +5,7 @@
         public int AccountId { get; set; }
         public Account Account { get; set; }
         public string Status {  get; set; }
+        public float DiscountPercentage { get; set; }
         public decimal TotalPrice { get; set; }
         public int PaymentId { get; set; }
         public Payment Payment { get; set; }

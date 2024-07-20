@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructures.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240719094528_InitialDatabase")]
+    [Migration("20240720025124_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -825,6 +825,9 @@ namespace Infrastructures.Migrations
 
                     b.Property<DateTime>("DeliveryDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<float>("DiscountPercentage")
+                        .HasColumnType("real");
 
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
